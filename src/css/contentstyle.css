@@ -1,0 +1,136 @@
+@import "tailwindcss";
+/* General Styles */
+.content-section {
+  width: 80%;
+  max-width: 1300px;
+  min-width: 600px;
+  padding: 25px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  overflow: auto;
+}
+
+/* Hide scrollbar but still allow scrolling */
+.content-section::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.content-section::-webkit-scrollbar-track {
+  background: transparent; /* Removes track */
+}
+
+.content-section::-webkit-scrollbar-thumb {
+  background: transparent; /* Makes the thumb (scroll indicator) invisible */
+}
+
+/* Section Titles */
+.content-section h2 {
+  font-size: 24px;
+  color: #3498db;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.content-section h4 {
+  font-size: 17px;
+  color: #a0c4ffe5;
+  margin: 5px;
+  font-weight: bold;
+}
+
+/* Lists */
+.content-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.content-section li {
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+p {
+  color: #e0e0e0;
+}
+/* Highlighted Section */
+.content-section.highlight {
+  border-color: #e74c3c;
+  background-color: #2c1e1e;
+}
+
+/* Role Headers */
+.content-section .role-header {
+  font-size: 20px;
+  color: #a0c4ff;
+  margin-top: 20px;
+}
+
+/* Role Lists */
+.content-section .role-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.content-section .role-list li {
+  margin: 10px 0;
+  padding-left: 15px;
+  position: relative;
+}
+
+/* Custom Bullet Points */
+.content-section .role-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #3498db; /* Blue bullets */
+  font-size: 20px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  font-size: 2rem;
+  color: white;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
+.youtube {
+  color: #ff0000;
+}
+
+.twitch {
+  color: #9146ff;
+}
+
+.discord {
+  color: #5865f2;
+}
+
+@media (max-width: 650px) {
+  .content-section {
+    width: 95%;
+    min-width: 400px;
+    padding: 20px;
+  }
+}
+@media (max-width: 450px) {
+  .content-section {
+    width: 95%;
+    min-width: 250px;
+    padding: 20px;
+  }
+}

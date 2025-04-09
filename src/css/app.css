@@ -1,0 +1,15 @@
+/* app.css */
+@import "tailwindcss";
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow-y:hidden;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    display: block;
+  }
+}
