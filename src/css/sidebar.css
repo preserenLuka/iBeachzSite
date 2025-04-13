@@ -12,6 +12,7 @@
   flex-direction: column;
   width: 25rem;
   flex-shrink: 0; /* Prevents it from shrinking */
+  overflow: hidden;
 }
 
 .sidebar.closed {
@@ -21,7 +22,7 @@
 /* Sidebar header */
 .sidebar-header {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   padding: 1rem;
 }
@@ -68,14 +69,11 @@
 .search-input {
   width: 100%;
   padding: 0.5rem;
-  border: none;
-  outline: none;
-  border-radius: 0.25rem;
 }
 
 /* Navigation Links */
 .nav-links {
-  flex: 1; /* Push the profile section to the bottom */
+  flex: 1;
 }
 
 .nav-links ul {
@@ -89,25 +87,27 @@
   cursor: pointer;
 }
 
-.nav-links li:hover {
-}
-
-/* New styles for the Fundamentals section */
-
 .sub-menu {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two items per row */
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-top: 10px;
   overflow: hidden;
-  max-height: 0; /* Initially collapsed */
-  opacity: 0; /* Initially hidden */
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transition */
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+.sub-menu > * {
+  background-color: #141414;
 }
 
 .sub-menu.open {
-  max-height: 1000px; /* Adjust this to fit your content's height */
-  opacity: 1; /* Fade in */
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.menu-item.Wborder {
+  border-right: #2a5c91 solid 3px;
 }
 
 .menu-title {
@@ -115,6 +115,7 @@
   font-weight: bold;
   padding: 0.6rem;
   transition: padding 0.15s ease;
+  border-radius: 2%;
 }
 
 .menu-title:hover {
@@ -134,13 +135,12 @@
   text-align: center;
   color: #2a5c91;
   font-weight: bold;
-  border: #2219d87e solid 1px;
   transition: background-color 0.3s ease;
 }
 
 /* Profile Section */
 .profile-section {
-  padding: 1rem;
+  padding: 0.5rem;
   border-top: 1px solid #333;
   display: flex;
   align-items: center;
@@ -150,8 +150,8 @@
 /* Profile picture */
 .profile-pic {
   border-radius: 50%;
-  width: 2.5rem; /* 2.5rem = 40px */
-  height: 2.5rem; /* 2.5rem = 40px */
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 /* Profile information */
@@ -160,7 +160,54 @@
   flex-direction: column;
 }
 
+.icon-container {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  gap: 10px; /* Optional: adds space between icons */
+}
+
+.btn-icon {
+  margin: 70% 0% 70% 0%;
+  width: 100%;
+  cursor: pointer;
+}
+.btn-icon:hover {
+  color: rgb(63, 63, 180);
+}
+.btn-icon.open {
+  opacity: 0;
+}
+.btn-icon.closed {
+  opacity: 1;
+}
+
 /* phone version ----------------------------------------------------------------------------- */
+@media (max-width: 2000px) {
+  .sidebar {
+    width: 20rem;
+  }
+  .fundamentals-item {
+    height: 90px;
+  }
+  .nav-links li {
+    padding: 0rem 0.5rem 0rem 0.5rem;
+  }
+  .menu-title {
+    font-size: 1rem;
+  }
+
+  .menu-title:hover {
+    padding: 0.9rem;
+  }
+  .sub-menu {
+    gap: 7px;
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+  .search-input {
+    padding: 0.1rem;
+  }
+}
 
 @media (max-width: 768px) {
   .sidebar {

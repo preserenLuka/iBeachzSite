@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import Sidebar from "./sidebar";
 import Content from "./content";
 import "../css/app.css";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router";
 
 const App: React.FC = () => {
   const [OpenContent, setOpenContent] = useState<string>(""); // Content to be opened

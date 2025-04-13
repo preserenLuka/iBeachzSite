@@ -35,6 +35,13 @@
   font-weight: bold;
 }
 
+.content-section h3 {
+  font-size: 22px;
+  color: #76a8fa;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
 .content-section h4 {
   font-size: 17px;
   color: #a0c4ffe5;
@@ -127,10 +134,16 @@ p {
     padding: 20px;
   }
 }
+
 @media (max-width: 450px) {
   .content-section {
     width: 95%;
     min-width: 250px;
     padding: 20px;
+  }
+}
+@media (max-width: 2000px) {
+  .content-section {
+    width: 60%;
   }
 }

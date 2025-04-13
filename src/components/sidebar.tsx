@@ -5,6 +5,17 @@ import menuItems from "../util/menuItems";
 import { motion } from "motion/react";
 import Profile from "./Profile";
 
+// Icons for menu
+import { FaLightbulb } from "react-icons/fa";
+
+import { IoGameController } from "react-icons/io5";
+
+import { GiWhistle } from "react-icons/gi";
+
+import { BiNotepad } from "react-icons/bi";
+
+import { FaRegFolderOpen } from "react-icons/fa";
+
 menuItems;
 
 interface SidebarProps {
@@ -22,6 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
+  const [width, setWidth] = useState(window.innerWidth);
 
   const toggleSubMenu = (menu: string) => {
     if (openSubMenu === menu) {
@@ -31,26 +43,20 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
-  const useWindowWidth = () => {
-    const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    useEffect(() => {
-      const handleResize = () => setWidth(window.innerWidth);
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    return width;
-  };
-
-  const isMobile = useWindowWidth() <= 768; // or whatever breakpoint you use
+  const isMobile = width <= 768;
 
   const handleContentChange = (content: string) => {
     setOpenContent(content);
     setIsOpen(false);
     setisContentOpen(true);
   };
-  
+
   useEffect(() => {
     console.log("closing", isContentOpen);
   }, [isContentOpen]);
@@ -65,18 +71,22 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
     console.log("opening");
   };
-  
+
   return (
     <>
       {isOpen ? (
-        <div className={`sidebar ${isOpen ? "open overflow-y-auto" : "closed overflow-y-hidden"}`}>
+        <div
+          className={`sidebar ${
+            isOpen ? "open overflow-y-auto" : "closed overflow-y-hidden"
+          }`}
+        >
           <div className="sidebar-header">
-            {isOpen && (
-              <span className="sidebar-title">Game Fundamentals2</span>
+            {isOpen && <span className="sidebar-title">Game Fundamentals</span>}
+            {!isMobile && (
+              <button className="toggle-btn" onClick={toggleSidebar}>
+                <div className="icon-placeholder">≡</div>
+              </button>
             )}
-           {!isMobile && <button className="toggle-btn" onClick={toggleSidebar}>
-              <div className="icon-placeholder">≡</div>
-            </button>}
           </div>
 
           {/* Search Input */}
@@ -93,18 +103,23 @@ const Sidebar: React.FC<SidebarProps> = ({
             <motion.ul
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.23 }}
             >
-              {menuItems.map(({ title, key, items }) => (
-                <li key={key} className="menu-item">
+              {menuItems.map(({ title, key, items, icon }) => (
+                <li
+                  key={key}
+                  className={`menu-item ${
+                    openSubMenu === key ? "Wborder" : ""
+                  }`}
+                >
                   <div
-                    className="menu-title"
+                    className="menu-title flex gap-5"
                     onClick={() => toggleSubMenu(key)}
                   >
+                    <div className="w-10 flex justify-center items-center">
+                      {icon}
+                    </div>
                     {title + " "}
-                    <span className="arrow">
-                      {openSubMenu === key ? "▲" : "▼"}
-                    </span>
                   </div>
                   <div
                     className={`sub-menu ${openSubMenu === key ? "open" : ""}`}
@@ -112,9 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     {items.map(({ label, value, color, icon }, idx) => (
                       <div
                         key={idx}
-                        className={`fundamentals-item ${
-                          color ? `color-${color}` : ""
-                        }`}
+                        className={`fundamentals-item `} //${color ? `color-${color}` : ""}
                         onClick={() => handleContentChange(value)}
                       >
                         {icon}
@@ -126,10 +139,8 @@ const Sidebar: React.FC<SidebarProps> = ({
               ))}
             </motion.ul>
           </nav>
-          {/* Profile Section */}
-          {isOpen && (
-            <Profile/>
-          )}
+
+          {isOpen && <Profile />}
         </div>
       ) : (
         <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
@@ -138,20 +149,52 @@ const Sidebar: React.FC<SidebarProps> = ({
               {openSubMenu ? (
                 <div className="mobile-welcome-message">
                   <button className="toggle-btn2" onClick={toggleSidebar}>
-                   {isMobile && <h3>{OpenContent}</h3>}
-                   {!isMobile && <h3>≡</h3>}
+                    {isMobile && <h3>{OpenContent}</h3>}
+                    {!isMobile && <h3>≡</h3>}
                   </button>
                 </div>
               ) : (
                 <div className="mobile-welcome-message">
                   <button className="toggle-btn2" onClick={toggleSidebar}>
-                  {isMobile && <h3>welcome</h3>}
-                  {!isMobile && <h3>≡</h3>}
+                    {isMobile && <h3>welcome</h3>}
+                    {!isMobile && <h3>≡</h3>}
                   </button>
                 </div>
               )}
             </div>
-            {isOpen && <span className="sidebar-title">Game Fundamentals</span>}
+          </div>
+          <div className={`icon-container ${isOpen ? "open" : "closed"}`}>
+            <motion.ul
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.23 }}
+            >
+              <FaLightbulb
+                size={width <= 2000 ? 22 : 26}
+                onClick={toggleSidebar}
+                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+              />
+              <IoGameController
+                size={width <= 2000 ? 22 : 26}
+                onClick={toggleSidebar}
+                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+              />
+              <GiWhistle
+                size={width <= 2000 ? 22 : 26}
+                onClick={toggleSidebar}
+                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+              />
+              <BiNotepad
+                size={width <= 2000 ? 22 : 26}
+                onClick={toggleSidebar}
+                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+              />
+              <FaRegFolderOpen
+                size={width <= 2000 ? 22 : 26}
+                onClick={toggleSidebar}
+                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+              />
+            </motion.ul>
           </div>
         </div>
       )}

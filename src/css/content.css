@@ -1,12 +1,12 @@
-@import "tailwindcss";
-/*content.css*/
+/* @import "tailwindcss";
+
 .content-wrapper {
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 20px;
-  overflow: hidden; /* Prevents entire wrapper from scrolling */
+  overflow: hidden; 
   height: 100vh;
 }
 
@@ -14,4 +14,47 @@
   .content-wrapper {
     padding: 10px;
   }
+}
+ */
+
+.wrapper {
+  flex-grow: 1;
+  display: flex;
+  background-color: #121212ef;
+}
+
+.content-wrapper {
+  padding: 2%;
+  width: 60%;
+}
+.vid-wrapper {
+  width: 40%;
+  height: 100vh;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  background-color: #1e1e1e;
+  height: 100%;
+  border-radius: 1.5%;
+  padding: 1%;
+  color: white;
+}
+
+.content h1 {
+  font-size: 24px;
+  color: #3498db;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.content-section h2 {
+  font-size: 22px;
+  color: #76a8fa;
+  margin-bottom: 15px;
+  font-weight: bold;
 }
