@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import YouTubeEmbed from "../components/YouTubeEmbedProps";
 
@@ -36,6 +36,8 @@ interface ContentProps {
 
 const Content: React.FC<ContentProps> = ({ isContentOpen }) => {
   const { contentName } = useParams();
+  const [isFundamental, setIsFundamental] = React.useState(false);
+  const [isMechanic, setIsMechanic] = React.useState(false);
 
   const contentData: Record<string, contentObject> = {
     shootingMechanics: shootingMechData,
@@ -46,15 +48,15 @@ const Content: React.FC<ContentProps> = ({ isContentOpen }) => {
     recoveryMechanics: recoveryMechData,
     resetMechanics: resetMechData,
     wallCeilingMechanics: wallCeilingMechData,
-    advancedFundamentals: advancedFundData,
-    attackingFundamentals: attackFundData,
-    challengeFundamentals: challengeFundData,
-    counterAttackFundamentals: counterAttackFundData,
-    defenseFundamentals: defenseFundData,
-    mentalFundamentals: mentalFundData,
-    rotationFundamentals: rotationFundData,
-    soloQFundamentals: soloQFundData,
-    speedFundamentals: speedFundData,
+    advancedFundamental: advancedFundData,
+    attackingFundamental: attackFundData,
+    challengeFundamental: challengeFundData,
+    counterAttackFundamental: counterAttackFundData,
+    defenseFundamental: defenseFundData,
+    mentalFundamental: mentalFundData,
+    rotationFundamental: rotationFundData,
+    soloQFundamental: soloQFundData,
+    speedFundamental: speedFundData,
   };
 
   const currentContent = contentName ? contentData[contentName] : undefined;
