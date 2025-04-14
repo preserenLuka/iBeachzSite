@@ -22,7 +22,7 @@ const App: React.FC = () => {
         setOpenContent={setOpenContent}
         setisContentOpen={setisContentOpen}
       />
-      <Content OpenContent={OpenContent} isContentOpen={isContentOpen} />
+      <Content isContentOpen={isContentOpen} />
     </div>
   );
 };

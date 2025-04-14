@@ -24,6 +24,7 @@ export type Topics = {
   videoTime?: string;
   description?: string;
   listOfLists: List[];
+  videoId?: string;
 };
 
 export type contentObject = {

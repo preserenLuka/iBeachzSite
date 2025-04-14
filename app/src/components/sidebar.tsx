@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/Sidebar.css";
+import { useNavigate } from "react-router";
 
 import menuItems from "../util/menuItems";
 import { motion } from "motion/react";
@@ -15,8 +16,6 @@ import { GiWhistle } from "react-icons/gi";
 import { BiNotepad } from "react-icons/bi";
 
 import { FaRegFolderOpen } from "react-icons/fa";
-
-menuItems;
 
 interface SidebarProps {
   OpenContent: string;
@@ -34,6 +33,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [width, setWidth] = useState(window.innerWidth);
+  const [canHoverOpen, setCanHoverOpen] = useState(true);
+  const router = useNavigate();
 
   const toggleSubMenu = (menu: string) => {
     if (openSubMenu === menu) {
@@ -52,7 +53,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   const isMobile = width <= 768;
 
   const handleContentChange = (content: string) => {
-    setOpenContent(content);
+    router(`/content/${content}`);
+
+    setCanHoverOpen(false);
+    setTimeout(() => setCanHoverOpen(true), 600); // match animation
     setIsOpen(false);
     setisContentOpen(true);
   };
@@ -62,26 +66,31 @@ const Sidebar: React.FC<SidebarProps> = ({
   }, [isContentOpen]);
 
   const toggleSidebar = () => {
-    setIsOpen((prev) => !prev);
-    console.log("Sidebar opens");
-    if (isMobile) {
-      if (!isOpen) {
-        setisContentOpen(false); // Close content when sidebar is closed
+    setIsOpen((prev) => {
+      const newState = !prev;
+
+      if (isMobile && !newState) {
+        setisContentOpen(false); // Close content when sidebar is closing
       }
-    }
-    console.log("opening");
+
+      if (!newState) {
+        // If we're closing, disable hover re-open for 600ms
+        setCanHoverOpen(false);
+        setTimeout(() => setCanHoverOpen(true), 500); // slightly longer than the 0.5s animation
+      }
+
+      return newState;
+    });
+
+    console.log("Sidebar toggled");
   };
 
   return (
     <>
       {isOpen ? (
-        <div
-          className={`sidebar ${
-            isOpen ? "open overflow-y-auto" : "closed overflow-y-hidden"
-          }`}
-        >
+        <div className={`sidebar open overflow-y-auto `}>
           <div className="sidebar-header">
-            {isOpen && <span className="sidebar-title">Game Fundamentals</span>}
+            <span className="sidebar-title">Game Fundamentals</span>
             {!isMobile && (
               <button className="toggle-btn" onClick={toggleSidebar}>
                 <div className="icon-placeholder">≡</div>
@@ -140,11 +149,18 @@ const Sidebar: React.FC<SidebarProps> = ({
             </motion.ul>
           </nav>
 
-          {isOpen && <Profile />}
+          <Profile />
         </div>
       ) : (
-        <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
-          <div className={`sidebar-header ${isOpen ? "open" : "closed"}`}>
+        <div
+          className={`sidebar ${isOpen ? "open" : "closed"}`}
+          onMouseEnter={() => {
+            if (canHoverOpen && !isOpen) {
+              toggleSidebar();
+            }
+          }}
+        >
+          <div className={`sidebar-headerclosed`}>
             <div className="mobile-content">
               {openSubMenu ? (
                 <div className="mobile-welcome-message">

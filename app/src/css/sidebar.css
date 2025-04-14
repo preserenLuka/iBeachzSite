@@ -7,7 +7,7 @@
   color: #266ebb;
   transition: width 0.35s ease;
   display: flex;
-  height: 100vh;
+  height: 100%;
   /* overflow-y:auto; */
   flex-direction: column;
   width: 25rem;

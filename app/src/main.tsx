@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/errorPage.tsx";
 import Welcome from "./components/welcome.tsx";
 
-// Setup router
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +14,12 @@ const router = createBrowserRouter([
   {
     path: "/content",
     element: <App />,
+    children: [
+      {
+        path: ":contentName",
+        element: <App />,
+      },
+    ],
   },
 ]);
 

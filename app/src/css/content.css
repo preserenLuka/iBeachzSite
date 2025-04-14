@@ -1,60 +1,82 @@
-/* @import "tailwindcss";
+@import "tailwindcss";
 
-.content-wrapper {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-  overflow: hidden; 
-  height: 100vh;
+:root {
+  --primary: #3498db;
+  --secondary: #76a8fa;
+  --background: #121212ef;
+  --background-light: #1e1e1e;
+  --text-color: #bcc4c6e6;
+  --text-color-light: #e9e9e9;
 }
-
-@media (max-width: 768px) {
-  .content-wrapper {
-    padding: 10px;
-  }
-}
- */
 
 .wrapper {
   flex-grow: 1;
   display: flex;
-  background-color: #121212ef;
+  flex-direction: column;
+  background-color: var(--background);
+  overflow-y: auto;
+  color: var(--text-color);
 }
 
-.content-wrapper {
-  padding: 2%;
-  width: 60%;
+.topic {
+  display: flex;
+  padding: 10px;
+
+  width: 100%;
+  height: 92.5vh;
+  margin-bottom: 10vh;
 }
-.vid-wrapper {
-  width: 40%;
-  height: 100vh;
-  padding: 2%;
+.content {
+  margin-right: 1%;
+  border-radius: 3%;
+  padding: 1%;
+  width: 50%;
+  height: 88vh;
+  background-color: var(--background-light);
+}
+.video-wrapper {
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-
-.content {
-  background-color: #1e1e1e;
-  height: 100%;
-  border-radius: 1.5%;
-  padding: 1%;
-  color: white;
-}
-
-.content h1 {
+.site-title {
+  position: sticky;
+  top: 0;
   font-size: 24px;
-  color: #3498db;
+  color: var(--primary);
+  width: 100%;
+  font-weight: bold;
+}
+.content h2 {
+  font-size: 22px;
+  color: var(--secondary);
   margin-bottom: 15px;
   font-weight: bold;
 }
-
-.content-section h2 {
-  font-size: 22px;
-  color: #76a8fa;
+.content h3 {
+  font-size: 20px;
+  color: var(--secondary);
   margin-bottom: 15px;
   font-weight: bold;
+}
+.controlbtn {
+  width: 100%;
+  align-items: center;
+  height: 10vh;
+  border-radius: 12% / 80%;
+  display: flex; /* Add display: flex here to enable centering */
+}
+
+.btnwrap {
+  display: flex;
+  justify-content: space-between; /* Keeps space between label and icon */
+  align-items: center;
+  color: var(--text-color-light);
+  width: 60%;
+  margin: 0 auto; /* Use only margin: 0 auto for horizontal centering */
+}
+.controlbtn:hover {
+  background-color: var(--background-light);
 }

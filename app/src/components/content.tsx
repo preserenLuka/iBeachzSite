@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router";
 import YouTubeEmbed from "../components/YouTubeEmbedProps";
 
-//   Mechs
+// Data imports
 import shootingMechData from "../util/mechData/shootingMechData";
 import aerialMechData from "../util/mechData/aerialMechData";
 import defenseMechData from "../util/mechData/defenseMechData";
@@ -10,8 +11,6 @@ import flickMechData from "../util/mechData/flickMechData";
 import recoveryMechData from "../util/mechData/recoveryMechData";
 import resetMechData from "../util/mechData/resetMechData";
 import wallCeilingMechData from "../util/mechData/wallCeilingMechData";
-
-//Fundementals
 import advancedFundData from "../util/fundamentalsData/advancedFundData";
 import attackFundData from "../util/fundamentalsData/attackFundData";
 import challengeFundData from "../util/fundamentalsData/challengeFundData";
@@ -22,130 +21,124 @@ import rotationFundData from "../util/fundamentalsData/rotationFundData";
 import soloQFundData from "../util/fundamentalsData/soloQFundData";
 import speedFundData from "../util/fundamentalsData/speedFundData";
 
+// Types
+import { contentObject } from "../util/types";
+
 // CSS
 import "../css/content.css";
 
-// Types
-import { contentObject, keyContentPairs } from "../util/types";
-
-// Assuming contentObject and keyContentPairs types are defined in your types file
+// Icons
+import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 
 interface ContentProps {
-  OpenContent: string;
   isContentOpen: boolean;
 }
 
-const Content: React.FC<ContentProps> = ({ OpenContent, isContentOpen }) => {
-  const [keyPairs, setKeyPairs] = useState<keyContentPairs>({});
-  const [dataToUse, setDataToUse] = useState<string>("");
+const Content: React.FC<ContentProps> = ({ isContentOpen }) => {
+  const { contentName } = useParams();
 
-  // Data mapping to access the correct data array based on component name
-  const dataMap: { [key: string]: contentObject[] } = {
-    shootingMechData,
-    aerialMechData,
-    defenseMechData,
-    cuttingControlData,
-    flickMechData,
-    recoveryMechData,
-    resetMechData,
-    wallCeilingMechData,
-    advancedFundData,
-    attackFundData,
-    challengeFundData,
-    counterAttackFundData,
-    defenseFundData,
-    mentalFundData,
-    rotationFundData,
-    soloQFundData,
-    speedFundData,
+  const contentData: Record<string, contentObject> = {
+    shootingMechanics: shootingMechData,
+    aerialMechanics: aerialMechData,
+    defenseMechanics: defenseMechData,
+    cuttingControlMechanics: cuttingControlData,
+    flickingMechanics: flickMechData,
+    recoveryMechanics: recoveryMechData,
+    resetMechanics: resetMechData,
+    wallCeilingMechanics: wallCeilingMechData,
+    advancedFundamentals: advancedFundData,
+    attackingFundamentals: attackFundData,
+    challengeFundamentals: challengeFundData,
+    counterAttackFundamentals: counterAttackFundData,
+    defenseFundamentals: defenseFundData,
+    mentalFundamentals: mentalFundData,
+    rotationFundamentals: rotationFundData,
+    soloQFundamentals: soloQFundData,
+    speedFundamentals: speedFundData,
   };
+
+  const currentContent = contentName ? contentData[contentName] : undefined;
 
   useEffect(() => {
-    generateKeyContentPairs([
-      shootingMechData,
-      aerialMechData,
-      defenseMechData,
-      cuttingControlData,
-      flickMechData,
-      recoveryMechData,
-      resetMechData,
-      wallCeilingMechData,
-      advancedFundData,
-      attackFundData,
-      challengeFundData,
-      counterAttackFundData,
-      defenseFundData,
-      mentalFundData,
-      rotationFundData,
-      soloQFundData,
-      speedFundData,
-    ]);
-  }, []);
+    console.log(
+      "Content name:",
+      contentName,
+      "currentContent:",
+      currentContent
+    );
+  }, [contentName]);
 
-  useEffect(() => {
-    shownContent();
-  }, [OpenContent]);
-
-  const generateKeyContentPairs = (dataComponents: contentObject[][]) => {
-    const newPairs: keyContentPairs = {};
-
-    dataComponents.forEach((dataArray) => {
-      dataArray.forEach((item) => {
-        console.log("item", item);
-        if (item.key) {
-          newPairs[item.key] = item.componentName;
-        }
-      });
-    });
-
-    setKeyPairs((prev) => ({ ...prev, ...newPairs }));
-  };
-
-  const shownContent = () => {
-    console.log("keyPairs", keyPairs);
-    Object.entries(keyPairs).forEach(([key, componentName]) => {
-      if (key === OpenContent) {
-        console.log("componentName", componentName);
-        setDataToUse(componentName); // Set the component name
-      }
-    });
-  };
-
-  // Determine which data to use based on dataToUse
-  const currentData = dataMap[dataToUse] || [];
+  if (!currentContent) {
+    return <div className="wrapper">Content not found.</div>;
+  }
 
   return (
-    <>
-      <div className="wrapper">
-        <div className="content-wrapper">
-          <div className="content">
-            {currentData.length > 0 &&
-              currentData.map(({ title, key, description, topics }) => (
-                <div key={key}>
-                  <h1>{title}</h1>
-                  {topics.map(({ label, listOfLists }) => (
-                    <div key={label}>
-                      <h2>{label}</h2>
-                      {listOfLists.map(({ title }, index) => (
-                        <div key={index}>
-                          <h2>{title}</h2>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+    <div className="wrapper">
+      <h1 className="site-title">{currentContent.title}</h1>
+      <p className="site-description">{currentContent.description}</p>
+
+      {currentContent.topics.map((topic, idx) => {
+        const prevTopic = currentContent.topics[idx - 1];
+        const nextTopic = currentContent.topics[idx + 1];
+
+        return (
+          <div key={idx} className="topic">
+            <div className="content">
+              <h2>{topic.label}</h2>
+              <p className="topic-description">{topic.description}</p>
+
+              {topic.listOfLists.map((list, listIdx) => (
+                <div key={listIdx} className="bullet-list">
+                  <h3>{list.title}</h3>
+                  <ul>
+                    {list.bulletPoints && list.bulletPoints.length > 0 && (
+                      <ul>
+                        {list.bulletPoints.map((bulletPoint, index) => (
+                          <li key={index}>{bulletPoint.point}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </ul>
                 </div>
               ))}
+            </div>
+
+            <div className="video-wrapper">
+              {/* Up Button with Previous Topic Label */}
+              <div className="controlbtn">
+                <div className="btnwrap flex">
+                  {prevTopic && (
+                    <>
+                      <p>{prevTopic.label}</p>
+                      <FaAngleDoubleUp size={40} color="#e9e9e9" />
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {topic.videoId && (
+                <YouTubeEmbed
+                  videoId={topic.videoId}
+                  startTime={topic.videoTime}
+                />
+              )}
+
+              {/* Down Button with Next Topic Label */}
+              <div className="controlbtn">
+                <div className="btnwrap">
+                  {nextTopic && (
+                    <>
+                      <p>{nextTopic.label}</p>
+                      <FaAngleDoubleDown size={40} color="#e9e9e9" />
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="vid-wrapper">
-          <div>a</div>
-          <div>
-            <YouTubeEmbed videoId="fsPlXbKgv3M" />
-          </div>
-          <div>c</div>
-        </div>
-      </div>
-    </>
+        );
+      })}
+    </div>
   );
 };
 
