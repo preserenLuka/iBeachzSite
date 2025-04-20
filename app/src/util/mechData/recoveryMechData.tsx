@@ -12,12 +12,12 @@ const recoveryMechData: contentObject = {
 
   topics: [
     {
-      label: "Wall Dash",
-      value: "wallDash",
+      title: "Wall Dash",
+      key: "wallDash",
       videoTime: "32:10",
       description:
         "What it is: A dodge-based way to accelerate along the wall without using boost.",
-      listOfLists: [
+      content: [
         {
           title: "How to do it:",
           bulletPoints: [
@@ -33,11 +33,11 @@ const recoveryMechData: contentObject = {
       ],
     },
     {
-      label: "Half Flip",
-      value: "halfFlip",
+      title: "Half Flip",
+      key: "halfFlip",
       videoTime: "7:10",
       description: "Purpose: Quickly turn around when facing the wrong way.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -53,12 +53,12 @@ const recoveryMechData: contentObject = {
       ],
     },
     {
-      label: "Wave Dash",
-      value: "waveDash",
+      title: "Wave Dash",
+      key: "waveDash",
       videoTime: "22:15",
       description:
         "Why for defense: Regain speed instantly after a save or recovery without wasting boost.",
-      listOfLists: [
+      content: [
         {
           title: "How to use:",
           bulletPoints: [
@@ -75,11 +75,11 @@ const recoveryMechData: contentObject = {
       ],
     },
     {
-      label: "Speed Flip",
-      value: "speedFlip",
+      title: "Speed Flip",
+      key: "speedFlip",
       videoTime: "52:50",
       description: "Key use: Kickoffs and quick rotations.",
-      listOfLists: [
+      content: [
         {
           title: "Why:",
           bulletPoints: [
@@ -106,12 +106,12 @@ const recoveryMechData: contentObject = {
       ],
     },
     {
-      label: "Crease Dash",
-      value: "creaseDash",
+      title: "Crease Dash",
+      key: "creaseDash",
       videoTime: "",
       description:
         "What: A grounded wavedash near the goal line to regain speed while staying positioned for a save.",
-      listOfLists: [
+      content: [
         {
           title: "When to use:",
           bulletPoints: [
@@ -136,12 +136,12 @@ const recoveryMechData: contentObject = {
       ],
     },
     {
-      label: "Zap Dash",
-      value: "zapDash",
+      title: "Zap Dash",
+      key: "zapDash",
       videoTime: "",
       description:
         "What: A rapid chain of wavedashes using flip resets for burst acceleration.",
-      listOfLists: [
+      content: [
         {
           title: "How it works:",
           bulletPoints: [

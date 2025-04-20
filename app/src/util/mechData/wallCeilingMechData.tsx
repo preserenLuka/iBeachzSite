@@ -8,11 +8,11 @@ const wallCeilingMechData: contentObject = {
     "Mastering walls and ceilings means you’re not limited by gravity. These mechanics give you more angles, more speed, and more options — whether you're attacking or defending.",
   topics: [
     {
-      label: "Wall Pinch",
-      value: "wallPinch",
+      title: "Wall Pinch",
+      key: "wallPinch",
       videoTime: "50:00",
       description: "When: Low boost clears or surprise goals.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -31,11 +31,11 @@ const wallCeilingMechData: contentObject = {
       ],
     },
     {
-      label: "Ceiling Pinch",
-      value: "ceilingPinch",
+      title: "Ceiling Pinch",
+      key: "ceilingPinch",
       videoTime: "2:10:15",
       description: "One of the highest-power mechanics in the game.",
-      listOfLists: [
+      content: [
         {
           title: "Execution:",
           bulletPoints: [
@@ -56,11 +56,11 @@ const wallCeilingMechData: contentObject = {
       ],
     },
     {
-      label: "Ceiling Stall Reset",
-      value: "ceilingStallReset",
+      title: "Ceiling Stall Reset",
+      key: "ceilingStallReset",
       videoTime: "2:15:30",
       description: "Purpose: Delay your flip after a ceiling drop.",
-      listOfLists: [
+      content: [
         {
           title: "How to Execute:",
           bulletPoints: [
@@ -80,12 +80,12 @@ const wallCeilingMechData: contentObject = {
       ],
     },
     {
-      label: "Preflip Off Wall",
-      value: "preflipOffWall",
+      title: "Preflip Off Wall",
+      key: "preflipOffWall",
       videoTime: "2:34:04",
       description:
         "When: You’re out of alignment but need to reach the ball fast.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -106,11 +106,11 @@ const wallCeilingMechData: contentObject = {
       ],
     },
     {
-      label: "Missing Mechanics:",
-      value: "missingMechanics",
+      title: "Missing Mechanics:",
+      key: "missingMechanics",
       videoTime: "(No timestamp)",
       description: "",
-      listOfLists: [
+      content: [
         {
           title: "• Ceiling Shot (Basic)",
           bulletPoints: [

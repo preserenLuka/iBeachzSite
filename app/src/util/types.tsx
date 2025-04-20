@@ -3,39 +3,6 @@ export type keyContentPairs = {
   [key: string]: string;
 };
 
-export type BulletPoints = {
-  point: string;
-};
-export type Ids = {
-  id: string;
-};
-
-export type List = {
-  title: string;
-  description?: string;
-  listOfLists?: List[];
-  bulletPoints?: BulletPoints[];
-  extraText?: string;
-};
-
-export type Topics = {
-  label: string;
-  value: string;
-  videoTime?: string;
-  description?: string;
-  listOfLists: List[];
-  videoId?: string;
-};
-
-export type contentObject = {
-  title: string;
-  key: string;
-  componentName: string;
-  description: string;
-  topics: Topics[];
-  videoIds?: Ids[];
-};
-
 export type SubMenuItem = {
   label: string;
   value: string;
@@ -48,4 +15,48 @@ export type MenuItem = {
   key: string;
   items: SubMenuItem[];
   icon?: ReactNode;
+};
+
+//types for content data
+
+export type contentObject = {
+  title: string;
+  key: string;
+  componentName: string;
+  description?: string;
+  topics: SingleTopic | MultiTopic;
+};
+
+export type SingleTopic = {
+  title: string;
+  description?: string;
+  videoId?: string[];
+  content: (RandomText | List)[];
+};
+
+export type MultiTopic = Topics[];
+
+export type Topics = {
+  title: string;
+  key?: string;
+  description?: string;
+  videoId?: string[];
+  videoTime?: string;
+  content: (RandomText | List)[];
+};
+
+export type BulletPoints = {
+  point: string;
+};
+
+export type List = {
+  title: string;
+  description?: string;
+  listOfLists?: List[];
+  bulletPoints?: BulletPoints[];
+  extraText?: string;
+};
+
+export type RandomText = {
+  text: string;
 };

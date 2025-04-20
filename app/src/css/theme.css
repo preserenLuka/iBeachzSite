@@ -5,6 +5,16 @@
   --background-light: #1e1e1e;
   --text-color: #bcc4c6e6;
   --text-color-light: #e9e9e9;
+  --background-gradient: linear-gradient(
+    to top right,
+    rgba(2, 4, 5, 1) 5%,
+    rgba(5, 10, 12, 1) 19%,
+    rgba(9, 21, 24, 1) 34%,
+    rgba(14, 34, 39, 1) 46%,
+    rgba(24, 57, 66, 1) 64%,
+    rgba(28, 63, 72, 1) 75%,
+    rgba(51, 95, 107, 1) 100%
+  );
 }
 
 /* Text colors */
@@ -33,6 +43,11 @@
 }
 .bg-light {
   background-color: var(--background-light);
+}
+.bg-gradiant {
+  background-image: var(--background-gradient);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* Border colors */

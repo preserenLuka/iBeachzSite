@@ -8,11 +8,11 @@ const cuttingControlData: contentObject = {
     "Want to stay ahead of your opponents? These mechanics give you sharper turns, faster recoveries, and cleaner transitions — all essential for higher-level play.",
   topics: [
     {
-      label: "Catching",
-      value: "catching",
+      title: "Catching",
+      key: "catching",
       videoTime: "12:20",
       description: "Why: Maintain possession when no one’s pressuring you.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -32,12 +32,12 @@ const cuttingControlData: contentObject = {
       ],
     },
     {
-      label: "Power Slide Cuts",
-      value: "powerSlideCuts",
+      title: "Power Slide Cuts",
+      key: "powerSlideCuts",
       videoTime: "35:55",
       description:
         "What: Sudden, sharp direction change with the ball.\nWhen: To avoid a challenge or fake a race to boost.",
-      listOfLists: [
+      content: [
         {
           title: "Drill:",
           bulletPoints: [
@@ -54,11 +54,11 @@ const cuttingControlData: contentObject = {
       ],
     },
     {
-      label: "Quick Cuts",
-      value: "quickCuts",
+      title: "Quick Cuts",
+      key: "quickCuts",
       videoTime: "38:10",
       description: "Variation of: Power slide cuts, but on your car.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -77,12 +77,12 @@ const cuttingControlData: contentObject = {
       ],
     },
     {
-      label: "Dribbling",
-      value: "dribbling",
+      title: "Dribbling",
+      key: "dribbling",
       videoTime: "14:45",
       description:
         "Why: Gives you control. Forces defenders to react.\nWhen to use: When you have space, want to outplay a defender, or set up a flick.",
-      listOfLists: [
+      content: [
         {
           title: "How to learn:",
           bulletPoints: [
@@ -108,12 +108,12 @@ const cuttingControlData: contentObject = {
       ],
     },
     {
-      label: "Bounce Dribble",
-      value: "bounceDribble",
+      title: "Bounce Dribble",
+      key: "bounceDribble",
       videoTime: "28:50",
       description:
         "What: Dribbling while letting the ball bounce once between touches — perfect for baiting defenders and lining up better flick angles.\nWhy: Forces defenders to commit early or guess wrong, while giving you clean setup windows.",
-      listOfLists: [
+      content: [
         {
           title: "How to practice:",
           bulletPoints: [

@@ -8,12 +8,12 @@ const flickMechData: contentObject = {
     "Flicks let you convert possession into instant offense. The better your flick variety, the harder it is for defenders to predict or block your plays.",
   topics: [
     {
-      label: "Front Flip Flick",
-      value: "frontFlipFlick",
+      title: "Front Flip Flick",
+      key: "frontFlipFlick",
       videoTime: "17:45",
       description:
         "Use: Gain momentum and get a quick shot with minimal boost.\nWhen: Low on boost or need a fast, simple finish.",
-      listOfLists: [
+      content: [
         {
           title: "How to do it:",
           bulletPoints: [
@@ -32,12 +32,12 @@ const flickMechData: contentObject = {
       ],
     },
     {
-      label: "Back Flip Flick",
-      value: "backFlipFlick",
+      title: "Back Flip Flick",
+      key: "backFlipFlick",
       videoTime: "20:00",
       description:
         "Use: Great for lob passes, surprise shots, or avoiding early challenges.\nBest in: 1v1 or 2v2 if your teammate is waiting mid.",
-      listOfLists: [
+      content: [
         {
           title: "How to do it:",
           bulletPoints: [
@@ -52,12 +52,12 @@ const flickMechData: contentObject = {
       ],
     },
     {
-      label: "Diagonal Flick",
-      value: "diagonalFlick",
+      title: "Diagonal Flick",
+      key: "diagonalFlick",
       videoTime: "25:15",
       description:
         "Use: Adds both height and power. Great for shooting over defenders or creating backboard reads.",
-      listOfLists: [
+      content: [
         {
           title: "Execution:",
           bulletPoints: [
@@ -74,12 +74,12 @@ const flickMechData: contentObject = {
       ],
     },
     {
-      label: "Reverse 45 Flick",
-      value: "reverse45Flick",
+      title: "Reverse 45 Flick",
+      key: "reverse45Flick",
       videoTime: "40:30",
       description:
         "One of the most powerful flicks in the game.\nWhen: To shoot with power when shadowed or being pressured.",
-      listOfLists: [
+      content: [
         {
           title: "How to do it:",
           bulletPoints: [
@@ -98,12 +98,12 @@ const flickMechData: contentObject = {
       ],
     },
     {
-      label: "Musty Flick",
-      value: "mustyFlick",
+      title: "Musty Flick",
+      key: "mustyFlick",
       videoTime: "46:00",
       description:
         "Use: Surprise defenders with high-arcing, powerful backflips.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -121,12 +121,12 @@ const flickMechData: contentObject = {
       ],
     },
     {
-      label: "Delayed Musty",
-      value: "delayedMusty",
+      title: "Delayed Musty",
+      key: "delayedMusty",
       videoTime: "1:56:00",
       description:
         "Style shot with big reward if timed right.\nUse: Fake defenders, or set up double touches with delay.",
-      listOfLists: [
+      content: [
         {
           title: "Technique:",
           bulletPoints: [
@@ -143,11 +143,11 @@ const flickMechData: contentObject = {
       ],
     },
     {
-      label: "Tornado Flick",
-      value: "tornadoFlick",
+      title: "Tornado Flick",
+      key: "tornadoFlick",
       videoTime: "2:03:00",
       description: "Highly mechanical and flashy.",
-      listOfLists: [
+      content: [
         {
           title: "How it works:",
           bulletPoints: [

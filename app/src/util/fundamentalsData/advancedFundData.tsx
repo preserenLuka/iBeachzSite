@@ -6,14 +6,17 @@ const advancedFundData: contentObject = {
   componentName: "advancedFundData",
   description:
     "These advanced tips cover key areas like mentality, mechanics, and improvement strategies to elevate your gameplay.",
-  videoIds: [{ id: "fsPlXbKgv3M" }],
+  //videoIds: [{ id: "fsPlXbKgv3M" }], // You can link the video ID here if available
   topics: [
     {
-      label: "Mentality Tips",
-      value: "mentalityTips",
-      videoTime: "(No timestamp)",
+      title: "Mentality Tips",
+      key: "mentalityTips",
       description: "Mental approach is just as important as mechanical skill.",
-      listOfLists: [
+
+      content: [
+        {
+          text: "Mentality is crucial for maintaining focus and composure under pressure. Here are some key tips to improve your mental game.",
+        },
         {
           title: "Key Ideas:",
           bulletPoints: [
@@ -34,11 +37,14 @@ const advancedFundData: contentObject = {
       ],
     },
     {
-      label: "Mechanical Tips",
-      value: "mechanicalTips",
-      videoTime: "(No timestamp)",
+      title: "Mechanical Tips",
+      key: "mechanicalTips",
       description: "Refine and apply mechanics with intention and control.",
-      listOfLists: [
+
+      content: [
+        {
+          text: "Mechanical skills are key to staying competitive in Rocket League. Here are tips for refining and applying mechanics during gameplay.",
+        },
         {
           title: "Essentials:",
           bulletPoints: [
@@ -65,12 +71,14 @@ const advancedFundData: contentObject = {
       ],
     },
     {
-      label: "Improvement Tips",
-      value: "improvementTips",
-      videoTime: "(No timestamp)",
+      title: "Improvement Tips",
+      key: "improvementTips",
       description:
         "Training habits and in-game decisions that push your growth.",
-      listOfLists: [
+      content: [
+        {
+          text: "Improvement in Rocket League requires a combination of good habits and quick, effective decision-making.",
+        },
         {
           title: "Growth Strategies:",
           bulletPoints: [
@@ -99,11 +107,13 @@ const advancedFundData: contentObject = {
       ],
     },
     {
-      label: "More Detailed Tips",
-      value: "detailedTips",
-      videoTime: "(No timestamp)",
+      title: "More Detailed Tips",
+      key: "detailedTips",
       description: "Refinements and mindset shifts for high-level consistency.",
-      listOfLists: [
+      content: [
+        {
+          text: "To truly take your game to the next level, small refinements and mindset shifts are essential. Here are some in-depth tips for achieving high-level consistency.",
+        },
         {
           title: "In-Depth Advice:",
           bulletPoints: [

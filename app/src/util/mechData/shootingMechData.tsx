@@ -8,12 +8,13 @@ const shootingMechData: contentObject = {
     "Welcome to the deep dive into advanced Rocket League shooting mechanics. Each mechanic here is designed to help you generate power, improve shot placement, and become a more threatening player on the field.",
   topics: [
     {
-      label: "Power Shooting (Basic)",
-      value: "powerShootingBasic",
+      title: "Power Shooting (Basic)",
+      key: "powerShootingBasic",
       videoTime: "1:50",
+      videoId: ["C0EBfirnYIE"],
       description:
         "When to use: Anytime you need a powerful strike — offense, defense, or clears.",
-      listOfLists: [
+      content: [
         {
           title: "How to practice:",
           bulletPoints: [
@@ -35,12 +36,12 @@ const shootingMechData: contentObject = {
       ],
     },
     {
-      label: "Power Shooting (Advanced)",
-      value: "powerShootingAdvanced",
+      title: "Power Shooting (Advanced)",
+      key: "powerShootingAdvanced",
       videoTime: "4:30",
       description:
         "What’s different: You use air roll (e.g., Air Roll Left) to lean away from the ball, then flip through it to generate massive power.",
-      listOfLists: [
+      content: [
         {
           title: "Key Points:",
           bulletPoints: [
@@ -55,12 +56,12 @@ const shootingMechData: contentObject = {
       ],
     },
     {
-      label: "Bounce Dribble (Power Shooting Out)",
-      value: "bounceDribblePowerShot",
+      title: "Bounce Dribble (Power Shooting Out)",
+      key: "bounceDribblePowerShot",
       videoTime: "28:50",
       description:
         "Use this when:\n• You want to bait a challenge or open up a better shooting angle.\n• Great in 1v1 or if an opponent is shadowing closely.",
-      listOfLists: [
+      content: [
         {
           title: "Drill:",
           bulletPoints: [
@@ -78,12 +79,12 @@ const shootingMechData: contentObject = {
       ],
     },
     {
-      label: "Side Wall Redirect",
-      value: "sideWallRedirect",
+      title: "Side Wall Redirect",
+      key: "sideWallRedirect",
       videoTime: "18:05",
       description:
         "What it is: Redirecting a pass or clear from the side wall into a shot on net — without controlling first.",
-      listOfLists: [
+      content: [
         {
           title: "When to use:",
           bulletPoints: [

@@ -4,80 +4,43 @@ const mentalFundData: contentObject = {
   title: "Positive Mental",
   key: "mentalFundemental",
   componentName: "mentalFundData",
-  description:
-    "Mental resilience is huge in this game. It's okay to get tilted, but knowing how to manage it makes a big difference.",
-  videoIds: [{ id: "C0EBfirnYIE" }],
-  topics: [
-    {
-      label: "Managing Tilt",
-      value: "managingTilt",
-      videoTime: "(No timestamp)",
-      description:
-        "Tilt is natural, especially in a competitive setting. These strategies help you refocus and stay sharp.",
-      listOfLists: [
-        {
-          title: "Practical Tips:",
-          bulletPoints: [
-            { point: "Tilt is normal—especially for competitive players." },
-            {
-              point:
-                "Instead of focusing on teammates' mistakes, shift focus to the enemy’s errors.",
-            },
-            {
-              point:
-                "Watching opponent mistakes helps you find ways to win, not just dwell on how you're losing.",
-            },
-            { point: "Had a bad day? Avoid ranked to protect your mindset." },
-            {
-              point:
-                "Still want to play? Try casual matches first—see how you feel before going into ranked.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: "Improving Mental Game",
-      value: "improvingMental",
-      videoTime: "(No timestamp)",
-      description: "Prevent mental burnout and build discipline over time.",
-      listOfLists: [
-        {
-          title: "Guidelines:",
-          bulletPoints: [
-            {
-              point:
-                "Set a daily game limit—e.g., 15 games. Don't play past your tilt point (like game 6).",
-            },
-            {
-              point: "Over time, this builds mental discipline and control.",
-            },
-            {
-              point:
-                "Got a teammate intentionally throwing? “Throw harder” to mentally reset—it’s about refreshing your mindset, not giving up.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: "Having Fun",
-      value: "mentalFun",
-      videoTime: "(No timestamp)",
-      description: "Fun is fuel for creativity and focus.",
-      listOfLists: [
-        {
-          title: "Why It Matters:",
-          bulletPoints: [
-            {
-              point:
-                "Enjoying the game helps you stay creative and keeps your mindset fresh.",
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  description: "Mental is very important in this game.",
+  topics: {
+    videoId: ["fsPlXbKgv3M"],
+    title: "Mental Strength",
+    content: [
+      {
+        text: "Tilting is an emotion, and it's okay to tilt — you will 100% tilt if you are a competitive person.",
+      },
+      { text: "Try to notice the enemy’s mistakes, not your teammates’." },
+      {
+        text: "If you focus on the enemy's mistakes, you're looking for how to win.",
+      },
+      {
+        text: "If you focus on your teammates' mistakes, you'll only see how you're losing.",
+      },
+      {
+        text: "If you’ve had a bad day, don’t jump into ranked games — don’t do that to yourself.",
+      },
+      {
+        text: "If you really want to play, go casual first, then decide what you want.",
+      },
+      {
+        title: "Daily Mental Strategy",
+        bulletPoints: [
+          { point: "Set a number of games to play each day." },
+          {
+            point:
+              "If you plan to play 15 games a day, you can't tilt by game 6.",
+          },
+          { point: "Over time, your mental game will improve." },
+        ],
+        extraText:
+          "If your teammate is intentionally throwing, you can throw the game twice as hard to reset mentally. It’s a mental refresh.",
+      },
+      { text: "Try to have fun — this will help you become more creative." },
+    ],
+  },
 };
 
 export default mentalFundData;

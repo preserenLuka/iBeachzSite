@@ -8,13 +8,13 @@ const aerialMechData: contentObject = {
     "The air is where Rocket League truly becomes a different game. Mastering aerials means becoming a threat anywhere on the field — whether you're striking, passing, or faking.",
   topics: [
     {
-      label: "Aerial (with Power)",
-      value: "aerialWithPower",
+      title: "Aerial (with Power)",
+      key: "aerialWithPower",
       videoTime: "9:00",
-      videoId: "fsPlXbKgv3M",
+      videoId: ["fsPlXbKgv3M"],
       description:
         "When: Beating opponents to the ball, countering clears, or quick-shotting a rebound.",
-      listOfLists: [
+      content: [
         {
           title: "How:",
           bulletPoints: [
@@ -49,12 +49,12 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Air Dribbling",
-      value: "airDribbling",
+      title: "Air Dribbling",
+      key: "airDribbling",
       videoTime: "no exact timestamp",
-      videoId: "fsPlXbK234v3M",
+      videoId: ["fsPlXbK234v3M"],
       description: "Why: Maintains control and pressure mid-air.",
-      listOfLists: [
+      content: [
         {
           title: "When:",
           bulletPoints: [
@@ -95,11 +95,11 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Air Dribble Bumps",
-      value: "airDribbleBumps",
+      title: "Air Dribble Bumps",
+      key: "airDribbleBumps",
       videoTime: "1:45:00",
       description: "Toxic? Maybe. Effective? Absolutely.",
-      listOfLists: [
+      content: [
         {
           title: "When:",
           bulletPoints: [{ point: "One defender in net." }],
@@ -130,12 +130,12 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Ground to Air Dribble Off Bounce/Roll",
-      value: "groundToAirDribbleOffBounce",
+      title: "Ground to Air Dribble Off Bounce/Roll",
+      key: "groundToAirDribbleOffBounce",
       videoTime: "1:29:15",
       description:
         "When to use: Transition into aerial play when the ball is rolling or bouncing in front of you.",
-      listOfLists: [
+      content: [
         {
           title: "Drill:",
           bulletPoints: [
@@ -164,12 +164,12 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Ground to Air Dribble (from carry)",
-      value: "groundToAirDribbleFromCarry",
+      title: "Ground to Air Dribble (from carry)",
+      key: "groundToAirDribbleFromCarry",
       videoTime: "1:47:10",
       description:
         "Higher-skill version: Turning a dribble into an aerial threat.",
-      listOfLists: [
+      content: [
         {
           title: "Steps:",
           bulletPoints: [
@@ -193,12 +193,12 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Off-Wall Double Taps",
-      value: "offWallDoubleTaps",
+      title: "Off-Wall Double Taps",
+      key: "offWallDoubleTaps",
       videoTime: "1:15:30",
       description:
         "Why: Beat backboard defenders or score from unexpected angles.",
-      listOfLists: [
+      content: [
         {
           title: "Steps:",
           bulletPoints: [
@@ -221,12 +221,12 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Directional Air Roll",
-      value: "directionalAirRoll",
+      title: "Directional Air Roll",
+      key: "directionalAirRoll",
       videoTime: "2:00:00",
       description:
         "What it is: Using air roll in a specific direction to control your car mid-air, adjusting your angle without losing speed.",
-      listOfLists: [
+      content: [
         {
           title: "When to use:",
           bulletPoints: [
@@ -263,12 +263,12 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      label: "Ground Double Tap",
-      value: "groundDoubleTap",
+      title: "Ground Double Tap",
+      key: "groundDoubleTap",
       videoTime: "2:10:00",
       description:
         "What it is: Performing a double tap after bouncing the ball on the ground.",
-      listOfLists: [
+      content: [
         {
           title: "When to use:",
           bulletPoints: [

@@ -1,0 +1,80 @@
+@import "./theme.css";
+
+.wrapper {
+  display: flex;
+  overflow-y: auto;
+  color: var(--text-color);
+  padding: 2.5%;
+  height: 100vh;
+}
+
+.content {
+  border-radius: 3%;
+  padding: 1%;
+  width: 45%;
+  background-color: var(--background-light);
+  margin-right: 1.25%;
+}
+.video-wrapper {
+  width: 55%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 1.25%;
+}
+.site-title {
+  position: sticky;
+  top: 0;
+  font-size: 24px;
+  color: var(--primary);
+  width: 100%;
+  font-weight: bold;
+}
+.content h2 {
+  font-size: 22px;
+  color: var(--secondary);
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+.content h3 {
+  font-size: 20px;
+  color: var(--secondary);
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.vidGallery-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons under the video */
+  gap: 10px; /* Add a small gap between the buttons */
+  width: 60%; /* Ensure the container spans the full width */
+  margin-top: 10px; /* Reduce the space above the buttons */
+}
+
+.gallerybutton {
+  flex: 1; /* Make both buttons take up equal space */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-color);
+  background-color: #081215;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center; /* Ensure the text is centered */
+}
+
+.gallerybutton:hover {
+  background-color: #0a1a1f; /* Slightly darker background on hover */
+}

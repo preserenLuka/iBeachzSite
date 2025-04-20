@@ -8,12 +8,12 @@ const resetMechData: contentObject = {
     "Flip resets allow you to reclaim your dodge mid-air — unlocking endless mechanical potential. Whether you're going for power, fakes, or pure style, mastering resets will take your aerial game to another level.",
   topics: [
     {
-      label: "Flip Reset",
-      value: "flipReset",
+      title: "Flip Reset",
+      key: "flipReset",
       videoTime: "1:39:35",
       description:
         "What: Touch all four wheels on the ball mid-air = regain your flip.",
-      listOfLists: [
+      content: [
         {
           title: "How to practice:",
           bulletPoints: [
@@ -37,12 +37,12 @@ const resetMechData: contentObject = {
       ],
     },
     {
-      label: "Ceiling Stall Reset",
-      value: "ceilingStallReset",
+      title: "Ceiling Stall Reset",
+      key: "ceilingStallReset",
       videoTime: "2:15:30",
       description:
         "Why: Buy time mid-air and delay the reset for perfect control.",
-      listOfLists: [
+      content: [
         {
           title: "Steps:",
           bulletPoints: [
@@ -69,12 +69,12 @@ const resetMechData: contentObject = {
       ],
     },
     {
-      label: "Insta Reset with Power",
-      value: "instaResetWithPower",
+      title: "Insta Reset with Power",
+      key: "instaResetWithPower",
       videoTime: "2:20:20",
       description:
         "Goal: Land the reset and use your flip immediately for power.",
-      listOfLists: [
+      content: [
         {
           title: "Execution:",
           bulletPoints: [
@@ -100,11 +100,11 @@ const resetMechData: contentObject = {
       ],
     },
     {
-      label: "Double Reset",
-      value: "doubleReset",
+      title: "Double Reset",
+      key: "doubleReset",
       videoTime: "2:41:30",
       description: "What: Two resets in one air dribble.",
-      listOfLists: [
+      content: [
         {
           title: "Drill:",
           bulletPoints: [
@@ -128,11 +128,11 @@ const resetMechData: contentObject = {
       ],
     },
     {
-      label: "Reset Double Tap",
-      value: "resetDoubleTap",
+      title: "Reset Double Tap",
+      key: "resetDoubleTap",
       videoTime: "2:50:00",
       description: "Mix of creativity and pressure.",
-      listOfLists: [
+      content: [
         {
           title: "Steps:",
           bulletPoints: [
@@ -153,12 +153,12 @@ const resetMechData: contentObject = {
       ],
     },
     {
-      label: "Musty Flick (Out of Reset)",
-      value: "mustyFlickOutOfReset",
+      title: "Musty Flick (Out of Reset)",
+      key: "mustyFlickOutOfReset",
       videoTime: "2:25:40",
       description:
         "Combo of a flip reset and a musty = massive power and verticality.",
-      listOfLists: [
+      content: [
         {
           title: "Steps:",
           bulletPoints: [
@@ -182,11 +182,11 @@ const resetMechData: contentObject = {
       ],
     },
     {
-      label: "Heli Reset",
-      value: "heliReset",
+      title: "Heli Reset",
+      key: "heliReset",
       videoTime: "3:03:41",
       description: "One of the most advanced (and stylish) reset variants.",
-      listOfLists: [
+      content: [
         {
           title: "Concept:",
           bulletPoints: [

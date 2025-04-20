@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import YouTubeEmbed from "./YouTubeEmbedProps";
-import "../css/tailwind.css"; // Or just your regular CSS file import
-import { Ids } from "../util/types";
+import "../css/tailwind.css";
 
 interface VideoGalleryProps {
-  videoIds: Ids[];
+  videoIds: string[];
 }
 
 const VideoGallery: React.FC<VideoGalleryProps> = ({ videoIds }) => {
@@ -20,15 +19,17 @@ const VideoGallery: React.FC<VideoGalleryProps> = ({ videoIds }) => {
 
   return (
     <div className="vidGallery-wrapper">
-      <YouTubeEmbed videoId={videoIds[currentIndex].id} />
-      <div className="button-container">
-        <button className="gallerybutton" onClick={handlePrev}>
-          Previous
-        </button>
-        <button className="gallerybutton" onClick={handleNext}>
-          Next
-        </button>
-      </div>
+      <YouTubeEmbed videoId={videoIds[currentIndex]} />
+      {videoIds.length > 1 && ( // Conditionally render buttons if more than 1 video ID
+        <div className="button-container">
+          <button className="gallerybutton" onClick={handlePrev}>
+            Previous
+          </button>
+          <button className="gallerybutton" onClick={handleNext}>
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

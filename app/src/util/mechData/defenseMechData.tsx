@@ -8,11 +8,11 @@ const defenseMechData: contentObject = {
     "Defense in Rocket League isn’t just about blocking shots — it’s about recovering fast, reading pressure, and clearing with control. These mechanics will sharpen your defensive consistency.",
   topics: [
     {
-      label: "Backboard Defense",
-      value: "backboardDefense",
+      title: "Backboard Defense",
+      key: "backboardDefense",
       videoTime: "1:21:15",
       description: "Essential for blocking backboard passes and double taps.",
-      listOfLists: [
+      content: [
         {
           title: "How to train:",
           bulletPoints: [
@@ -39,12 +39,12 @@ const defenseMechData: contentObject = {
       ],
     },
     {
-      label: "Corner & Wall Clears",
-      value: "cornerWallClears",
+      title: "Corner & Wall Clears",
+      key: "cornerWallClears",
       videoTime: "(No timestamp)",
       description:
         "What: When defending under pressure, use the wall or corner to launch the ball out of danger.",
-      listOfLists: [
+      content: [
         {
           title: "Technique:",
           bulletPoints: [
@@ -74,12 +74,12 @@ const defenseMechData: contentObject = {
       ],
     },
     {
-      label: "Shadow Defense",
-      value: "shadowDefense",
+      title: "Shadow Defense",
+      key: "shadowDefense",
       videoTime: "(No timestamp)",
       description:
         "What: Defending by staying between the ball and your net while facing backward, mirroring your opponent’s movement.",
-      listOfLists: [
+      content: [
         {
           title: "How to train:",
           bulletPoints: [
@@ -113,12 +113,12 @@ const defenseMechData: contentObject = {
       ],
     },
     {
-      label: "Backwards Aerials",
-      value: "backwardsAerials",
+      title: "Backwards Aerials",
+      key: "backwardsAerials",
       videoTime: "(No timestamp)",
       description:
         "What: A defensive move for reaching high balls when your car is facing backward or during awkward recoveries.",
-      listOfLists: [
+      content: [
         {
           title: "Technique:",
           bulletPoints: [

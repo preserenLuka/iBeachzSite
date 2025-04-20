@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 // Components
-import MechContent from "./mechContent";
-import FundContent from "./fundContent";
 import Welcome from "./welcome";
+import InformativeContent from "./informativeContent";
 
 // CSS
 import "../css/theme.css";
@@ -25,11 +24,9 @@ const Content: React.FC<ContentProps> = ({ isContentOpen }) => {
   const isMechanic = contentName?.includes("Mechanic");
 
   return (
-    <div className="grow-1 flex flex-col bg-dark overflow-y-auto text-base">
-      {isFundamental ? (
-        <FundContent isContentOpen={isContentOpen} />
-      ) : isMechanic ? (
-        <MechContent isContentOpen={isContentOpen} />
+    <div className="bg-gradiant w-full">
+      {isFundamental || isMechanic ? (
+        <InformativeContent isContentOpen={isContentOpen} />
       ) : (
         <Welcome />
       )}
