@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const isMobile = width <= 768;
 
   const handleContentChange = (content: string) => {
-    router(`/content/${content}`);
+    router(`${content}`);
 
     setCanHoverOpen(false);
     setTimeout(() => setCanHoverOpen(true), 600); // match animation

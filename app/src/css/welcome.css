@@ -1,13 +1,13 @@
 /* contentstyle.css */
 .welcome-container {
-  width: 90%;
+  width: 95%;
+  padding: 1%;
   margin: auto;
-  padding: 2%;
 }
 .content-section {
   background-color: #1e1e1e;
   border-radius: 10px;
-  padding: 24px;
+  padding: 4%;
   color: #e0e0e0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);

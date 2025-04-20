@@ -60,12 +60,6 @@ const Welcome: React.FC = () => {
             </a>
           </div>
         </div>
-        <button
-          className="navigate-button"
-          onClick={() => navigate("/content")}
-        >
-          Go to App
-        </button>
       </div>
     </div>
   );

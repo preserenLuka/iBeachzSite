@@ -3,17 +3,12 @@ import { createRoot } from "react-dom/client";
 import App from "./components/App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/errorPage.tsx";
-import Welcome from "./components/welcome.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Welcome />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/content",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: ":contentName",

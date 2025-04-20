@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import YouTubeEmbed from "../components/YouTubeEmbedProps";
+import VideoWrapper from "../components/contentRightSide";
+import VideoGallery from "./videoGallery";
 
 // Data imports
 import advancedFundData from "../util/fundamentalsData/advancedFundData";
@@ -21,6 +23,7 @@ import "../css/content.css";
 
 // Icons
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
+import { div, p } from "motion/react-client";
 
 interface ContentProps {
   isContentOpen: boolean;
@@ -58,56 +61,17 @@ const FundContent: React.FC<ContentProps> = ({ isContentOpen }) => {
 
   return (
     <>
-      <h1 className="site-title">{currentContent.title}</h1>
-      <p className="site-description">{currentContent.description}</p>
-
-      {currentContent.topics.map((topic, idx) => {
-        const prevTopic = currentContent.topics[idx - 1];
-        const nextTopic = currentContent.topics[idx + 1];
-
-        return (
-          <section key={idx} className="topic">
-            <h2>{topic.label}</h2>
-            <p className="topic-description">{topic.description}</p>
-
-            {topic.listOfLists.map((list, listIdx) => (
-              <section key={listIdx}>
-                <h3>{list.title}</h3>
-                {list.bulletPoints && (
-                  <ul>
-                    {list.bulletPoints.map((bulletPoint, index) => (
-                      <li key={index}>{bulletPoint.point}</li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            ))}
-
-            <div className="video-wrapper">
-              {prevTopic && (
-                <div className="controlbtn btnwrap flex">
-                  <p>{prevTopic.label}</p>
-                  <FaAngleDoubleUp size={40} color="#e9e9e9" />
-                </div>
-              )}
-
-              {topic.videoId && (
-                <YouTubeEmbed
-                  videoId={topic.videoId}
-                  startTime={topic.videoTime}
-                />
-              )}
-
-              {nextTopic && (
-                <div className="controlbtn btnwrap">
-                  <p>{nextTopic.label}</p>
-                  <FaAngleDoubleDown size={40} color="#e9e9e9" />
-                </div>
-              )}
-            </div>
-          </section>
-        );
-      })}
+      <section className="topic">
+        <div className="content">
+          <h1 className="site-title">{currentContent.title}</h1>
+          <p className="site-description">{currentContent.description}</p>
+        </div>
+        {currentContent.videoIds && currentContent.videoIds.length === 1 ? (
+          <VideoWrapper vidId={currentContent.videoIds[0]} />
+        ) : currentContent.videoIds && currentContent.videoIds.length > 1 ? (
+          <VideoGallery videoIds={currentContent.videoIds} />
+        ) : null}
+      </section>
     </>
   );
 };

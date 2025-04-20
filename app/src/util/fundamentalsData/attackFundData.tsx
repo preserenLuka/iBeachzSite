@@ -2,7 +2,7 @@ import { contentObject } from "../types";
 
 const attackFundData: contentObject = {
   title: "Attacking",
-  key: "attackFundemental",
+  key: "attackFundamental",
   componentName: "attackFundData",
   description:
     "Offensive pressure isn't just about scoring — it's about creating chaos, supporting teammates, and forcing difficult decisions from defenders.",
@@ -11,7 +11,7 @@ const attackFundData: contentObject = {
     {
       label: "General Tips",
       value: "attackingGeneral",
-      videoTime: "(No timestamp)",
+
       description: "Core principles for strong and smart offensive plays.",
       listOfLists: [
         {
@@ -32,7 +32,7 @@ const attackFundData: contentObject = {
     {
       label: "1st Man Tips",
       value: "firstManTips",
-      videoTime: "(No timestamp)",
+
       description: "Your job is to apply pressure and force mistakes.",
       listOfLists: [
         {
@@ -47,7 +47,6 @@ const attackFundData: contentObject = {
     {
       label: "2nd Man Tips",
       value: "secondManTips",
-      videoTime: "(No timestamp)",
       description:
         "Follow up smartly to maintain pressure and punish openings.",
       listOfLists: [
