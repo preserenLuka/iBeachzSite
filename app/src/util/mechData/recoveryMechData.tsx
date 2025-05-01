@@ -1,7 +1,4 @@
 import { contentObject } from "../types";
-interface ContentProps {
-  key: string;
-}
 
 const recoveryMechData: contentObject = {
   title: "Recovery Mechanics",

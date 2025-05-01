@@ -25,7 +25,6 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  setOpenContent,
   OpenContent,
   setisContentOpen,
   isContentOpen,
@@ -41,6 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       setOpenSubMenu(null); // Close the menu if it's already open
     } else {
       setOpenSubMenu(menu); // Open the clicked menu
+      console.log("Submenu toggled", menu);
     }
   };
 
@@ -133,7 +133,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <div
                     className={`sub-menu ${openSubMenu === key ? "open" : ""}`}
                   >
-                    {items.map(({ label, value, color, icon }, idx) => (
+                    {items.map(({ label, value, icon }, idx) => (
                       <div
                         key={idx}
                         className={`fundamentals-item `} //${color ? `color-${color}` : ""}
@@ -186,27 +186,31 @@ const Sidebar: React.FC<SidebarProps> = ({
               transition={{ delay: 0.23 }}
             >
               <FaLightbulb
-                size={width <= 2000 ? 22 : 26}
+                size={width <= 2000 ? 25 : 26}
                 onClick={toggleSidebar}
-                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+                className={`btn-icon ${isOpen ? "open" : "closed"} ${
+                  openSubMenu == "fundamentals" ? "colored-icon" : ""
+                }`}
               />
               <IoGameController
-                size={width <= 2000 ? 22 : 26}
+                size={width <= 2000 ? 25 : 26}
                 onClick={toggleSidebar}
-                className={`btn-icon ${isOpen ? "open" : "closed"}`}
+                className={`btn-icon ${isOpen ? "open" : "closed"} ${
+                  openSubMenu == "mechanics" ? "colored-icon" : ""
+                }`}
               />
               <GiWhistle
-                size={width <= 2000 ? 22 : 26}
+                size={width <= 2000 ? 25 : 26}
                 onClick={toggleSidebar}
                 className={`btn-icon ${isOpen ? "open" : "closed"}`}
               />
               <BiNotepad
-                size={width <= 2000 ? 22 : 26}
+                size={width <= 2000 ? 25 : 26}
                 onClick={toggleSidebar}
                 className={`btn-icon ${isOpen ? "open" : "closed"}`}
               />
               <FaRegFolderOpen
-                size={width <= 2000 ? 22 : 26}
+                size={width <= 2000 ? 25 : 26}
                 onClick={toggleSidebar}
                 className={`btn-icon ${isOpen ? "open" : "closed"}`}
               />

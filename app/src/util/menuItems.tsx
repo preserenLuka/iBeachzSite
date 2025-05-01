@@ -24,7 +24,6 @@ const menuItems: MenuItem[] = [
         label: "Defense",
         value: "defenseFundamental",
         color: "red",
-        icon: <FaShieldAlt size={20} />,
       },
       {
         label: "Counter Attacking",
@@ -35,7 +34,6 @@ const menuItems: MenuItem[] = [
         label: "Attack",
         value: "attackFundamental",
         color: "yellow",
-        icon: <LuSword size={30} />,
       },
       {
         label: "Rotations & Recoveries",

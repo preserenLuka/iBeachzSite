@@ -11,16 +11,10 @@ const rotationFundData: contentObject = {
     videoId: ["WlgNfzle_1s"],
     content: [
       {
-        title: "Selecting Boost Pads",
-        bulletPoints: [
-          {
-            point: "Pad management is key for speed and efficient recoveries.",
-          },
-          { point: "Prioritize small pads to stay active and fluid." },
-          { point: "Save large boost for aggressive offensive moments." },
-        ],
+        title: "Collecting Boost Pads",
+        bulletPoints: [],
         extraText:
-          "Efficient pad usage keeps you moving quickly and staying relevant in the play.",
+          "Pad management is key to fast rotations and maintaining speed during recovery.",
       },
       {
         title: "Recoveries",
@@ -42,28 +36,29 @@ const rotationFundData: contentObject = {
         title: "Rotations",
         bulletPoints: [
           {
-            point:
-              "1st Man: Disrupt opponents on the ground to relieve pressure and create openings.",
+            title: "1st Man:",
           },
           {
             point:
-              "1st Man: If opponent is aerial:\n- Fast enough? Rotate behind 2nd man and challenge from better positioning.\n- Too slow? Go for the air challenge yourself to make it easier for 2nd man.",
+              "If your opponent is grounded harass them to make it easier for the 2nd man.",
           },
           {
             point:
-              "2nd Man: If 1st man is pressured by two opponents, cover his weak side to support challenges.",
+              "If they are airborne and you can get behind your tm8 do it, else challenge opponent.",
+          },
+          {
+            title: "2nd Man:",
+          },
+          {
+            point: "If 1st man has 2 players to beat, cover his weak side.",
           },
           {
             point:
-              "2nd Man: If he only has one to beat, cover his strong side to keep up offensive pressure.",
-          },
-          {
-            point:
-              "2nd Man: Stay in play even with low boost—24 boost from pads is plenty to stay useful.",
+              "If the 1st man has 1 player to beat, cover his strong side.",
           },
         ],
         extraText:
-          "Strong rotations depend on proper positioning and support based on your role in the play.",
+          "Always be ready to support the 1st man, even on low boost (Pick up pads; 24 boost is enough).",
       },
     ],
   },

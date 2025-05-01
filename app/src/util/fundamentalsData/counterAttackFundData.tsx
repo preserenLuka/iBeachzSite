@@ -5,10 +5,12 @@ const counterAttackFundData: contentObject = {
   key: "counterAttackFundemental",
   componentName: "counterAttackFundData",
   description:
-    "Counter-attacks work because opponents often overcommit, leaving their defense exposed. To capitalize: transition fast, push the ball with pace, and make sure your first touch sets up your next move.",
+    "Counter-attacks work because opponents often overcommit, leaving their defense exposed. ",
   topics: {
     title: "Key Tips",
     videoId: ["F0KPMc9Cy-o"],
+    description:
+      "To capitalize: transition fast, push the ball with pace, and make sure your first touch sets up your next move.",
     content: [
       {
         title: "Execution Tips",

@@ -3,8 +3,8 @@
 
 /* Sidebar container */
 .sidebar {
-  background-color: #0d0d0d;
-  color: #51a7c1;
+  background-color: var(--background);
+  color: var(--primary);
   transition: width 0.35s ease;
   display: flex;
   height: 100%;
@@ -98,7 +98,7 @@
   transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
 }
 .sub-menu > * {
-  background-color: #141414;
+  background-color: var(--background-light);
 }
 
 .sub-menu.open {
@@ -133,7 +133,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #2a5c91;
+  color: var(--secondary);
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
@@ -171,9 +171,7 @@
   width: 100%;
   cursor: pointer;
 }
-.btn-icon:hover {
-  color: rgb(63, 63, 180);
-}
+
 .btn-icon.open {
   opacity: 0;
 }

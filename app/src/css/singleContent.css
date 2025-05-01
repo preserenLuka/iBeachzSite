@@ -23,23 +23,23 @@
   margin-left: 1.25%;
 }
 .site-title {
-  position: sticky;
-  top: 0;
   font-size: 24px;
   color: var(--primary);
   width: 100%;
   font-weight: bold;
 }
-.content h2 {
-  font-size: 22px;
-  color: var(--secondary);
-  margin-bottom: 15px;
+.site-description {
+  font-size: 18px;
+  width: 100%;
   font-weight: bold;
+  padding: 1%;
 }
+
 .content h3 {
   font-size: 20px;
   color: var(--secondary);
-  margin-bottom: 15px;
+  margin-bottom: 1.5%;
+  margin-top: 4%;
   font-weight: bold;
 }
 
@@ -77,4 +77,30 @@
 
 .gallerybutton:hover {
   background-color: #0a1a1f; /* Slightly darker background on hover */
+}
+
+/* Ensure bullet points are displayed for unordered lists */
+.singleCul {
+  list-style-type: disc; /* Use default bullet points */
+  margin-left: 20px; /* Add some indentation */
+  padding-left: 20px; /* Add padding for better alignment */
+}
+
+.singleCli {
+  margin-bottom: 10px; /* Add spacing between list items */
+  color: var(--text-color); /* Ensure text color matches your theme */
+}
+
+.extra-text {
+  font-size: 15px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-weight: bold;
+}
+.singleh4 {
+  font-size: 16px;
+  color: var(--third-color);
+  margin-bottom: 0.5%;
+  margin-top: 1%;
+  font-weight: bold;
 }

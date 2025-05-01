@@ -8,7 +8,7 @@ const attackFundData: contentObject = {
     "Offensive pressure isn't just about scoring — it's about creating chaos, supporting teammates, and forcing difficult decisions from defenders.",
   topics: {
     title: "Offensive Principles",
-    videoId: ["v1g0x2c3"],
+    videoId: ["McFf085CuXY"],
     content: [
       {
         text: "Avoid shooting directly at goalkeepers – instead, force them into awkward positions or make them move.",

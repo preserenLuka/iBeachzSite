@@ -53,10 +53,13 @@ export type List = {
   title: string;
   description?: string;
   listOfLists?: List[];
-  bulletPoints?: BulletPoints[];
+  bulletPoints?: (BulletPoints | BPTitle)[];
   extraText?: string;
 };
 
+export type BPTitle = {
+  title: string;
+};
 export type RandomText = {
   text: string;
 };

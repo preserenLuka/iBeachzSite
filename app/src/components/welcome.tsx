@@ -1,11 +1,8 @@
 import React from "react";
 import "../css/welcome.css"; // Import the CSS file
 import { FaDiscord, FaYoutube, FaTwitch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { div } from "motion/react-client";
 
 const Welcome: React.FC = () => {
-  const navigate = useNavigate();
   return (
     <div className="welcome-container">
       <div className="content-section">
@@ -20,6 +17,12 @@ const Welcome: React.FC = () => {
         <p>
           Explore key aspects of the game, from positioning and rotation to
           advanced mechanics like air dribbles and flip resets.
+        </p>
+        <p>Built from backfield to frontfield</p>
+
+        <p>
+          Your mindset should be: How quickly can I make decision and how fast
+          can I gain control of the ball
         </p>
 
         <div className="role-section">

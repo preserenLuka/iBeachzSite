@@ -9,6 +9,7 @@ const advancedFundData: contentObject = {
   //videoIds: [{ id: "fsPlXbKgv3M" }], // You can link the video ID here if available
   topics: [
     {
+      videoId: ["fsPlXbKgv3M"],
       title: "Mentality Tips",
       key: "mentalityTips",
       description: "Mental approach is just as important as mechanical skill.",
@@ -37,6 +38,7 @@ const advancedFundData: contentObject = {
       ],
     },
     {
+      videoId: ["fsPlXbKgv3M"],
       title: "Mechanical Tips",
       key: "mechanicalTips",
       description: "Refine and apply mechanics with intention and control.",
@@ -71,6 +73,7 @@ const advancedFundData: contentObject = {
       ],
     },
     {
+      videoId: ["fsPlXbKgv3M"],
       title: "Improvement Tips",
       key: "improvementTips",
       description:
@@ -107,6 +110,7 @@ const advancedFundData: contentObject = {
       ],
     },
     {
+      videoId: ["fsPlXbKgv3M"],
       title: "More Detailed Tips",
       key: "detailedTips",
       description: "Refinements and mindset shifts for high-level consistency.",

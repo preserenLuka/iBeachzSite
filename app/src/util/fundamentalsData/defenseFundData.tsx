@@ -13,7 +13,7 @@ const defenseFundData: contentObject = {
       {
         title: "1st Man on Defense",
         bulletPoints: [
-          { point: "Make life easier for your 2nd man." },
+          { point: "Make your 2nd man's job easier." },
           { point: "Apply pressure to the opponent with the ball." },
           {
             point: "Don’t overcommit—avoid leaving your teammate in a 1v2.",
@@ -33,7 +33,7 @@ const defenseFundData: contentObject = {
           { point: "Only challenge if it’s necessary." },
           { point: "Cover your teammate’s weaker outcomes." },
           {
-            point: "Backboard positioning is often a smart defensive move.",
+            point: "Backboard positioning is often  a good idea.",
           },
         ],
         extraText:

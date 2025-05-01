@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 // Components
 import SingleContentComponent from "./singleContentComponent";
 import MultiContentComponent from "./multiContentComponent";
-import Welcome from "./welcome";
 
 // mech components
 import shootingMechData from "../util/mechData/shootingMechData";
@@ -51,7 +50,7 @@ const InformativeContent: React.FC<ContentProps> = ({ isContentOpen }) => {
 
     // Fundamentals
     advancedTipsFundamental: advancedFundData,
-    attackingFundamental: attackFundData,
+    attackFundamental: attackFundData,
     challengeFundamental: challengeFundData,
     counterAttackFundamental: counterAttackFundData,
     defenseFundamental: defenseFundData,
