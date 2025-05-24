@@ -120,8 +120,17 @@
 
 .menu-title:hover {
   background-color: #333;
-  padding: 1rem;
+  padding: 0.75rem;
   transition: padding 0.15s ease;
+}
+
+.menu-title,
+.fundamentals-item,
+.sidebar-title {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
 }
 
 .fundamentals-item {
@@ -195,7 +204,7 @@
   }
 
   .menu-title:hover {
-    padding: 0.9rem;
+    padding: 0.75rem;
   }
   .sub-menu {
     gap: 7px;
@@ -273,127 +282,4 @@
 .mobile-welcome-message p {
   font-size: 1em;
   color: #777;
-}
-
-/* BARVE ----------------------------------------------------------------------------- */
-:root {
-  /* Red */
-  --color-red: #0d0d0d;
-  --color-red-light: #aa1c1ca2;
-
-  /* Orange */
-  --color-orange: #0d0d0d;
-  --color-orange-light: #ec6a1375;
-
-  /* Yellow */
-  --color-yellow: #0d0d0d;
-  --color-yellow-light: #6200ff5e;
-
-  /* Green */
-  --color-green: #0d0d0d;
-  --color-green-light: #20df6c5e;
-
-  /* Cyan */
-  --color-cyan: #0d0d0d;
-  --color-cyan-light: #23cfb55e;
-
-  /* Blue */
-  --color-blue: #0d0d0d;
-  --color-blue-light: #2f5a9c5e;
-
-  /* Purple */
-  --color-purple: #0d0d0d;
-  --color-purple-light: #f140e95e;
-
-  /* Pink */
-  --color-pink: #0d0d0d;
-  --color-pink-light: #ce4f825e;
-
-  /* Teal */
-  --color-teal: #0d0d0d;
-  --color-teal-light: #2f9c9c5e;
-
-  /* Gold */
-  --color-gold: #0d0d0d;
-  --color-gold-light: #9c7a2f5e;
-}
-
-.color-red {
-  background-color: var(--color-red);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-red:hover {
-  background-color: var(--color-red-light);
-}
-
-.color-orange {
-  background-color: var(--color-orange);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-orange:hover {
-  background-color: var(--color-orange-light);
-}
-
-.color-yellow {
-  background-color: var(--color-yellow);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-yellow:hover {
-  background-color: var(--color-yellow-light);
-}
-
-.color-green {
-  background-color: var(--color-green);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-green:hover {
-  background-color: var(--color-green-light);
-}
-
-.color-cyan {
-  background-color: var(--color-cyan);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-cyan:hover {
-  background-color: var(--color-cyan-light);
-}
-
-.color-blue {
-  background-color: var(--color-blue);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-blue:hover {
-  background-color: var(--color-blue-light);
-}
-
-.color-purple {
-  background-color: var(--color-purple);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-purple:hover {
-  background-color: var(--color-purple-light);
-}
-
-.color-pink {
-  background-color: var(--color-pink);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-pink:hover {
-  background-color: var(--color-pink-light);
-}
-
-.color-teal {
-  background-color: var(--color-teal);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-teal:hover {
-  background-color: var(--color-teal-light);
-}
-
-.color-gold {
-  background-color: var(--color-gold);
-  transition: background-color 0.3s ease-in-out;
-}
-.color-gold:hover {
-  background-color: var(--color-gold-light);
 }

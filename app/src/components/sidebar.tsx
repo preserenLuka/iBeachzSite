@@ -16,6 +16,8 @@ import { GiWhistle } from "react-icons/gi";
 import { BiNotepad } from "react-icons/bi";
 
 import { FaRegFolderOpen } from "react-icons/fa";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 interface SidebarProps {
   OpenContent: string;
@@ -32,14 +34,14 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [width, setWidth] = useState(window.innerWidth);
-  const [canHoverOpen, setCanHoverOpen] = useState(true);
+
   const router = useNavigate();
 
   const toggleSubMenu = (menu: string) => {
     if (openSubMenu === menu) {
-      setOpenSubMenu(null); // Close the menu if it's already open
+      setOpenSubMenu(null);
     } else {
-      setOpenSubMenu(menu); // Open the clicked menu
+      setOpenSubMenu(menu);
       console.log("Submenu toggled", menu);
     }
   };
@@ -55,8 +57,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   const handleContentChange = (content: string) => {
     router(`${content}`);
 
-    setCanHoverOpen(false);
-    setTimeout(() => setCanHoverOpen(true), 600); // match animation
     setIsOpen(false);
     setisContentOpen(true);
   };
@@ -70,13 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       const newState = !prev;
 
       if (isMobile && !newState) {
-        setisContentOpen(false); // Close content when sidebar is closing
-      }
-
-      if (!newState) {
-        // If we're closing, disable hover re-open for 600ms
-        setCanHoverOpen(false);
-        setTimeout(() => setCanHoverOpen(true), 500); // slightly longer than the 0.5s animation
+        setisContentOpen(false);
       }
 
       return newState;
@@ -93,19 +87,22 @@ const Sidebar: React.FC<SidebarProps> = ({
             <span className="sidebar-title">Game Fundamentals</span>
             {!isMobile && (
               <button className="toggle-btn" onClick={toggleSidebar}>
-                <div className="icon-placeholder">≡</div>
+                <motion.div
+                  className="icon-placeholder"
+                  initial={false}
+                  animate={{ rotate: isOpen ? 0 : 180 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  {isOpen ? (
+                    <FaArrowAltCircleLeft size={28} />
+                  ) : (
+                    <FaArrowAltCircleRight size={28} />
+                  )}
+                </motion.div>
               </button>
             )}
           </div>
 
-          {/* Search Input */}
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search... ( DISABLED )"
-              className="search-input"
-            />
-          </div>
           {/* Navigation Links */}
           <nav className="nav-links">
             {/* nav */}
@@ -152,14 +149,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <Profile />
         </div>
       ) : (
-        <div
-          className={`sidebar ${isOpen ? "open" : "closed"}`}
-          onMouseEnter={() => {
-            if (canHoverOpen && !isOpen) {
-              toggleSidebar();
-            }
-          }}
-        >
+        <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
           <div className={`sidebar-headerclosed`}>
             <div className="mobile-content">
               {openSubMenu ? (

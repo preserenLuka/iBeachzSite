@@ -88,8 +88,8 @@ const menuItems: MenuItem[] = [
     key: "coaching",
     icon: <GiWhistle size={30} />,
     items: [
-      { label: "discord", value: "discord", icon: <FaShieldAlt size={30} /> },
-      { label: "reviews", value: "reviews", icon: <LuSword size={30} /> },
+      { label: "Request", value: "CoachingRequest" },
+      { label: "Reviews", value: "CoachingReviews" },
     ],
   },
   {
@@ -102,11 +102,11 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
-    title: "File Manager",
-    key: "fileManager",
+    title: "In House Games",
+    key: "inhouse",
     icon: <FaRegFolderOpen size={30} />,
     items: [
-      { label: "test", value: "test", icon: <FaShieldAlt size={30} /> },
+      { label: "Leaderboards", value: "Leaderboards" },
       {
         label: "Component Test",
         value: "componentTest",
