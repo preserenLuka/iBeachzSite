@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 
 // Components
+import CoachingRequest from "./coachingRequest";
+import CoachingReviews from "./coachingReviews";
 
 // CSS
 
-interface ContentProps {
-  isContentOpen: boolean;
-}
-
-const Coaching: React.FC<ContentProps> = ({ isContentOpen }) => {
+const Coaching: React.FC = () => {
   const { contentName } = useParams();
 
   useEffect(() => {
@@ -20,11 +18,11 @@ const Coaching: React.FC<ContentProps> = ({ isContentOpen }) => {
   const isReview = contentName?.includes("Review");
 
   return (
-    <div className="bg-gradiant w-full">
+    <div>
       {isRequst ? (
-        <>test request</>
+        <CoachingRequest />
       ) : isReview ? (
-        <>test review</>
+        <CoachingReviews />
       ) : (
         <>no content</>
       )}

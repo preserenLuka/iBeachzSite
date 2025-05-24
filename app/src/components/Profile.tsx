@@ -1,4 +1,8 @@
-export default function Profile() {
+interface ProfileProps {
+  isOpen: boolean;
+}
+
+export default function Profile({ isOpen }: ProfileProps) {
   return (
     <div className="profile-section">
       <img
@@ -6,10 +10,12 @@ export default function Profile() {
         alt="Pfp"
         className="profile-pic"
       />
-      <div className="profile-info">
-        <p className="profile-name">ProfileName</p>
-        <p className="profile-title"></p>
-      </div>
+      {isOpen && (
+        <div className="profile-info">
+          <p className="profile-name">ProfileName</p>
+          <p className="profile-title"></p>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import { MenuItem } from "./types";
 // Icons for each element in menu
-import { FaShieldAlt } from "react-icons/fa";
-import { LuSword } from "react-icons/lu";
 
 // Icons for menu
 import { FaLightbulb } from "react-icons/fa";
@@ -12,7 +10,7 @@ import { GiWhistle } from "react-icons/gi";
 
 import { BiNotepad } from "react-icons/bi";
 
-import { FaRegFolderOpen } from "react-icons/fa";
+import { FaHouseChimney } from "react-icons/fa6";
 
 const menuItems: MenuItem[] = [
   {
@@ -97,19 +95,19 @@ const menuItems: MenuItem[] = [
     key: "notes",
     icon: <BiNotepad size={30} />,
     items: [
-      { label: "my notes", value: "myNotes", icon: <FaShieldAlt size={30} /> },
-      { label: "test", value: "test", icon: <LuSword size={30} /> },
+      { label: "Notes", value: "Notes" },
+      { label: "test", value: "test" },
     ],
   },
   {
-    title: "In House Games",
+    title: "In House",
     key: "inhouse",
-    icon: <FaRegFolderOpen size={30} />,
+    icon: <FaHouseChimney size={25} />,
     items: [
-      { label: "Leaderboards", value: "Leaderboards" },
+      { label: "Leaderboards", value: "InHouseLeaderboards" },
       {
         label: "Component Test",
-        value: "componentTest",
+        value: "InHousecomponentTest",
       },
     ],
   },

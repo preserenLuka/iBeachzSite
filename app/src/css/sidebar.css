@@ -25,6 +25,7 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Sidebar title */
@@ -42,16 +43,6 @@
   border: none;
   color: #fff;
   padding: 0;
-  margin-left: 1rem;
-}
-.toggle-btn2 {
-  font-size: 1.4rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #fff;
-  padding: 0;
-  margin: auto;
 }
 
 /* Placeholder icon style */
@@ -59,32 +50,9 @@
   font-size: 1.5rem;
 }
 
-/* Search container */
-.search-container {
-  padding: 0 1rem;
-  margin-bottom: 1rem;
-}
-
-/* Search input */
-.search-input {
-  width: 100%;
-  padding: 0.5rem;
-}
-
 /* Navigation Links */
 .nav-links {
   flex: 1;
-}
-
-.nav-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-links li {
-  padding: 1rem;
-  cursor: pointer;
 }
 
 .sub-menu {
@@ -126,7 +94,9 @@
 
 .menu-title,
 .fundamentals-item,
-.sidebar-title {
+.sidebar-title,
+.profile-info,
+.profile-pic {
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -175,20 +145,12 @@
   gap: 10px; /* Optional: adds space between icons */
 }
 
-.btn-icon {
-  margin: 70% 0% 70% 0%;
-  width: 100%;
-  cursor: pointer;
-}
-
-.btn-icon.open {
-  opacity: 0;
-}
-.btn-icon.closed {
-  opacity: 1;
-}
-
 /* phone version ----------------------------------------------------------------------------- */
+@media (max-width: 4000px) {
+  .nav-links li {
+    padding: 0rem 0.5rem 0rem 0.5rem;
+  }
+}
 @media (max-width: 2000px) {
   .sidebar {
     width: 20rem;
@@ -231,11 +193,6 @@
     transition: height 0.8s ease;
   }
 
-  .sidebar-header.closed {
-    display: block;
-    align-items: flex-start;
-    padding: 0;
-  }
   .toggle-btn2 h3 {
     text-transform: capitalize;
   }
