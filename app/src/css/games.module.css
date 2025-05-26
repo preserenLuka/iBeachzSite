@@ -1,0 +1,143 @@
+.container {
+  width: 70%;
+  margin: 40px auto;
+  background: var(--background-light);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  color: var(--text-color-light);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-end;
+}
+
+.input,
+.select {
+  background: var(--background);
+  color: var(--text-color-light);
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.input:focus,
+.select:focus {
+  border: 1.5px solid var(--secondary);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--background);
+}
+
+.table th,
+.table td {
+  text-align: center;
+  padding: 0.5rem;
+  border: 1px solid var(--primary);
+}
+
+.table th {
+  background: var(--background-light);
+  color: var(--primary);
+}
+
+.loading,
+.noMatches {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-light);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.card {
+  display: flex;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 16px;
+  align-items: center;
+  min-height: 120px;
+  color: var(--text-color-light);
+}
+
+.cardLeft,
+.cardRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardMiddle {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.teamName {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.playerName {
+  font-size: 1rem;
+  margin-bottom: 12px; /* reasonable vertical space */
+}
+
+/* Add margin-right only for left column player names */
+.cardLeft .playerName {
+  margin-right: 32px;
+}
+
+/* Add margin-left only for right column player names */
+.cardRight .playerName {
+  margin-left: 32px;
+}
+
+/* Remove extra space after last name in each column */
+.cardLeft .playerName:last-child,
+.cardRight .playerName:last-child {
+  margin-bottom: 0;
+}
+
+.vs {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.score {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.duration {
+  font-size: 1rem;
+  color: var(--text-color);
+}

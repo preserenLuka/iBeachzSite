@@ -10,16 +10,10 @@ const prisma = new PrismaClient();
  *       - Match
  *     parameters:
  *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           enum: [10, 25, 50, 75]
- *         description: Number of matches to return
- *       - in: query
  *         name: playerName
  *         schema:
  *           type: string
- *         description: Filter matches by player name
+ *         description: Filter matches by player name (case-insensitive, partial match)
  *       - in: query
  *         name: order
  *         schema:
@@ -36,13 +30,11 @@ const prisma = new PrismaClient();
  */
 const getMatches = async (req, res) => {
   try {
-    const { limit = 10, playerName, order = "desc" } = req.query;
-    const validLimits = [10, 25, 50, 75];
-    const parsedLimit = parseInt(limit, 10);
-
-    if (!validLimits.includes(parsedLimit)) {
-      return res.status(400).json({ error: "Invalid limit" });
-    }
+    // Always use 8 per page
+    const page = parseInt(req.query.page, 10) || 1;
+    const take = 8;
+    const skip = (page - 1) * take;
+    const { playerName, order = "desc" } = req.query;
 
     // Build the where clause
     let where = {};
@@ -61,15 +53,24 @@ const getMatches = async (req, res) => {
     const matches = await prisma.match.findMany({
       where,
       include: {
-        playerMatches: true,
+        playerMatches: {
+          include: {
+            player: true,
+          },
+        },
       },
       orderBy: {
         duration: order === "asc" ? "asc" : "desc",
       },
-      take: parsedLimit,
+      take,
+      skip,
     });
 
-    res.json(matches);
+    // For frontend pagination: check if there are more matches
+    const totalCount = await prisma.match.count({ where });
+    const hasMore = skip + take < totalCount;
+
+    res.json({ matches, hasMore });
   } catch (error) {
     console.error("Error fetching matches:", error);
     res.status(500).json({ error: "Internal server error" });

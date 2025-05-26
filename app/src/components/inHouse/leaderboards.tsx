@@ -68,24 +68,16 @@ const Leaderboards: React.FC = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Leaderboard</h2>
-      <div className={styles.controls}>
+      <div className={styles.topBar}>
+        <div /> {/* Empty div to push the select to the right */}
         <select
+          className={styles.modeSelect}
           value={leaderboardId}
           onChange={(e) => setLeaderboardId(Number(e.target.value))}
         >
           {leaderboardOptions.map((opt) => (
             <option key={opt.id} value={opt.id}>
               {opt.label}
-            </option>
-          ))}
-        </select>
-        <select
-          value={limit}
-          onChange={(e) => setLimit(Number(e.target.value))}
-        >
-          {limitOptions.map((n) => (
-            <option key={n} value={n}>
-              {n}
             </option>
           ))}
         </select>
@@ -139,6 +131,20 @@ const Leaderboards: React.FC = () => {
             </tbody>
           </table>
         )}
+      </div>
+      <div className={styles.bottomBar}>
+        <div /> {/* Empty div to push the select to the right */}
+        <select
+          className={styles.limitSelect}
+          value={limit}
+          onChange={(e) => setLimit(Number(e.target.value))}
+        >
+          {limitOptions.map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );

@@ -106,8 +106,8 @@ const menuItems: MenuItem[] = [
     items: [
       { label: "Leaderboards", value: "InHouseLeaderboards" },
       {
-        label: "Component Test",
-        value: "InHousecomponentTest",
+        label: "Games",
+        value: "InHouseGames",
       },
     ],
   },

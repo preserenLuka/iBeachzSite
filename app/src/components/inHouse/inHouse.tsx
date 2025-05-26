@@ -3,8 +3,8 @@ import { useParams } from "react-router";
 
 // Components
 import Leaderboards from "./leaderboards";
-
-// CSS
+import Games from "./games";
+// import Games from "./games"; // Uncomment and create this if you have a Games component
 
 const InHouse: React.FC = () => {
   const { contentName } = useParams();
@@ -13,9 +13,20 @@ const InHouse: React.FC = () => {
     console.log("Content name:", contentName);
   }, [contentName]);
 
-  const isLeaderboars = contentName?.includes("Leaderboards");
+  const isLeaderboards = contentName?.toLowerCase().includes("leaderboard");
+  const isGames = contentName?.toLowerCase().includes("game");
 
-  return <div>{isLeaderboars ? <Leaderboards /> : <>no content</>}</div>;
+  return (
+    <div>
+      {isLeaderboards ? (
+        <Leaderboards />
+      ) : isGames ? (
+        <Games />
+      ) : (
+        <>No content</>
+      )}
+    </div>
+  );
 };
 
 export default InHouse;
