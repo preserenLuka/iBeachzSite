@@ -4,8 +4,11 @@ const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const userData = require("./routes/user");
+const matchData = require("./routes/match");
+const playerMatchData = require("./routes/playerMatch");
 const notesData = require("./routes/notes");
 const leaderboardData = require("./routes/leaderboard");
+const newGameData = require("./routes/newGameData");
 
 //const topicsRoutes = require("./routes/topics");
 //const contentsRoutes = require("./routes/contents");
@@ -36,6 +39,9 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(userData);
 app.use(notesData);
 app.use(leaderboardData);
+app.use(matchData);
+app.use(playerMatchData);
+app.use(newGameData);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
