@@ -4,8 +4,7 @@ const rotationFundData: contentObject = {
   title: "Rotations & Recoveries",
   key: "rotationFundemental",
   componentName: "rotationFundData",
-  description:
-    "Mastering pad selection, boost management, and recovery habits is essential to maintaining strong rotational flow in Rocket League.",
+
   topics: {
     title: "Rotational Flow",
     videoId: ["WlgNfzle_1s"],
@@ -30,7 +29,7 @@ const rotationFundData: contentObject = {
           },
         ],
         extraText:
-          "Recover with minimal boost to stay involved in plays without overcommitting resources.",
+          "Recover with minimal boost usage to stay involved in more plays without overcommitting.",
       },
       {
         title: "Rotations",
@@ -48,6 +47,9 @@ const rotationFundData: contentObject = {
           },
           {
             title: "2nd Man:",
+          },
+          {
+            point: "The main goal is to buy time for your tm8.",
           },
           {
             point: "If 1st man has 2 players to beat, cover his weak side.",

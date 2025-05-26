@@ -42,22 +42,87 @@ enum LeaderboardMode {
   THREE_VS_THREE
 }
 
+enum TeamColor {
+  BLUE
+  ORANGE
+}
+
 model Leaderboard {
-  id          Int             @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   title       String
   mode        LeaderboardMode
   playerStats PlayerStats[]
+  matches     Match[] 
 }
-
 
 model PlayerStats {
-  id            Int             @id @default(autoincrement())
-  leaderboard   Leaderboard     @relation(fields: [leaderboardId], references: [id])
-  leaderboardId Int
-  playerId      String          @default(uuid())
-  playerName    String
-  goals         Int             @default(0)
-  saves         Int             @default(0)
-  assists       Int             @default(0)
-  points        Int             @default(0)
+  id              Int             @id @default(autoincrement())
+  leaderboard     Leaderboard     @relation(fields: [leaderboardId], references: [id])
+  leaderboardId   Int
+  playerId        String          @unique @default(uuid()) 
+  playerName      String
+  goals           Int             @default(0)
+  saves           Int             @default(0)
+  assists         Int             @default(0)
+  points          Int             @default(0)
+  shots           Int             @default(0)
+  winStreak       Int             @default(0)
+  lossStreak      Int             @default(0)
+  matchesPlayed   Int             @default(0)
+  wins            Int             @default(0)
+  losses          Int             @default(0)
+  teammateRecords TeammateRecord[] @relation("Teammates")
+  opponentRecords OpponentRecord[] @relation("Opponents")
 }
+
+
+model TeammateRecord {
+  id          Int    @id @default(autoincrement())
+  playerId    String
+  teammateId  String
+  wins        Int    @default(0)
+  losses      Int    @default(0)
+  player      PlayerStats @relation("Teammates", fields: [playerId], references: [playerId])
+}
+
+model OpponentRecord {
+  id          Int    @id @default(autoincrement())
+  playerId    String
+  opponentId  String
+  wins        Int    @default(0)
+  losses      Int    @default(0)
+  player      PlayerStats @relation("Opponents", fields: [playerId], references: [playerId])
+}
+
+model Match {
+  id            Int                   @id @default(autoincrement())
+  matchTime     DateTime              @default(now())
+  duration      Int                   
+  leaderboard   Leaderboard           @relation(fields: [leaderboardId], references: [id])
+  leaderboardId Int
+  blueScore     Int
+  orangeScore   Int
+  winner        TeamColor
+  participations MatchParticipation[]
+}
+
+model MatchParticipation {
+  id         Int        @id @default(autoincrement())
+  match      Match      @relation(fields: [matchId], references: [id])
+  matchId    Int
+  playerId   String
+  playerName String
+  team       TeamColor
+  goals      Int        @default(0)
+  assists    Int        @default(0)
+  saves      Int        @default(0)
+  shots      Int        @default(0)
+  points     Int        @default(0)
+  mvp        Boolean    @default(false)
+}
+
+// add Streaks (win streak, loss streak),i want to have leaderboars based on mode, i alos want players stats (icludes good/bad matchups), i want to have match stats(a table for matches of all the players and what team they belong to (blue / orange), team that won, match length, score (5:3), anything else neded?)
+
+
+// what data can you get? what would be useful: (map played on, demos, match length, mvp?,Heatmaps or positional data)
+// manualy adding rank to players?

@@ -4,8 +4,7 @@ const speedFundData: contentObject = {
   title: "Speed & Decision-Making",
   key: "speedFundemental",
   componentName: "speedFundData",
-  description:
-    "This section emphasizes the importance of maintaining momentum in gameplay and making quick, committed decisions without overthinking.",
+
   topics: {
     title: "Speed & Decision-Making Concepts",
     videoId: ["pBGFqL6RS7k"],
@@ -16,7 +15,10 @@ const speedFundData: contentObject = {
       {
         title: "Speed",
         bulletPoints: [
-          { point: "Keep momentum—avoid slowing unnecessarily." },
+          {
+            point:
+              "Always try to maintain your momentum; avoid unnecessary break checks.",
+          },
           {
             point:
               "Missed a boost pad? Keep moving unless slowing is clearly better.",
@@ -27,30 +29,24 @@ const speedFundData: contentObject = {
           },
           {
             point:
-              "Don’t panic if fast movement feels out of control; this improves with time.",
-          },
-          {
-            point:
-              "Common pitfall: reaching supersonic, stopping briefly, then trying to speed up again—maintain consistent motion.",
+              "If fast movement feels out of control, that’s good — it will help you learn to control that speed.",
           },
         ],
         extraText:
-          "Speed is all about being reactive and staying in motion. Don’t let small setbacks disrupt your flow.",
+          "Common mistake: reaching supersonic, stopping briefly, then trying to speed up again—maintain consistent motion.",
       },
       {
         title: "Decision-Making",
         bulletPoints: [
-          { point: "Trust your instincts—hesitation leads to errors." },
+          { point: "Do not hesitate in your decisions." },
           {
-            point: "Fully commit to your choices; learn from what happens.",
+            point: "Fully commit to your decisions; learn from what happens.",
           },
           {
             point:
               "Overthinking slows you down; a late good decision = a bad one.",
           },
         ],
-        extraText:
-          "Quick, confident decision-making is crucial in fast-paced situations. Commit to your choices and adapt quickly.",
       },
     ],
   },

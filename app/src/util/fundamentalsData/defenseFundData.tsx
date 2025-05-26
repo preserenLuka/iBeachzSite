@@ -19,8 +19,6 @@ const defenseFundData: contentObject = {
             point: "Don’t overcommit—avoid leaving your teammate in a 1v2.",
           },
         ],
-        extraText:
-          "As the first man back, your job is to apply smart pressure and buy time without overcommitting.",
       },
       {
         title: "2nd Man on Defense",

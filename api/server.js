@@ -3,8 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
-const getData = require("./routes/getData");
-const postData = require("./routes/postData");
+const userData = require("./routes/user");
+const notesData = require("./routes/notes");
+const leaderboardData = require("./routes/leaderboard");
+
 //const topicsRoutes = require("./routes/topics");
 //const contentsRoutes = require("./routes/contents");
 
@@ -31,10 +33,9 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(getData);
-app.use(postData);
-//app.use(topicsRoutes);
-//app.use(contentsRoutes);
+app.use(userData);
+app.use(notesData);
+app.use(leaderboardData);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

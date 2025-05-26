@@ -16,10 +16,8 @@ const challengeFundData: contentObject = {
           {
             point: "Only commit if you're confident it will help your team.",
           },
-          { point: "Don't overuse it—timing matters a lot." },
+          { point: "Don't do it too often." },
         ],
-        extraText:
-          "A hard commit—used when you're sure it'll disrupt or win possession.",
       },
       {
         title: "Drive Challenge",
@@ -35,18 +33,17 @@ const challengeFundData: contentObject = {
           },
         ],
         extraText:
-          "Challenging without jumping — great for staying grounded and involved.",
+          "Drive challenge can be used quite often since it has very low risk.",
       },
       {
         title: "Fake Challenge",
         bulletPoints: [
-          { point: "Best used when you're in a position of strength." },
+          { point: "Best used when you're in a position of power." },
           { point: "Always make sure to cover your net while faking." },
           {
             point: "Super effective against players with strong ball control.",
           },
           { point: "Forces the opponent to react, giving you control." },
-          { point: "Creates panic, especially when they're under pressure." },
         ],
         extraText:
           "A mind game tool to force mistakes without committing to the ball.",

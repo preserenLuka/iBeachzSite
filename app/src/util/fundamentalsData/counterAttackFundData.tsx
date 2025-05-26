@@ -29,7 +29,7 @@ const counterAttackFundData: contentObject = {
           },
         ],
         extraText:
-          "Simple principles that make counter-attacks effective and consistent.",
+          "Most of the time you should focus on speed when counter-attacking.",
       },
     ],
   },
