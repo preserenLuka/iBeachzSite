@@ -32,6 +32,7 @@ const Leaderboards: React.FC = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setPlayers(data);
         setLoading(false);
       });
@@ -56,7 +57,7 @@ const Leaderboards: React.FC = () => {
         >
           ← Back to Leaderboard
         </button>
-        <PlayerStats player={selectedPlayer} />
+        <PlayerStats playerId={selectedPlayer.id} />
       </div>
     );
   }

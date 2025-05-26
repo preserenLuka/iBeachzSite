@@ -5,10 +5,10 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const userData = require("./routes/user");
 const matchData = require("./routes/match");
-const playerMatchData = require("./routes/playerMatch");
 const notesData = require("./routes/notes");
 const leaderboardData = require("./routes/leaderboard");
 const newGameData = require("./routes/newGameData");
+const playerData = require("./routes/player");
 
 //const topicsRoutes = require("./routes/topics");
 //const contentsRoutes = require("./routes/contents");
@@ -40,8 +40,8 @@ app.use(userData);
 app.use(notesData);
 app.use(leaderboardData);
 app.use(matchData);
-app.use(playerMatchData);
 app.use(newGameData);
+app.use(playerData);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
