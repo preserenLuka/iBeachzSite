@@ -146,7 +146,6 @@ const newGameData = async (req, res) => {
 
 const processPlayers = async (players, leaderboard, winner, matchId) => {
   const playerStatsMap = {}; // Map to store player stats by playerName
-  console.log("[processPlayers] Start processing players for match:", matchId);
 
   for (const player of players) {
     console.log(`[processPlayers] Processing player: ${player.playerName}`);
@@ -202,7 +201,7 @@ const processPlayers = async (players, leaderboard, winner, matchId) => {
     }
 
     // Store playerStats in the map
-    playerStatsMap[player.playerName] = playerStats;
+    playerStatsMap[player.playerName] = playerStats; // playerStats.id is the PK
 
     console.log(
       `[processPlayers] Creating PlayerMatch for: ${player.playerName}`
@@ -248,31 +247,27 @@ const updateTeammateAndOpponentRecords = async (
       const teammateStats = playerStatsMap[teammate.playerName];
       let record = await prisma.teammateRecord.findFirst({
         where: {
-          playerId: playerStats.playerId,
-          teammateId: teammateStats.playerId,
+          playerId: playerStats.id,
+          teammateId: teammateStats.id,
         },
       });
       if (!record) {
-        console.log(
-          `[updateTeammateAndOpponentRecords] Creating TeammateRecord: ${player.playerName} + ${teammate.playerName}`
-        );
         await prisma.teammateRecord.create({
           data: {
-            playerId: playerStats.playerId,
-            teammateId: teammateStats.playerId,
+            playerId: playerStats.id,
+            teammateId: teammateStats.id,
+            teammateName: teammateStats.playerName, // <-- add this
             wins: isWinner ? 1 : 0,
             losses: isWinner ? 0 : 1,
           },
         });
       } else {
-        console.log(
-          `[updateTeammateAndOpponentRecords] Updating TeammateRecord: ${player.playerName} + ${teammate.playerName}`
-        );
         await prisma.teammateRecord.update({
           where: { id: record.id },
           data: {
             wins: record.wins + (isWinner ? 1 : 0),
             losses: record.losses + (isWinner ? 0 : 1),
+            teammateName: teammateStats.playerName, // <-- keep updated
           },
         });
       }
@@ -284,31 +279,27 @@ const updateTeammateAndOpponentRecords = async (
       const opponentStats = playerStatsMap[opponent.playerName];
       let record = await prisma.opponentRecord.findFirst({
         where: {
-          playerId: playerStats.playerId,
-          opponentId: opponentStats.playerId,
+          playerId: playerStats.id,
+          opponentId: opponentStats.id,
         },
       });
       if (!record) {
-        console.log(
-          `[updateTeammateAndOpponentRecords] Creating OpponentRecord: ${player.playerName} vs ${opponent.playerName}`
-        );
         await prisma.opponentRecord.create({
           data: {
-            playerId: playerStats.playerId,
-            opponentId: opponentStats.playerId,
+            playerId: playerStats.id,
+            opponentId: opponentStats.id,
+            opponentName: opponentStats.playerName, // <-- add this
             wins: isWinner ? 1 : 0,
             losses: isWinner ? 0 : 1,
           },
         });
       } else {
-        console.log(
-          `[updateTeammateAndOpponentRecords] Updating OpponentRecord: ${player.playerName} vs ${opponent.playerName}`
-        );
         await prisma.opponentRecord.update({
           where: { id: record.id },
           data: {
             wins: record.wins + (isWinner ? 1 : 0),
             losses: record.losses + (isWinner ? 0 : 1),
+            opponentName: opponentStats.playerName, // <-- keep updated
           },
         });
       }

@@ -1,45 +1,26 @@
 import React, { useEffect, useState } from "react";
+import styles from "../../css/playerStats.module.css";
+import { Player } from "../../util/types";
+// Only allow keys that are numbers (not arrays or objects)
+type PlayerStatKey =
+  | "goals"
+  | "assists"
+  | "saves"
+  | "points"
+  | "shots"
+  | "streak"
+  | "matchesPlayed"
+  | "wins"
+  | "losses";
 
-type TeammateRecord = {
-  id: number;
-  playerId: string;
-  teammateId: string;
-  wins: number;
-  losses: number;
-};
-type OpponentRecord = {
-  id: number;
-  playerId: string;
-  opponentId: string;
-  wins: number;
-  losses: number;
-};
-type Player = {
-  id: number;
-  leaderboardId: number;
-  playerId: string;
-  playerName: string;
-  goals: number;
-  assists: number;
-  saves: number;
-  points: number;
-  shots: number;
-  streak: number;
-  matchesPlayed: number;
-  wins: number;
-  losses: number;
-  teammateRecords: TeammateRecord[];
-  opponentRecords: OpponentRecord[];
-};
-
-const statSquares = [
+const statSquares: { key: PlayerStatKey; label: string }[] = [
   { key: "goals", label: "Goals" },
   { key: "assists", label: "Assists" },
   { key: "saves", label: "Saves" },
   { key: "points", label: "Points" },
 ];
 
-const extraStats = [
+const extraStats: { key: PlayerStatKey; label: string }[] = [
   { key: "shots", label: "Shots" },
   { key: "streak", label: "Streak" },
   { key: "matchesPlayed", label: "Matches Played" },
@@ -49,105 +30,49 @@ const extraStats = [
 
 const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
   const [player, setPlayer] = useState<Player | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`/api/player/${playerId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPlayer(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.error("Failed to fetch player data:", err);
-      });
+    const fetchPlayerData = async () => {
+      const response = await fetch(`/api/player/${playerId}`);
+      const data = await response.json();
+      setPlayer(data);
+      setLoading(false);
+    };
+    fetchPlayerData();
   }, [playerId]);
 
   if (loading) return <div>Loading...</div>;
-  if (!player) return <div>No player data found.</div>;
+  if (!player) return <div>Player not found</div>;
 
   return (
-    <div
-      style={{
-        width: "60%",
-        margin: "40px auto",
-        background: "#f9f9f9",
-        borderRadius: 12,
-        padding: 24,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-      }}
-    >
-      <h2 style={{ textAlign: "center", marginBottom: 24 }}>
-        {player.playerName}
-      </h2>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 24,
-        }}
-      >
+    <div className={styles.container}>
+      <h2 className={styles.title}>{player.playerName}</h2>
+      <div className={styles.statRow}>
         {statSquares.map((stat) => (
-          <div
-            key={stat.key}
-            style={{
-              flex: 1,
-              margin: "0 8px",
-              background: "#fff",
-              borderRadius: 8,
-              boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
-              padding: 16,
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: 600,
-                fontSize: 16,
-                marginBottom: 8,
-                color: "#888",
-              }}
-            >
-              {stat.label}
-            </div>
+          <div key={stat.key} className={styles.statSquare}>
+            <div className={styles.statLabel}>{stat.label}</div>
+            <div className={styles.statValue}>{player[stat.key]}</div>
           </div>
         ))}
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          gap: 12,
-        }}
-      >
+      <div className={styles.extraStatsRow}>
         {extraStats.map((stat) => (
-          <div
-            key={stat.key}
-            style={{
-              flex: "1 1 30%",
-              background: "#f1f1f1",
-              borderRadius: 6,
-              padding: 12,
-              minWidth: 120,
-              textAlign: "center",
-            }}
-          >
-            <div style={{ fontSize: 13, color: "#666" }}>{stat.label}</div>
+          <div key={stat.key} className={styles.extraStat}>
+            <div className={styles.extraStatLabel}>{stat.label}</div>
+            <div className={styles.statValue}>{player[stat.key]}</div>
           </div>
         ))}
       </div>
-      <div style={{ marginTop: 32 }}>
-        <h3>Teammate Records</h3>
+      <div className={styles.section}>
+        <h3 className={styles.subTitle}>Teammate Records</h3>
         {player.teammateRecords.length === 0 ? (
           <div>No teammate records.</div>
         ) : (
-          <table style={{ width: "100%", marginBottom: 16 }}>
+          <table className={styles.table}>
             <thead>
               <tr>
-                <th>Teammate ID</th>
+                <th>Teammate</th>
                 <th>Wins</th>
                 <th>Losses</th>
               </tr>
@@ -155,7 +80,7 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
             <tbody>
               {player.teammateRecords.map((rec) => (
                 <tr key={rec.id}>
-                  <td>{rec.teammateId}</td>
+                  <td>{rec.teammateName || rec.teammateId}</td>
                   <td>{rec.wins}</td>
                   <td>{rec.losses}</td>
                 </tr>
@@ -164,14 +89,14 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
           </table>
         )}
 
-        <h3>Opponent Records</h3>
+        <h3 className={styles.subTitle}>Opponent Records</h3>
         {player.opponentRecords.length === 0 ? (
           <div>No opponent records.</div>
         ) : (
-          <table style={{ width: "100%" }}>
+          <table className={styles.table}>
             <thead>
               <tr>
-                <th>Opponent ID</th>
+                <th>Opponent</th>
                 <th>Wins</th>
                 <th>Losses</th>
               </tr>
@@ -179,7 +104,7 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
             <tbody>
               {player.opponentRecords.map((rec) => (
                 <tr key={rec.id}>
-                  <td>{rec.opponentId}</td>
+                  <td>{rec.opponentName || rec.opponentId}</td>
                   <td>{rec.wins}</td>
                   <td>{rec.losses}</td>
                 </tr>

@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
-import PlayerStats from "./playerStats"; // Make sure this path is correct
+import PlayerStats from "./playerStats";
+import styles from "../../css/leaderboard.module.css";
+import { FaArrowDownShortWide } from "react-icons/fa6";
+import { FaArrowUpWideShort } from "react-icons/fa6";
 
 const leaderboardOptions = [
-  { label: "1 v 1", id: 1 },
-  { label: "2 v 2", id: 2 },
-  { label: "3 v 3", id: 3 },
-];
-
-const orderOptions = [
-  { label: "Goals", value: "goals" },
-  { label: "Saves", value: "saves" },
-  { label: "Assists", value: "assists" },
-  { label: "Shots", value: "shots" },
+  { label: "1 v 1", id: 0 },
+  { label: "2 v 2", id: 1 },
+  { label: "3 v 3", id: 2 },
 ];
 
 const limitOptions = [10, 25, 50, 75];
 
+const columns = [
+  { key: "playerName", label: "Player" },
+  { key: "goals", label: "Goals" },
+  { key: "saves", label: "Saves" },
+  { key: "assists", label: "Assists" },
+  { key: "shots", label: "Shots" },
+];
+
 const Leaderboards: React.FC = () => {
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
-  const [leaderboardId, setLeaderboardId] = useState(2);
+  const [leaderboardId, setLeaderboardId] = useState(1);
   const [orderBy, setOrderBy] = useState("goals");
   const [order, setOrder] = useState("desc");
   const [limit, setLimit] = useState(25);
@@ -32,27 +36,26 @@ const Leaderboards: React.FC = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log("Fetched players:", data);
         setPlayers(data);
         setLoading(false);
       });
   }, [leaderboardId, orderBy, order, limit]);
 
+  const handleSort = (key: string) => {
+    if (orderBy === key) {
+      setOrder(order === "desc" ? "asc" : "desc");
+    } else {
+      setOrderBy(key);
+      setOrder("desc");
+    }
+  };
+
   if (selectedPlayer) {
     return (
       <div>
         <button
-          style={{
-            margin: "2rem auto",
-            display: "block",
-            padding: "0.5rem 1.5rem",
-            borderRadius: 6,
-            border: "none",
-            background: "#23272f",
-            color: "#fff",
-            cursor: "pointer",
-            fontWeight: 600,
-          }}
+          className={styles.backButton}
           onClick={() => setSelectedPlayer(null)}
         >
           ← Back to Leaderboard
@@ -63,21 +66,9 @@ const Leaderboards: React.FC = () => {
   }
 
   return (
-    <div
-      style={{
-        width: "60%",
-        margin: "2rem auto",
-        background: "#23272f",
-        borderRadius: "12px",
-        padding: "2rem",
-        color: "#fff",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-      }}
-    >
-      <h2 style={{ textAlign: "center", marginBottom: "1.5rem" }}>
-        Leaderboard
-      </h2>
-      <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem" }}>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Leaderboard</h2>
+      <div className={styles.controls}>
         <select
           value={leaderboardId}
           onChange={(e) => setLeaderboardId(Number(e.target.value))}
@@ -87,17 +78,6 @@ const Leaderboards: React.FC = () => {
               {opt.label}
             </option>
           ))}
-        </select>
-        <select value={orderBy} onChange={(e) => setOrderBy(e.target.value)}>
-          {orderOptions.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-        <select value={order} onChange={(e) => setOrder(e.target.value)}>
-          <option value="desc">Desc</option>
-          <option value="asc">Asc</option>
         </select>
         <select
           value={limit}
@@ -110,46 +90,56 @@ const Leaderboards: React.FC = () => {
           ))}
         </select>
       </div>
-      {loading ? (
-        <div style={{ textAlign: "center" }}>Loading...</div>
-      ) : (
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ borderBottom: "2px solid #444" }}>
-              <th style={{ textAlign: "left", padding: "0.5rem" }}>#</th>
-              <th style={{ textAlign: "left", padding: "0.5rem" }}>Player</th>
-              <th style={{ textAlign: "left", padding: "0.5rem" }}>Goals</th>
-              <th style={{ textAlign: "left", padding: "0.5rem" }}>Saves</th>
-              <th style={{ textAlign: "left", padding: "0.5rem" }}>Assists</th>
-              <th style={{ textAlign: "left", padding: "0.5rem" }}>Shots</th>
-            </tr>
-          </thead>
-          <tbody>
-            {players.map((player, idx) => (
-              <tr
-                key={player.id}
-                style={{ borderBottom: "1px solid #444", cursor: "pointer" }}
-                onClick={() => setSelectedPlayer(player)}
-              >
-                <td style={{ padding: "0.5rem" }}>{idx + 1}</td>
-                <td
-                  style={{
-                    padding: "0.5rem",
-                    color: "#4fd1c5",
-                    textDecoration: "underline",
-                  }}
-                >
-                  {player.playerName}
-                </td>
-                <td style={{ padding: "0.5rem" }}>{player.goals}</td>
-                <td style={{ padding: "0.5rem" }}>{player.saves}</td>
-                <td style={{ padding: "0.5rem" }}>{player.assists}</td>
-                <td style={{ padding: "0.5rem" }}>{player.shots}</td>
+      <div style={{ minHeight: 300 }}>
+        {loading ? (
+          <div style={{ textAlign: "center", padding: "2rem" }}>Loading...</div>
+        ) : (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>#</th>
+                {columns.map((col) => (
+                  <th
+                    key={col.key}
+                    className={col.key !== "playerName" ? styles.sortable : ""}
+                    onClick={
+                      col.key !== "playerName"
+                        ? () => handleSort(col.key)
+                        : undefined
+                    }
+                    style={{
+                      textAlign: col.key === "playerName" ? "left" : "center",
+                    }}
+                  >
+                    {col.label}
+                    {orderBy === col.key && (
+                      <span className={styles.sortArrow}>
+                        {order === "asc" ? (
+                          <FaArrowUpWideShort className={styles.arrowIcon} />
+                        ) : (
+                          <FaArrowDownShortWide className={styles.arrowIcon} />
+                        )}
+                      </span>
+                    )}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {players.map((player, idx) => (
+                <tr key={player.id} onClick={() => setSelectedPlayer(player)}>
+                  <td>{idx + 1}</td>
+                  <td className={styles.playerName}>{player.playerName}</td>
+                  <td>{player.goals}</td>
+                  <td>{player.saves}</td>
+                  <td>{player.assists}</td>
+                  <td>{player.shots}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };

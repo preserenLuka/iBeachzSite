@@ -63,3 +63,37 @@ export type BPTitle = {
 export type RandomText = {
   text: string;
 };
+
+//------------------------
+export type TeammateRecord = {
+  id: number;
+  playerId: number;
+  teammateId: number;
+  teammateName?: string;
+  wins: number;
+  losses: number;
+};
+export type OpponentRecord = {
+  id: number;
+  playerId: number;
+  opponentId: number;
+  opponentName?: string;
+  wins: number;
+  losses: number;
+};
+export type Player = {
+  id: number;
+  leaderboardId: number;
+  playerName: string;
+  goals: number;
+  assists: number;
+  saves: number;
+  points: number;
+  shots: number;
+  streak: number;
+  matchesPlayed: number;
+  wins: number;
+  losses: number;
+  teammateRecords: TeammateRecord[];
+  opponentRecords: OpponentRecord[];
+};

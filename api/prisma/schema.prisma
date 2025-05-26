@@ -59,7 +59,6 @@ model PlayerStats {
   id              Int             @id @default(autoincrement())
   leaderboard     Leaderboard     @relation(fields: [leaderboardId], references: [id])
   leaderboardId   Int
-  playerId        String          @unique @default(uuid()) 
   playerName      String
   goals           Int             @default(0)
   saves           Int             @default(0)
@@ -73,25 +72,30 @@ model PlayerStats {
   teammateRecords TeammateRecord[] @relation("Teammates")
   opponentRecords OpponentRecord[] @relation("Opponents")
   playerMatches   PlayerMatch[]
+  teammateOf      TeammateRecord[] @relation("TeammatePlayer")
+  opponentOf      OpponentRecord[] @relation("OpponentPlayer")
 }
 
-
 model TeammateRecord {
-  id          Int    @id @default(autoincrement())
-  playerId    String
-  teammateId  String
-  wins        Int    @default(0)
-  losses      Int    @default(0)
-  player      PlayerStats @relation("Teammates", fields: [playerId], references: [playerId])
+  id           Int         @id @default(autoincrement())
+  playerId     Int
+  teammateId   Int
+  teammateName String      // <--- add this
+  wins         Int         @default(0)
+  losses       Int         @default(0)
+  player       PlayerStats @relation("Teammates", fields: [playerId], references: [id])
+  teammate     PlayerStats @relation("TeammatePlayer", fields: [teammateId], references: [id])
 }
 
 model OpponentRecord {
-  id          Int    @id @default(autoincrement())
-  playerId    String
-  opponentId  String
-  wins        Int    @default(0)
-  losses      Int    @default(0)
-  player      PlayerStats @relation("Opponents", fields: [playerId], references: [playerId])
+  id           Int         @id @default(autoincrement())
+  playerId     Int
+  opponentId   Int
+  opponentName String      // <--- add this
+  wins         Int         @default(0)
+  losses       Int         @default(0)
+  player       PlayerStats @relation("Opponents", fields: [playerId], references: [id])
+  opponent     PlayerStats @relation("OpponentPlayer", fields: [opponentId], references: [id])
 }
 
 model Match {
