@@ -66,13 +66,13 @@ model PlayerStats {
   assists         Int             @default(0)
   points          Int             @default(0)
   shots           Int             @default(0)
-  winStreak       Int             @default(0)
-  lossStreak      Int             @default(0)
+  streak          Int             @default(0)
   matchesPlayed   Int             @default(0)
   wins            Int             @default(0)
   losses          Int             @default(0)
   teammateRecords TeammateRecord[] @relation("Teammates")
   opponentRecords OpponentRecord[] @relation("Opponents")
+  playerMatches   PlayerMatch[]
 }
 
 
@@ -95,34 +95,43 @@ model OpponentRecord {
 }
 
 model Match {
-  id            Int                   @id @default(autoincrement())
-  matchTime     DateTime              @default(now())
-  duration      Int                   
-  leaderboard   Leaderboard           @relation(fields: [leaderboardId], references: [id])
+  id            Int           @id @default(autoincrement())
+  matchTime     DateTime      @default(now())
+  duration      Int
+  leaderboard   Leaderboard   @relation(fields: [leaderboardId], references: [id])
   leaderboardId Int
   blueScore     Int
   orangeScore   Int
   winner        TeamColor
-  participations MatchParticipation[]
+  bluePlayers   Json         
+  orangePlayers Json    
+  playerMatches PlayerMatch[]      //Json field to store players match data
 }
+/*
+  {
+    "playerName": "Luka",
+    "goals": 2,
+    "assists": 1,
+    "saves": 3,
+    "shots": 4,
+    "points": 450
+  },
+  {
+    "playerName": "Alex",
+    "goals": 1,
+    "assists": 2,
+    "saves": 1,
+    "shots": 3,
+    "points": 390
+  }
+]
+*/
 
-model MatchParticipation {
-  id         Int        @id @default(autoincrement())
-  match      Match      @relation(fields: [matchId], references: [id])
+model PlayerMatch {
+  id         Int         @id @default(autoincrement())
+  match      Match       @relation(fields: [matchId], references: [id])
   matchId    Int
-  playerId   String
-  playerName String
+  player     PlayerStats @relation(fields: [playerStatsId], references: [id])
+  playerStatsId Int
   team       TeamColor
-  goals      Int        @default(0)
-  assists    Int        @default(0)
-  saves      Int        @default(0)
-  shots      Int        @default(0)
-  points     Int        @default(0)
-  mvp        Boolean    @default(false)
 }
-
-// add Streaks (win streak, loss streak),i want to have leaderboars based on mode, i alos want players stats (icludes good/bad matchups), i want to have match stats(a table for matches of all the players and what team they belong to (blue / orange), team that won, match length, score (5:3), anything else neded?)
-
-
-// what data can you get? what would be useful: (map played on, demos, match length, mvp?,Heatmaps or positional data)
-// manualy adding rank to players?
