@@ -10,8 +10,7 @@ const shootingMechData: contentObject = {
     {
       title: "Power Shooting (Basic)",
       key: "powerShootingBasic",
-      videoTime: "1:50",
-      videoId: ["C0EBfirnYIE"],
+      videoId: ["pKrD1jHx84o?si=54_RsJf-XCbEvTBe"],
       description:
         "When to use: Anytime you need a powerful strike — offense, defense, or clears.",
       content: [
@@ -38,7 +37,7 @@ const shootingMechData: contentObject = {
     {
       title: "Power Shooting (Advanced)",
       key: "powerShootingAdvanced",
-      videoTime: "4:30",
+      videoId: ["pKrD1jHx84o?si=54_RsJf-XCbEvTBe"],
       description:
         "What’s different: You use air roll (e.g., Air Roll Left) to lean away from the ball, then flip through it to generate massive power.",
       content: [
@@ -58,7 +57,7 @@ const shootingMechData: contentObject = {
     {
       title: "Bounce Dribble (Power Shooting Out)",
       key: "bounceDribblePowerShot",
-      videoTime: "28:50",
+      videoId: ["WL4m8HhzI9U?si=HR9oIQhDBQQ6n8cM&amp;start=1735"],
       description:
         "Use this when:\n• You want to bait a challenge or open up a better shooting angle.\n• Great in 1v1 or if an opponent is shadowing closely.",
       content: [
@@ -81,7 +80,7 @@ const shootingMechData: contentObject = {
     {
       title: "Side Wall Redirect",
       key: "sideWallRedirect",
-      videoTime: "18:05",
+      videoId: ["WL4m8HhzI9U?si=d1vkwnV-wiUQ0q7_&amp;start=6690"],
       description:
         "What it is: Redirecting a pass or clear from the side wall into a shot on net — without controlling first.",
       content: [

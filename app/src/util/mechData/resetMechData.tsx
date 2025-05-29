@@ -10,7 +10,7 @@ const resetMechData: contentObject = {
     {
       title: "Flip Reset",
       key: "flipReset",
-      videoTime: "1:39:35",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=5976"],
       description:
         "What: Touch all four wheels on the ball mid-air = regain your flip.",
       content: [
@@ -39,7 +39,7 @@ const resetMechData: contentObject = {
     {
       title: "Ceiling Stall Reset",
       key: "ceilingStallReset",
-      videoTime: "2:15:30",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=8133"],
       description:
         "Why: Buy time mid-air and delay the reset for perfect control.",
       content: [
@@ -71,7 +71,7 @@ const resetMechData: contentObject = {
     {
       title: "Insta Reset with Power",
       key: "instaResetWithPower",
-      videoTime: "2:20:20",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=8440"],
       description:
         "Goal: Land the reset and use your flip immediately for power.",
       content: [
@@ -102,7 +102,7 @@ const resetMechData: contentObject = {
     {
       title: "Double Reset",
       key: "doubleReset",
-      videoTime: "2:41:30",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=9737"],
       description: "What: Two resets in one air dribble.",
       content: [
         {
@@ -130,7 +130,7 @@ const resetMechData: contentObject = {
     {
       title: "Reset Double Tap",
       key: "resetDoubleTap",
-      videoTime: "2:50:00",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=10208"],
       description: "Mix of creativity and pressure.",
       content: [
         {
@@ -155,7 +155,7 @@ const resetMechData: contentObject = {
     {
       title: "Musty Flick (Out of Reset)",
       key: "mustyFlickOutOfReset",
-      videoTime: "2:25:40",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=8754"],
       description:
         "Combo of a flip reset and a musty = massive power and verticality.",
       content: [
@@ -184,7 +184,7 @@ const resetMechData: contentObject = {
     {
       title: "Heli Reset",
       key: "heliReset",
-      videoTime: "3:03:41",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=11018"],
       description: "One of the most advanced (and stylish) reset variants.",
       content: [
         {

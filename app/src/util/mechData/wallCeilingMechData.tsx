@@ -10,7 +10,7 @@ const wallCeilingMechData: contentObject = {
     {
       title: "Wall Pinch",
       key: "wallPinch",
-      videoTime: "50:00",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=2999"],
       description: "When: Low boost clears or surprise goals.",
       content: [
         {
@@ -33,7 +33,7 @@ const wallCeilingMechData: contentObject = {
     {
       title: "Ceiling Pinch",
       key: "ceilingPinch",
-      videoTime: "2:10:15",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=7816"],
       description: "One of the highest-power mechanics in the game.",
       content: [
         {
@@ -58,7 +58,7 @@ const wallCeilingMechData: contentObject = {
     {
       title: "Ceiling Stall Reset",
       key: "ceilingStallReset",
-      videoTime: "2:15:30",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=8130"],
       description: "Purpose: Delay your flip after a ceiling drop.",
       content: [
         {
@@ -82,7 +82,7 @@ const wallCeilingMechData: contentObject = {
     {
       title: "Preflip Off Wall",
       key: "preflipOffWall",
-      videoTime: "2:34:04",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=9256"],
       description:
         "When: You’re out of alignment but need to reach the ball fast.",
       content: [
@@ -106,18 +106,17 @@ const wallCeilingMechData: contentObject = {
       ],
     },
     {
-      title: "Missing Mechanics:",
-      key: "missingMechanics",
-      videoTime: "(No timestamp)",
-      description: "",
+      title: "Ceiling Shot (Basic)",
+      key: "ceilingShotBasic",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=3587"],
+      description: "When: You need to attack from above.",
       content: [
         {
-          title: "• Ceiling Shot (Basic)",
+          title: "How:",
           bulletPoints: [
-            { point: "When: You need to attack from above." },
             {
               point:
-                "How: Jump off the wall or flip into the ceiling to gain height.",
+                "Jump off the wall or flip into the ceiling to gain height.",
             },
             {
               point:
@@ -125,15 +124,20 @@ const wallCeilingMechData: contentObject = {
             },
           ],
         },
+      ],
+    },
+    {
+      title: "Advanced Ceiling Shots",
+      key: "advancedCeilingShots",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=3769"],
+      description: "Purpose: Add power or unpredictability to ceiling shots.",
+      content: [
         {
-          title: "• Advanced Ceiling Shots",
+          title: "How:",
           bulletPoints: [
             {
-              point: "When: You want a more powerful or unpredictable shot.",
-            },
-            {
               point:
-                "How: Perform a ceiling shot but with more precision or angle variations.",
+                "Perform a ceiling shot with more precision or angle variations.",
             },
             {
               point:
@@ -141,27 +145,46 @@ const wallCeilingMechData: contentObject = {
             },
           ],
         },
+      ],
+    },
+    {
+      title: "Off-Wall Double Taps",
+      key: "offWallDoubleTaps",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=4532"],
+      description:
+        "Why: Beat backboard defenders or score from unexpected angles.",
+      content: [
         {
-          title: "• Off Wall Double Taps",
+          title: "Steps:",
           bulletPoints: [
-            { point: "When: You want to make a powerful play off the wall." },
+            { point: "Pop the ball off the wall with control." },
+            { point: "Follow close behind." },
             {
-              point:
-                "How: Hit the ball off the wall and immediately follow up with another shot, often by using your flip.",
-            },
-            {
-              point:
-                "Requires good timing to follow up quickly for a second touch.",
+              point: "Hit the backboard first, then redirect on the rebound.",
             },
           ],
         },
         {
-          title: "• Ground Pinch",
+          title: "Key:",
           bulletPoints: [
             {
-              point: "When: You want to generate high speed from the ground.",
+              point:
+                "The first touch must create space between you and the ball.",
             },
-            { point: "How: Approach the ball while it's on the ground." },
+          ],
+        },
+      ],
+    },
+    {
+      title: "Ground Pinch",
+      key: "groundPinch",
+      videoId: ["WL4m8HhzI9U?si=AqqSsJoECfh1BpEU&amp;start=3930"],
+      description: "When: You want to generate high speed from the ground.",
+      content: [
+        {
+          title: "How:",
+          bulletPoints: [
+            { point: "Approach the ball while it's on the ground." },
             {
               point:
                 "Use a strong hit from your car to pinch the ball against the ground or another object for high velocity.",

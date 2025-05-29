@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import YouTubeEmbed from "./YouTubeEmbedProps";
-import "../css/tailwind.css";
+import "../../css/tailwind.css";
 
 interface VideoGalleryProps {
   videoIds: string[];

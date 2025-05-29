@@ -10,7 +10,7 @@ const cuttingControlData: contentObject = {
     {
       title: "Catching",
       key: "catching",
-      videoTime: "12:20",
+      videoId: ["WL4m8HhzI9U?si=tJsW1Uw736Q1qrx_&amp;start=740"],
       description: "Why: Maintain possession when no one’s pressuring you.",
       content: [
         {
@@ -34,7 +34,7 @@ const cuttingControlData: contentObject = {
     {
       title: "Power Slide Cuts",
       key: "powerSlideCuts",
-      videoTime: "35:55",
+      videoId: ["WL4m8HhzI9U?si=zw8jknhflSHEjsS-&amp;start=2158"],
       description:
         "What: Sudden, sharp direction change with the ball.\nWhen: To avoid a challenge or fake a race to boost.",
       content: [
@@ -56,7 +56,7 @@ const cuttingControlData: contentObject = {
     {
       title: "Quick Cuts",
       key: "quickCuts",
-      videoTime: "38:10",
+      videoId: ["WL4m8HhzI9U?si=JxlC3WeNY-Xb0tPv&amp;start=2294"],
       description: "Variation of: Power slide cuts, but on your car.",
       content: [
         {
@@ -79,7 +79,7 @@ const cuttingControlData: contentObject = {
     {
       title: "Dribbling",
       key: "dribbling",
-      videoTime: "14:45",
+      videoId: ["WL4m8HhzI9U?si=RzuXdJnJ3R533Mh2&amp;start=887"],
       description:
         "Why: Gives you control. Forces defenders to react.\nWhen to use: When you have space, want to outplay a defender, or set up a flick.",
       content: [
@@ -110,7 +110,7 @@ const cuttingControlData: contentObject = {
     {
       title: "Bounce Dribble",
       key: "bounceDribble",
-      videoTime: "28:50",
+      videoId: ["GQesV9Z97Es?si=zxbVCm5jXkGRNwj_"],
       description:
         "What: Dribbling while letting the ball bounce once between touches — perfect for baiting defenders and lining up better flick angles.\nWhy: Forces defenders to commit early or guess wrong, while giving you clean setup windows.",
       content: [

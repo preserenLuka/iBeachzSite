@@ -10,7 +10,7 @@ const defenseMechData: contentObject = {
     {
       title: "Backboard Defense",
       key: "backboardDefense",
-      videoTime: "1:21:15",
+      videoId: ["WL4m8HhzI9U?si=dl2upVDZ24lMcPZL&amp;start=4882 "],
       description: "Essential for blocking backboard passes and double taps.",
       content: [
         {
@@ -41,7 +41,7 @@ const defenseMechData: contentObject = {
     {
       title: "Corner & Wall Clears",
       key: "cornerWallClears",
-      videoTime: "(No timestamp)",
+      videoId: ["vrHk66qmJEU?si=hw4xfvfKlM6CoVkl"],
       description:
         "What: When defending under pressure, use the wall or corner to launch the ball out of danger.",
       content: [
@@ -76,7 +76,7 @@ const defenseMechData: contentObject = {
     {
       title: "Shadow Defense",
       key: "shadowDefense",
-      videoTime: "(No timestamp)",
+      videoId: ["PmCBkHsKGVs?si=6ONlbRQnaS-0dhRN"],
       description:
         "What: Defending by staying between the ball and your net while facing backward, mirroring your opponent’s movement.",
       content: [
@@ -115,7 +115,7 @@ const defenseMechData: contentObject = {
     {
       title: "Backwards Aerials",
       key: "backwardsAerials",
-      videoTime: "(No timestamp)",
+      videoId: ["i1g3dKeW__I?si=6gF7tlrcep8o4aVk&amp;start=6"],
       description:
         "What: A defensive move for reaching high balls when your car is facing backward or during awkward recoveries.",
       content: [

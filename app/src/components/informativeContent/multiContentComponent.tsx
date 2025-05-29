@@ -1,9 +1,9 @@
 import React from "react";
-import VideoGallery from "./videoGallery";
+import VideoGallery from "../ytEmbed/videoGallery";
 // Types
-import { contentObject, MultiTopic } from "../util/types";
+import { contentObject, MultiTopic } from "../../util/types";
 // CSS
-import "../css/multiContent.css";
+import "../../css/multiContent.css";
 
 interface ContentProps {
   isContentOpen: boolean;

@@ -10,7 +10,7 @@ const flickMechData: contentObject = {
     {
       title: "Front Flip Flick",
       key: "frontFlipFlick",
-      videoTime: "17:45",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=1066"],
       description:
         "Use: Gain momentum and get a quick shot with minimal boost.\nWhen: Low on boost or need a fast, simple finish.",
       content: [
@@ -34,7 +34,7 @@ const flickMechData: contentObject = {
     {
       title: "Back Flip Flick",
       key: "backFlipFlick",
-      videoTime: "20:00",
+      videoId: ["WL4m8HhzI9U?si=t--iCLhSMrYGnOOf&amp;start=1201"],
       description:
         "Use: Great for lob passes, surprise shots, or avoiding early challenges.\nBest in: 1v1 or 2v2 if your teammate is waiting mid.",
       content: [
@@ -54,7 +54,7 @@ const flickMechData: contentObject = {
     {
       title: "Diagonal Flick",
       key: "diagonalFlick",
-      videoTime: "25:15",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=1513"],
       description:
         "Use: Adds both height and power. Great for shooting over defenders or creating backboard reads.",
       content: [
@@ -76,7 +76,7 @@ const flickMechData: contentObject = {
     {
       title: "Reverse 45 Flick",
       key: "reverse45Flick",
-      videoTime: "40:30",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=2433"],
       description:
         "One of the most powerful flicks in the game.\nWhen: To shoot with power when shadowed or being pressured.",
       content: [
@@ -100,7 +100,7 @@ const flickMechData: contentObject = {
     {
       title: "Musty Flick",
       key: "mustyFlick",
-      videoTime: "46:00",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=2762"],
       description:
         "Use: Surprise defenders with high-arcing, powerful backflips.",
       content: [
@@ -123,7 +123,7 @@ const flickMechData: contentObject = {
     {
       title: "Delayed Musty",
       key: "delayedMusty",
-      videoTime: "1:56:00",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=6982"],
       description:
         "Style shot with big reward if timed right.\nUse: Fake defenders, or set up double touches with delay.",
       content: [
@@ -145,7 +145,7 @@ const flickMechData: contentObject = {
     {
       title: "Tornado Flick",
       key: "tornadoFlick",
-      videoTime: "2:03:00",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=7382"],
       description: "Highly mechanical and flashy.",
       content: [
         {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import VideoGallery from "./videoGallery";
+import VideoGallery from "../ytEmbed/videoGallery";
 
 // Types
-import { contentObject, RandomText, List, SingleTopic } from "../util/types";
+import { contentObject, RandomText, List, SingleTopic } from "../../util/types";
 // CSS
-import "../css/singleContent.css";
+import "../../css/singleContent.css";
 
 interface ContentProps {
   isContentOpen: boolean;

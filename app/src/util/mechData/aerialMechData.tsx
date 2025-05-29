@@ -10,8 +10,7 @@ const aerialMechData: contentObject = {
     {
       title: "Aerial (with Power)",
       key: "aerialWithPower",
-      videoTime: "9:00",
-      videoId: ["fsPlXbKgv3M"],
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=7382"],
       description:
         "When: Beating opponents to the ball, countering clears, or quick-shotting a rebound.",
       content: [
@@ -51,8 +50,7 @@ const aerialMechData: contentObject = {
     {
       title: "Air Dribbling",
       key: "airDribbling",
-      videoTime: "no exact timestamp",
-      videoId: ["fsPlXbK234v3M"],
+      videoId: ["ddEe3t_cKyw?si=vtiOmKIW7zps3VzW&amp;start=100"],
       description: "Why: Maintains control and pressure mid-air.",
       content: [
         {
@@ -97,7 +95,7 @@ const aerialMechData: contentObject = {
     {
       title: "Air Dribble Bumps",
       key: "airDribbleBumps",
-      videoTime: "1:45:00",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=6302"],
       description: "Toxic? Maybe. Effective? Absolutely.",
       content: [
         {
@@ -132,7 +130,7 @@ const aerialMechData: contentObject = {
     {
       title: "Ground to Air Dribble Off Bounce/Roll",
       key: "groundToAirDribbleOffBounce",
-      videoTime: "1:29:15",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=5350"],
       description:
         "When to use: Transition into aerial play when the ball is rolling or bouncing in front of you.",
       content: [
@@ -166,7 +164,7 @@ const aerialMechData: contentObject = {
     {
       title: "Ground to Air Dribble (from carry)",
       key: "groundToAirDribbleFromCarry",
-      videoTime: "1:47:10",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=6487"],
       description:
         "Higher-skill version: Turning a dribble into an aerial threat.",
       content: [
@@ -193,37 +191,9 @@ const aerialMechData: contentObject = {
       ],
     },
     {
-      title: "Off-Wall Double Taps",
-      key: "offWallDoubleTaps",
-      videoTime: "1:15:30",
-      description:
-        "Why: Beat backboard defenders or score from unexpected angles.",
-      content: [
-        {
-          title: "Steps:",
-          bulletPoints: [
-            { point: "Pop the ball off the wall with control." },
-            { point: "Follow close behind." },
-            {
-              point: "Hit the backboard first, then redirect on the rebound.",
-            },
-          ],
-        },
-        {
-          title: "Key:",
-          bulletPoints: [
-            {
-              point:
-                "The first touch must create space between you and the ball.",
-            },
-          ],
-        },
-      ],
-    },
-    {
       title: "Directional Air Roll",
       key: "directionalAirRoll",
-      videoTime: "2:00:00",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=4246"],
       description:
         "What it is: Using air roll in a specific direction to control your car mid-air, adjusting your angle without losing speed.",
       content: [
@@ -265,7 +235,7 @@ const aerialMechData: contentObject = {
     {
       title: "Ground Double Tap",
       key: "groundDoubleTap",
-      videoTime: "2:10:00",
+      videoId: ["WL4m8HhzI9U?si=04i6K5Hilp1Ab_Jq&amp;start=7563"],
       description:
         "What it is: Performing a double tap after bouncing the ball on the ground.",
       content: [

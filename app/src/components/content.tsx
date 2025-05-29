@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 // Components
 import Welcome from "./welcome";
-import InformativeContent from "./informativeContent";
+import InformativeContent from "./informativeContent/informativeContent";
 import Coaching from "./Coaching/coaching";
 import InHouse from "./inHouse/inHouse";
 import Notes from "./Notes/notes";

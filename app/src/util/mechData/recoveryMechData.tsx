@@ -11,7 +11,7 @@ const recoveryMechData: contentObject = {
     {
       title: "Wall Dash",
       key: "wallDash",
-      videoTime: "32:10",
+      videoId: ["WL4m8HhzI9U?si=AI8_2oe3rHAKsCzo&amp;start=1931"],
       description:
         "What it is: A dodge-based way to accelerate along the wall without using boost.",
       content: [
@@ -32,7 +32,7 @@ const recoveryMechData: contentObject = {
     {
       title: "Half Flip",
       key: "halfFlip",
-      videoTime: "7:10",
+      videoId: ["WL4m8HhzI9U?si=AI8_2oe3rHAKsCzo&amp;start=431"],
       description: "Purpose: Quickly turn around when facing the wrong way.",
       content: [
         {
@@ -52,7 +52,7 @@ const recoveryMechData: contentObject = {
     {
       title: "Wave Dash",
       key: "waveDash",
-      videoTime: "22:15",
+      videoId: ["WL4m8HhzI9U?si=AI8_2oe3rHAKsCzo&amp;start=1338"],
       description:
         "Why for defense: Regain speed instantly after a save or recovery without wasting boost.",
       content: [
@@ -74,7 +74,7 @@ const recoveryMechData: contentObject = {
     {
       title: "Speed Flip",
       key: "speedFlip",
-      videoTime: "52:50",
+      videoId: ["WL4m8HhzI9U?si=AI8_2oe3rHAKsCzo&amp;start=3176"],
       description: "Key use: Kickoffs and quick rotations.",
       content: [
         {
@@ -105,7 +105,7 @@ const recoveryMechData: contentObject = {
     {
       title: "Crease Dash",
       key: "creaseDash",
-      videoTime: "",
+      videoId: ["JIpaLbuprKk?si=4JU0-18bYif4OgSH&amp;start=358"],
       description:
         "What: A grounded wavedash near the goal line to regain speed while staying positioned for a save.",
       content: [
@@ -135,7 +135,7 @@ const recoveryMechData: contentObject = {
     {
       title: "Zap Dash",
       key: "zapDash",
-      videoTime: "",
+      videoId: ["N0MQgp9dBkw?si=1kospbfxosYONMKZ"],
       description:
         "What: A rapid chain of wavedashes using flip resets for burst acceleration.",
       content: [

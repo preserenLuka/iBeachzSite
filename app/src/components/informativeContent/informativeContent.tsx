@@ -6,28 +6,28 @@ import SingleContentComponent from "./singleContentComponent";
 import MultiContentComponent from "./multiContentComponent";
 
 // mech components
-import shootingMechData from "../util/mechData/shootingMechData";
-import aerialMechData from "../util/mechData/aerialMechData";
-import defenseMechData from "../util/mechData/defenseMechData";
-import cuttingControlData from "../util/mechData/cuttingControllData";
-import flickMechData from "../util/mechData/flickMechData";
-import recoveryMechData from "../util/mechData/recoveryMechData";
-import resetMechData from "../util/mechData/resetMechData";
-import wallCeilingMechData from "../util/mechData/wallCeilingMechData";
+import shootingMechData from "../../util/mechData/shootingMechData";
+import aerialMechData from "../../util/mechData/aerialMechData";
+import defenseMechData from "../../util/mechData/defenseMechData";
+import cuttingControlData from "../../util/mechData/cuttingControllData";
+import flickMechData from "../../util/mechData/flickMechData";
+import recoveryMechData from "../../util/mechData/recoveryMechData";
+import resetMechData from "../../util/mechData/resetMechData";
+import wallCeilingMechData from "../../util/mechData/wallCeilingMechData";
 
 // fund components
-import advancedFundData from "../util/fundamentalsData/advancedFundData";
-import attackFundData from "../util/fundamentalsData/attackFundData";
-import challengeFundData from "../util/fundamentalsData/challengeFundData";
-import counterAttackFundData from "../util/fundamentalsData/counterAttackFundData";
-import defenseFundData from "../util/fundamentalsData/defenseFundData";
-import mentalFundData from "../util/fundamentalsData/mentalFundData";
-import rotationFundData from "../util/fundamentalsData/rotationFundData";
-import soloQFundData from "../util/fundamentalsData/soloQFundData";
-import speedFundData from "../util/fundamentalsData/speedFundData";
+import advancedFundData from "../../util/fundamentalsData/advancedFundData";
+import attackFundData from "../../util/fundamentalsData/attackFundData";
+import challengeFundData from "../../util/fundamentalsData/challengeFundData";
+import counterAttackFundData from "../../util/fundamentalsData/counterAttackFundData";
+import defenseFundData from "../../util/fundamentalsData/defenseFundData";
+import mentalFundData from "../../util/fundamentalsData/mentalFundData";
+import rotationFundData from "../../util/fundamentalsData/rotationFundData";
+import soloQFundData from "../../util/fundamentalsData/soloQFundData";
+import speedFundData from "../../util/fundamentalsData/speedFundData";
 
 // Types
-import { contentObject } from "../util/types";
+import { contentObject } from "../../util/types";
 
 interface ContentProps {
   isContentOpen: boolean;
