@@ -13,13 +13,20 @@ const prisma = new PrismaClient();
  *         name: playerName
  *         schema:
  *           type: string
- *         description: Filter matches by player name (case-insensitive, partial match)
+ *         description: >
+ *           Filter matches by player name (case-insensitive, partial match).
+ *           Returns matches where any player in the match has a name containing this value.
  *       - in: query
  *         name: order
  *         schema:
  *           type: string
  *           enum: [asc, desc]
  *         description: Sort by match duration
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number (8 matches per page)
  *     responses:
  *       200:
  *         description: List of matches
@@ -43,7 +50,9 @@ const getMatches = async (req, res) => {
         playerMatches: {
           some: {
             player: {
-              playerName: playerName,
+              playerName: {
+                contains: playerName.toLowerCase(),
+              },
             },
           },
         },
@@ -77,4 +86,57 @@ const getMatches = async (req, res) => {
   }
 };
 
-module.exports = { getMatches };
+/**
+ * @swagger
+ * /api/match/{id}:
+ *   get:
+ *     summary: Get a match by its ID
+ *     tags:
+ *       - Match
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The match ID
+ *     responses:
+ *       200:
+ *         description: Match details
+ *       400:
+ *         description: Invalid match id
+ *       404:
+ *         description: Match not found
+ *       500:
+ *         description: Internal server error
+ */
+const getMatchById = async (req, res) => {
+  try {
+    const matchId = parseInt(req.params.id, 10);
+    if (isNaN(matchId))
+      return res.status(400).json({ error: "Invalid match id" });
+
+    const match = await prisma.match.findUnique({
+      where: { id: matchId },
+      include: {
+        playerMatches: {
+          include: {
+            player: true, // This will include PlayerStats, which has playerName
+          },
+        },
+      },
+    });
+
+    if (!match) return res.status(404).json({ error: "Match not found" });
+
+    res.json(match);
+  } catch (error) {
+    console.error("Error fetching match by id:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = {
+  getMatches,
+  getMatchById,
+};

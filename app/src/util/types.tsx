@@ -97,3 +97,18 @@ export type Player = {
   teammateRecords: TeammateRecord[];
   opponentRecords: OpponentRecord[];
 };
+export type Match = {
+  id: number;
+  matchTime: string;
+  duration: number;
+  map: string;
+  blueScore: number;
+  orangeScore: number;
+  winner: string;
+  playerMatches: {
+    team: string;
+    player: {
+      playerName: string;
+    };
+  }[];
+};

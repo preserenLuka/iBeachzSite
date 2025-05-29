@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../css/playerStats.module.css";
+import styles from "./css/playerStats.module.css";
 import { Player } from "../../util/types";
-// Only allow keys that are numbers (not arrays or objects)
+
 type PlayerStatKey =
   | "goals"
   | "assists"
@@ -29,18 +29,28 @@ const extraStats: { key: PlayerStatKey; label: string }[] = [
 ];
 
 const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
+  // Use a number state for the current player ID
+  const [currentPlayerId, setCurrentPlayerId] = useState<number>(
+    parseInt(playerId, 10)
+  );
   const [player, setPlayer] = useState<Player | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const fetchPlayerData = async (id: number) => {
+    setLoading(true);
+    const response = await fetch(`/api/player/${id}`);
+    const data = await response.json();
+    setPlayer(data);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchPlayerData = async () => {
-      const response = await fetch(`/api/player/${playerId}`);
-      const data = await response.json();
-      setPlayer(data);
-      setLoading(false);
-    };
-    fetchPlayerData();
+    setCurrentPlayerId(parseInt(playerId, 10));
   }, [playerId]);
+
+  useEffect(() => {
+    fetchPlayerData(currentPlayerId);
+  }, [currentPlayerId]);
 
   if (loading) return <div>Loading...</div>;
   if (!player) return <div>Player not found</div>;
@@ -80,7 +90,19 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
             <tbody>
               {player.teammateRecords.map((rec) => (
                 <tr key={rec.id}>
-                  <td>{rec.teammateName || rec.teammateId}</td>
+                  <td>
+                    <span
+                      className={styles.playerLink}
+                      style={{
+                        cursor: "pointer",
+                        color: "var(--primary)",
+                        textDecoration: "underline",
+                      }}
+                      onClick={() => setCurrentPlayerId(rec.teammateId)}
+                    >
+                      {rec.teammateName || rec.teammateId}
+                    </span>
+                  </td>
                   <td>{rec.wins}</td>
                   <td>{rec.losses}</td>
                 </tr>
@@ -104,7 +126,19 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
             <tbody>
               {player.opponentRecords.map((rec) => (
                 <tr key={rec.id}>
-                  <td>{rec.opponentName || rec.opponentId}</td>
+                  <td>
+                    <span
+                      className={styles.playerLink}
+                      style={{
+                        cursor: "pointer",
+                        color: "var(--primary)",
+                        textDecoration: "underline",
+                      }}
+                      onClick={() => setCurrentPlayerId(rec.opponentId)}
+                    >
+                      {rec.opponentName || rec.opponentId}
+                    </span>
+                  </td>
                   <td>{rec.wins}</td>
                   <td>{rec.losses}</td>
                 </tr>

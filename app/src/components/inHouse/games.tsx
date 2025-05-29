@@ -1,21 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../css/games.module.css";
-
-type Match = {
-  id: number;
-  matchTime: string;
-  duration: number;
-  map: string;
-  blueScore: number;
-  orangeScore: number;
-  winner: string;
-  playerMatches: {
-    team: string;
-    player: {
-      playerName: string;
-    };
-  }[];
-};
+import { useNavigate } from "react-router-dom";
+import styles from "./css/games.module.css";
+import GameDetails from "./gameDetails";
+import { Match } from "../../util/types";
 
 const TEAM_COLORS: Record<string, string> = {
   BLUE: "#308bc7",
@@ -29,6 +16,7 @@ const Games: React.FC = () => {
   const [order, setOrder] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
+  const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -53,6 +41,24 @@ const Games: React.FC = () => {
 
   const handlePrev = () => setPage((p) => Math.max(1, p - 1));
   const handleNext = () => setPage((p) => p + 1);
+
+  if (selectedMatchId) {
+    return (
+      <>
+        <div className={styles.backButtonWrapper}>
+          <button
+            className={styles.pageButton}
+            onClick={() => setSelectedMatchId(null)}
+          >
+            Back to Games
+          </button>
+        </div>
+        <div className={styles.container}>
+          <GameDetails matchId={selectedMatchId} />
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -80,7 +86,7 @@ const Games: React.FC = () => {
           <option value="asc">Duration Asc</option>
         </select>
       </div>
-      <div style={{ minHeight: 300 }}>
+      <div className={styles.gamesList}>
         {loading ? (
           <div className={styles.loading}>Loading...</div>
         ) : matches.length === 0 ? (
@@ -90,46 +96,43 @@ const Games: React.FC = () => {
             <div className={styles.grid}>
               {Array.isArray(matches) &&
                 matches.map((match) => {
-                  // Get all player names for each team
                   const bluePlayers = match.playerMatches
                     .filter((pm) => pm.team === "BLUE")
-                    .map((pm) => pm.player.playerName);
+                    .map((pm) => pm.player);
                   const orangePlayers = match.playerMatches
                     .filter((pm) => pm.team === "ORANGE")
-                    .map((pm) => pm.player.playerName);
+                    .map((pm) => pm.player);
 
-                  const isBlueWinner = match.winner === "BLUE";
-                  const winningTeam = isBlueWinner ? "BLUE" : "ORANGE";
-                  const losingTeam = isBlueWinner ? "ORANGE" : "BLUE";
-                  const winningPlayers = isBlueWinner
-                    ? bluePlayers
-                    : orangePlayers;
-                  const losingPlayers = isBlueWinner
-                    ? orangePlayers
-                    : bluePlayers;
+                  const winningTeam = match.winner;
+                  const losingTeam = winningTeam === "BLUE" ? "ORANGE" : "BLUE";
+                  const winningPlayers =
+                    winningTeam === "BLUE" ? bluePlayers : orangePlayers;
+                  const losingPlayers =
+                    winningTeam === "BLUE" ? orangePlayers : bluePlayers;
 
                   const min = Math.floor(match.duration / 60);
                   const sec = match.duration % 60;
                   const durationStr = `${min}min ${sec}sec`;
 
                   const gradient = `linear-gradient(
-                  120deg,
-                  ${TEAM_COLORS[winningTeam]} 0%,
-                  var(--background) 38%,
-                  var(--background) 62%,
-                  ${TEAM_COLORS[losingTeam]} 100%
-                )`;
+                    120deg,
+                    ${TEAM_COLORS[winningTeam]} 0%,
+                    var(--background) 38%,
+                    var(--background) 62%,
+                    ${TEAM_COLORS[losingTeam]} 100%
+                  )`;
 
                   return (
                     <div
                       className={styles.card}
                       key={match.id}
-                      style={{ background: gradient }}
+                      style={{ background: gradient, cursor: "pointer" }}
+                      onClick={() => setSelectedMatchId(match.id)}
                     >
                       <div className={styles.cardLeft}>
                         {winningPlayers.map((p, i) => (
                           <div className={styles.playerName} key={i}>
-                            {p}
+                            {p.playerName}
                           </div>
                         ))}
                       </div>
@@ -143,7 +146,7 @@ const Games: React.FC = () => {
                       <div className={styles.cardRight}>
                         {losingPlayers.map((p, i) => (
                           <div className={styles.playerName} key={i}>
-                            {p}
+                            {p.playerName}
                           </div>
                         ))}
                       </div>
@@ -151,14 +154,7 @@ const Games: React.FC = () => {
                   );
                 })}
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: 24,
-                gap: 16,
-              }}
-            >
+            <div className={styles.pagination}>
               <button
                 className={styles.pageButton}
                 onClick={handlePrev}
@@ -166,7 +162,7 @@ const Games: React.FC = () => {
               >
                 Previous
               </button>
-              <span style={{ alignSelf: "center" }}>Page {page}</span>
+              <span className={styles.pageNumber}>Page {page}</span>
               <button
                 className={styles.pageButton}
                 onClick={handleNext}

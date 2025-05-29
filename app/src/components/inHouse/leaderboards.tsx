@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PlayerStats from "./playerStats";
-import styles from "../../css/leaderboard.module.css";
+import styles from "./css/leaderboard.module.css";
 import { FaArrowDownShortWide } from "react-icons/fa6";
 import { FaArrowUpWideShort } from "react-icons/fa6";
 

@@ -80,6 +80,15 @@
   align-items: center;
   min-height: 120px;
   color: var(--text-color-light);
+  cursor: pointer;
+  border: 2.5px solid black; /* Always reserve space for border */
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.card:hover {
+  border: 2.5px solid white;
+  box-shadow: 0 4px 16px rgba(48, 139, 199, 0.18);
+  transform: scale(1.025);
 }
 
 .cardLeft,
@@ -106,7 +115,7 @@
 
 .playerName {
   font-size: 1rem;
-  margin-bottom: 12px; /* reasonable vertical space */
+  margin-bottom: 12px;
 }
 
 /* Add margin-right only for left column player names */
@@ -140,4 +149,68 @@
 .duration {
   font-size: 1rem;
   color: var(--text-color);
+}
+
+.pageButton {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pageButton:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.matchStats {
+  background: var(--background);
+  border-radius: 10px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+  max-width: 400px;
+  color: var(--text-color-light);
+}
+
+.matchStats h3 {
+}
+
+.matchStats ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.matchStats li {
+  margin-bottom: 6px;
+}
+
+.gamesList {
+  min-height: 300px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  gap: 16px;
+}
+
+.pageNumber {
+  align-self: center;
+}
+
+.matchStatsPlayers {
+  margin-top: 16px;
+}
+
+.backButtonWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0 24px 0;
 }
