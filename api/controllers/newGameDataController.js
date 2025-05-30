@@ -22,7 +22,7 @@ const prisma = require("../utils/prisma");
  *               matchDuration:
  *                 type: number
  *                 description: Match duration in seconds (optional, used if duration is not set)
- *               map:
+ *               mapName:
  *                 type: string
  *                 description: Name of the map (optional)
  *               players:
@@ -65,8 +65,11 @@ const prisma = require("../utils/prisma");
 const newGameData = async (req, res) => {
   try {
     // Accept both duration and matchDuration for compatibility
-    let { duration, matchDuration, map, players } = req.body;
+    let { duration, matchDuration, map, mapName, players } = req.body;
     duration = duration ?? matchDuration; // Use matchDuration if duration is not set
+
+    // Prefer mapName, fallback to map for backward compatibility
+    const finalMapName = mapName || map || null;
 
     console.log("[newGameData] Received data:", req.body);
 
@@ -128,6 +131,7 @@ const newGameData = async (req, res) => {
         blueScore,
         orangeScore,
         winner,
+        mapName: finalMapName, // <-- add this line
       },
     });
     console.log("[newGameData] Match created with ID:", match.id);

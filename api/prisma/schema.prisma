@@ -103,6 +103,7 @@ model OpponentRecord {
 
 model Match {
   id            Int           @id @default(autoincrement())
+  mapName       String?        @default("Unknown")
   matchTime     DateTime      @default(now())
   duration      Int           @default(0)
   leaderboard   Leaderboard   @relation(fields: [leaderboardId], references: [id])

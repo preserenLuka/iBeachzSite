@@ -70,6 +70,15 @@ const getMatches = async (req, res) => {
           },
         },
       },
+      select: {
+        id: true,
+        duration: true,
+        blueScore: true,
+        orangeScore: true,
+        winner: true,
+        mapName: true, // <-- include mapName in the result
+        playerMatches: true,
+      },
       orderBy: {
         duration: order === "asc" ? "asc" : "desc",
       },
@@ -108,16 +117,15 @@ const getMatches = async (req, res) => {
  *       400:
  *         description: Invalid match id
  *       404:
- *         description: Match not found
- *       500:
- *         description: Internal server error
+ *         description: Match not found *         description: Match not found
  */
 const getMatchById = async (req, res) => {
-  try {
-    const matchId = parseInt(req.params.id, 10);
-    if (isNaN(matchId))
-      return res.status(400).json({ error: "Invalid match id" });
+  const matchId = parseInt(req.params.id, 10);
+  if (isNaN(matchId)) {
+    return res.status(400).json({ error: "Invalid match id" });
+  }
 
+  try {
     const match = await prisma.match.findUnique({
       where: { id: matchId },
       include: {
@@ -131,10 +139,17 @@ const getMatchById = async (req, res) => {
           },
         },
       },
+      select: {
+        id: true,
+        duration: true,
+        blueScore: true,
+        orangeScore: true,
+        winner: true,
+        mapName: true, // <-- include mapName
+        playerMatches: true,
+      },
     });
-
     if (!match) return res.status(404).json({ error: "Match not found" });
-
     res.json(match);
   } catch (error) {
     console.error("Error fetching match by id:", error);
