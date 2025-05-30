@@ -1,4 +1,4 @@
-const prisma = require("../utils/prisma");
+const prisma = require("../util/prisma");
 /**
  * @swagger
  * /api/leaderboards:
