@@ -1,4 +1,4 @@
-import prisma from "../prisma.js";
+const prisma = require("../utils/prisma");
 /**
  * @swagger
  * /api/matches:
