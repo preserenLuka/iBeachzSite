@@ -69,7 +69,7 @@ export type TeammateRecord = {
   id: number;
   playerId: number;
   teammateId: number;
-  teammateName?: string;
+  teammateName: string;
   wins: number;
   losses: number;
 };
@@ -77,7 +77,7 @@ export type OpponentRecord = {
   id: number;
   playerId: number;
   opponentId: number;
-  opponentName?: string;
+  opponentName: string;
   wins: number;
   losses: number;
 };

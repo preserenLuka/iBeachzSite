@@ -6,8 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  // Remove or comment out the output line!
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -59,13 +57,13 @@ model PlayerStats {
   id              Int             @id @default(autoincrement())
   leaderboard     Leaderboard     @relation(fields: [leaderboardId], references: [id])
   leaderboardId   Int
+  playerId        String          @default("") 
   playerName      String
   goals           Int             @default(0)
   saves           Int             @default(0)
   assists         Int             @default(0)
   points          Int             @default(0)
   shots           Int             @default(0)
-  streak          Int             @default(0)
   matchesPlayed   Int             @default(0)
   wins            Int             @default(0)
   losses          Int             @default(0)
@@ -74,6 +72,11 @@ model PlayerStats {
   playerMatches   PlayerMatch[]
   teammateOf      TeammateRecord[] @relation("TeammatePlayer")
   opponentOf      OpponentRecord[] @relation("OpponentPlayer")
+  streak          Int             @default(0)
+  longestStreak   Int             @default(0)
+  demosInflicted  Int             @default(0)
+  demosTaken      Int             @default(0)
+  boostUsed       Int             @default(0)
 }
 
 model TeammateRecord {
@@ -101,12 +104,12 @@ model OpponentRecord {
 model Match {
   id            Int           @id @default(autoincrement())
   matchTime     DateTime      @default(now())
-  duration      Int
+  duration      Int           @default(0)
   leaderboard   Leaderboard   @relation(fields: [leaderboardId], references: [id])
   leaderboardId Int
   blueScore     Int
   orangeScore   Int
-  winner        TeamColor
+  winner        TeamColor?
   playerMatches PlayerMatch[]
 }
 
@@ -124,4 +127,6 @@ model PlayerMatch {
   saves          Int         @default(0)
   shots          Int         @default(0)
   points         Int         @default(0)
+  demosInflicted Int      @default(0) // <-- add this
+  demosTaken     Int      @default(0) // <-- add this
 }

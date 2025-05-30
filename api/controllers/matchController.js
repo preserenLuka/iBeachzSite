@@ -64,7 +64,11 @@ const getMatches = async (req, res) => {
       include: {
         playerMatches: {
           include: {
-            player: true,
+            player: {
+              select: {
+                playerName: true,
+              },
+            },
           },
         },
       },
@@ -121,7 +125,11 @@ const getMatchById = async (req, res) => {
       include: {
         playerMatches: {
           include: {
-            player: true, // This will include PlayerStats, which has playerName
+            player: {
+              select: {
+                playerName: true,
+              },
+            },
           },
         },
       },

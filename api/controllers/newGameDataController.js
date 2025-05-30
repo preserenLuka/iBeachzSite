@@ -15,11 +15,14 @@ const prisma = new PrismaClient();
  *           schema:
  *             type: object
  *             required:
- *               - duration
  *               - players
  *             properties:
  *               duration:
- *                 type: integer
+ *                 type: number
+ *                 description: Match duration in seconds (optional, use matchDuration if not set)
+ *               matchDuration:
+ *                 type: number
+ *                 description: Match duration in seconds (optional, used if duration is not set)
  *               map:
  *                 type: string
  *                 description: Name of the map (optional)
@@ -28,6 +31,9 @@ const prisma = new PrismaClient();
  *                 items:
  *                   type: object
  *                   properties:
+ *                     playerId:
+ *                       type: string
+ *                       description: External player identifier (e.g., Steam ID)
  *                     playerName:
  *                       type: string
  *                     team:
@@ -43,11 +49,9 @@ const prisma = new PrismaClient();
  *                       type: integer
  *                     shots:
  *                       type: integer
- *                     demos:
+ *                     demosInflicted:
  *                       type: integer
- *                     hasBeenDemoed:
- *                       type: boolean
- *                     boostCollected:
+ *                     demosTaken:
  *                       type: integer
  *                     boostUsed:
  *                       type: integer
@@ -61,7 +65,10 @@ const prisma = new PrismaClient();
  */
 const newGameData = async (req, res) => {
   try {
-    const { duration, map, players } = req.body;
+    // Accept both duration and matchDuration for compatibility
+    let { duration, matchDuration, map, players } = req.body;
+    duration = duration ?? matchDuration; // Use matchDuration if duration is not set
+
     console.log("[newGameData] Received data:", req.body);
 
     if (duration == null || !Array.isArray(players) || players.length === 0) {
@@ -98,9 +105,10 @@ const newGameData = async (req, res) => {
     console.log("[newGameData] Scores calculated:", { blueScore, orangeScore });
 
     // 3. Determine winner
-    let winner = "UNKNOWN";
+    let winner = null;
     if (blueScore > orangeScore) winner = "BLUE";
     else if (orangeScore > blueScore) winner = "ORANGE";
+    // winner stays null for ties
     console.log("[newGameData] Winner determined:", winner);
 
     // 4. Find or create leaderboard for this mode
@@ -145,7 +153,7 @@ const newGameData = async (req, res) => {
 };
 
 const processPlayers = async (players, leaderboard, winner, matchId) => {
-  const playerStatsMap = {}; // Map to store player stats by playerName
+  const playerStatsMap = {};
 
   for (const player of players) {
     console.log(`[processPlayers] Processing player: ${player.playerName}`);
@@ -153,13 +161,60 @@ const processPlayers = async (players, leaderboard, winner, matchId) => {
     // Find PlayerStats for this player and leaderboard
     let playerStats = await prisma.playerStats.findFirst({
       where: {
-        playerName: player.playerName,
+        playerId: player.playerId,
         leaderboardId: leaderboard.id,
       },
     });
 
     // Calculate win/loss for this player
     const isWinner = player.team === winner;
+
+    // Streak logic with detailed logs
+    let newStreak = 0;
+    let newLongestStreak = 0;
+
+    if (playerStats) {
+      if (isWinner) {
+        if (playerStats.streak > 0) {
+          newStreak = playerStats.streak + 1;
+          console.log(
+            `[streak] ${player.playerName} continues win streak: ${playerStats.streak} -> ${newStreak}`
+          );
+        } else {
+          newStreak = 1;
+          console.log(
+            `[streak] ${player.playerName} win after loss streak: ${playerStats.streak} -> 1`
+          );
+        }
+      } else {
+        if (playerStats.streak < 0) {
+          newStreak = playerStats.streak - 1;
+          console.log(
+            `[streak] ${player.playerName} continues loss streak: ${playerStats.streak} -> ${newStreak}`
+          );
+        } else {
+          newStreak = -1;
+          console.log(
+            `[streak] ${player.playerName} loss after win streak: ${playerStats.streak} -> -1`
+          );
+        }
+      }
+      newLongestStreak = Math.max(
+        playerStats.longestStreak,
+        newStreak > 0 ? newStreak : 0
+      );
+      if (newLongestStreak !== playerStats.longestStreak) {
+        console.log(
+          `[longestStreak] ${player.playerName} new longest streak: ${newLongestStreak}`
+        );
+      }
+    } else {
+      newStreak = isWinner ? 1 : -1;
+      newLongestStreak = newStreak > 0 ? newStreak : 0;
+      console.log(
+        `[streak] ${player.playerName} first game, streak: ${newStreak}, longest: ${newLongestStreak}`
+      );
+    }
 
     if (!playerStats) {
       console.log(
@@ -169,6 +224,7 @@ const processPlayers = async (players, leaderboard, winner, matchId) => {
       playerStats = await prisma.playerStats.create({
         data: {
           leaderboardId: leaderboard.id,
+          playerId: player.playerId,
           playerName: player.playerName,
           goals: player.goals || 0,
           saves: player.saves || 0,
@@ -178,6 +234,11 @@ const processPlayers = async (players, leaderboard, winner, matchId) => {
           matchesPlayed: 1,
           wins: isWinner ? 1 : 0,
           losses: isWinner ? 0 : 1,
+          boostUsed: player.boostUsed || 0,
+          demosInflicted: player.demosInflicted || 0,
+          demosTaken: player.demosTaken || 0,
+          streak: newStreak,
+          longestStreak: newLongestStreak,
         },
       });
     } else {
@@ -196,12 +257,18 @@ const processPlayers = async (players, leaderboard, winner, matchId) => {
           matchesPlayed: playerStats.matchesPlayed + 1,
           wins: playerStats.wins + (isWinner ? 1 : 0),
           losses: playerStats.losses + (isWinner ? 0 : 1),
+          boostUsed: playerStats.boostUsed + (player.boostUsed || 0),
+          demosInflicted:
+            playerStats.demosInflicted + (player.demosInflicted || 0),
+          demosTaken: playerStats.demosTaken + (player.demosTaken || 0),
+          streak: newStreak,
+          longestStreak: newLongestStreak,
         },
       });
     }
 
     // Store playerStats in the map
-    playerStatsMap[player.playerName] = playerStats; // playerStats.id is the PK
+    playerStatsMap[player.playerId] = playerStats; // playerStats.id is the PK
 
     console.log(
       `[processPlayers] Creating PlayerMatch for: ${player.playerName}`
@@ -216,6 +283,8 @@ const processPlayers = async (players, leaderboard, winner, matchId) => {
         saves: player.saves || 0,
         shots: player.shots || 0,
         points: player.points || 0,
+        demosInflicted: player.demosInflicted || 0,
+        demosTaken: player.demosTaken || 0,
       },
     });
   }
@@ -236,15 +305,15 @@ const updateTeammateAndOpponentRecords = async (
 ) => {
   console.log("[updateTeammateAndOpponentRecords] Start");
   for (const player of players) {
-    const playerStats = playerStatsMap[player.playerName];
+    const playerStats = playerStatsMap[player.playerId];
     const isWinner = player.team === winner;
 
     // Teammates: all players on the same team except self
     const teammates = players.filter(
-      (p) => p.team === player.team && p.playerName !== player.playerName
+      (p) => p.team === player.team && p.playerId !== player.playerId
     );
     for (const teammate of teammates) {
-      const teammateStats = playerStatsMap[teammate.playerName];
+      const teammateStats = playerStatsMap[teammate.playerId]; // <-- FIXED
       let record = await prisma.teammateRecord.findFirst({
         where: {
           playerId: playerStats.id,
@@ -276,7 +345,7 @@ const updateTeammateAndOpponentRecords = async (
     // Opponents: all players on the other team
     const opponents = players.filter((p) => p.team !== player.team);
     for (const opponent of opponents) {
-      const opponentStats = playerStatsMap[opponent.playerName];
+      const opponentStats = playerStatsMap[opponent.playerId]; // <-- FIXED
       let record = await prisma.opponentRecord.findFirst({
         where: {
           playerId: playerStats.id,
