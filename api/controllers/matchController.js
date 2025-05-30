@@ -145,7 +145,7 @@ const getMatchById = async (req, res) => {
         blueScore: true,
         orangeScore: true,
         winner: true,
-        mapName: true, // <-- include mapName
+        mapName: true,
         playerMatches: true,
       },
     });
