@@ -80,7 +80,7 @@ model TeammateRecord {
   id           Int         @id @default(autoincrement())
   playerId     Int
   teammateId   Int
-  teammateName String      // <--- add this
+  teammateName String      
   wins         Int         @default(0)
   losses       Int         @default(0)
   player       PlayerStats @relation("Teammates", fields: [playerId], references: [id])

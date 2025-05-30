@@ -10,7 +10,7 @@ import Notes from "./Notes/notes";
 
 // CSS
 import "../css/theme.css";
-import "../css/tailwind.css";
+import "../css/content.module.css";
 
 interface ContentProps {
   isContentOpen: boolean;
@@ -30,7 +30,7 @@ const Content: React.FC<ContentProps> = ({ isContentOpen }) => {
   const isNotes = contentName?.includes("Notes");
 
   return (
-    <div className="bg-gradiant w-full">
+    <div className="bg-gradiant wrapper">
       {isFundamental || isMechanic ? (
         <InformativeContent isContentOpen={isContentOpen} />
       ) : isCoaching ? (

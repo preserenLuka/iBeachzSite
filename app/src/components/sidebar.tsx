@@ -82,15 +82,11 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      <div className={`sidebar overflow-y-auto ${isOpen ? "open" : "closed"}`}>
+      <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
         <div className={"sidebar-header"}>
           {isOpen && <span className="sidebar-title">Game Fundamentals</span>}
 
-          <button
-            className="toggle-btn"
-            onClick={toggleSidebar}
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <button className="toggle-btn" onClick={toggleSidebar}>
             {!isOpen && isMobile && (
               <span style={{ marginRight: 10 }}>{currentLabel}</span>
             )}
@@ -126,13 +122,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                 key={key}
                 className={`menu-item ${openSubMenu === key ? "Wborder" : ""}`}
               >
-                <div
-                  className="menu-title flex gap-5"
-                  onClick={() => toggleSubMenu(key)}
-                >
-                  <div className="w-10 flex justify-center items-center">
-                    {icon}
-                  </div>
+                <div className="menu-title" onClick={() => toggleSubMenu(key)}>
+                  <div className="menu-icon">{icon}</div>
                   {isOpen && title + " "}
                 </div>
                 <div
@@ -144,8 +135,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       className="fundamentals-item"
                       onClick={() => handleContentChange(value, label)}
                     >
-                      {icon}
-                      <span>{label}</span>
+                      {label}
                     </div>
                   ))}
                 </div>
