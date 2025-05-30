@@ -1,4 +1,5 @@
 // filepath: e:\github\InfoSite\Api\server.js
+require("dotenv-flow").config();
 const express = require("express");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
