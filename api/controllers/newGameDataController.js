@@ -62,7 +62,13 @@ const prisma = require("../util/prisma");
  *       500:
  *         description: Internal server error
  */
+const SECRET = process.env.API_SECRET;
+
 const newGameData = async (req, res) => {
+  const clientSecret = req.headers["x-api-secret"];
+  if (clientSecret !== SECRET) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
   try {
     // Accept both duration and matchDuration for compatibility
     let { duration, matchDuration, map, mapName, players } = req.body;

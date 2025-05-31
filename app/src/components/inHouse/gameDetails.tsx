@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./css/gameDetails.module.css";
+import { API_BASE_URL } from "../../vite-env.d";
 
 interface Player {
   playerName: string;
@@ -44,9 +45,8 @@ const GameDetails: React.FC<GameDetailsProps> = ({ matchId }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Fetching match details for ID:", matchId);
     setLoading(true);
-    fetch(`/api/match/${matchId}`)
+    fetch(`${API_BASE_URL}/api/match/${matchId}`)
       .then((res) => res.json())
       .then((data) => {
         setMatch(data);
@@ -58,13 +58,6 @@ const GameDetails: React.FC<GameDetailsProps> = ({ matchId }) => {
   if (loading || !match) {
     return <div className={styles.loading}>Loading...</div>;
   }
-
-  const bluePlayers = match.playerMatches
-    .filter((pm) => pm.team === "BLUE")
-    .map((pm) => pm.player);
-  const orangePlayers = match.playerMatches
-    .filter((pm) => pm.team === "ORANGE")
-    .map((pm) => pm.player);
 
   const winningTeam = match.winner;
   const losingTeam = winningTeam === "BLUE" ? "ORANGE" : "BLUE";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./css/games.module.css";
 import GameDetails from "./gameDetails";
 import { Match } from "../../util/types";
+import { API_BASE_URL } from "../../vite-env.d";
 
 const TEAM_COLORS: Record<string, string> = {
   BLUE: "#308bc7",
@@ -25,7 +25,7 @@ const Games: React.FC = () => {
     if (playerName) params.append("playerName", playerName);
     params.append("order", order);
 
-    fetch(`/api/matches?${params.toString()}`)
+    fetch(`${API_BASE_URL}api/matches?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data.matches)) {

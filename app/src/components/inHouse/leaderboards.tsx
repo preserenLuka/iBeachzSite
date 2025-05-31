@@ -3,6 +3,7 @@ import PlayerStats from "./playerStats";
 import styles from "./css/leaderboard.module.css";
 import { FaArrowDownShortWide } from "react-icons/fa6";
 import { FaArrowUpWideShort } from "react-icons/fa6";
+import { API_BASE_URL } from "../../vite-env.d";
 
 const leaderboardOptions = [
   { label: "1 v 1", id: 0 },
@@ -32,7 +33,7 @@ const Leaderboards: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `/api/leaderboards/${leaderboardId}/players?orderBy=${orderBy}&order=${order}&limit=${limit}`
+      `${API_BASE_URL}/api/leaderboards/${leaderboardId}/players?orderBy=${orderBy}&order=${order}&limit=${limit}`
     )
       .then((res) => res.json())
       .then((data) => {

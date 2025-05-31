@@ -3,7 +3,7 @@ const prisma = require("../util/prisma");
  * @swagger
  * /api/matches:
  *   get:
- *     summary: Get matches with optional filtering and sorting
+ *     summary: Get matches with optional player name filtering
  *     tags:
  *       - Match
  *     parameters:
@@ -12,14 +12,8 @@ const prisma = require("../util/prisma");
  *         schema:
  *           type: string
  *         description: >
- *           Filter matches by player name (case-insensitive, partial match).
+ *           Filter matches by player name (partial match, case-insensitive if DB collation allows).
  *           Returns matches where any player in the match has a name containing this value.
- *       - in: query
- *         name: order
- *         schema:
- *           type: string
- *           enum: [asc, desc]
- *         description: Sort by match duration
  *       - in: query
  *         name: page
  *         schema:
@@ -39,7 +33,7 @@ const getMatches = async (req, res) => {
     const page = parseInt(req.query.page, 10) || 1;
     const take = 8;
     const skip = (page - 1) * take;
-    const { playerName, order = "desc" } = req.query;
+    const { playerName } = req.query;
 
     // Build the where clause
     let where = {};
@@ -49,7 +43,8 @@ const getMatches = async (req, res) => {
           some: {
             player: {
               playerName: {
-                contains: playerName.toLowerCase(),
+                contains: playerName,
+                // Remove mode: "insensitive"
               },
             },
           },
@@ -70,17 +65,8 @@ const getMatches = async (req, res) => {
           },
         },
       },
-      select: {
-        id: true,
-        duration: true,
-        blueScore: true,
-        orangeScore: true,
-        winner: true,
-        mapName: true, // <-- include mapName in the result
-        playerMatches: true,
-      },
       orderBy: {
-        duration: order === "asc" ? "asc" : "desc",
+        duration: "desc", // Only descending order
       },
       take,
       skip,
@@ -117,7 +103,7 @@ const getMatches = async (req, res) => {
  *       400:
  *         description: Invalid match id
  *       404:
- *         description: Match not found *         description: Match not found
+ *         description: Match not found
  */
 const getMatchById = async (req, res) => {
   const matchId = parseInt(req.params.id, 10);
@@ -138,15 +124,6 @@ const getMatchById = async (req, res) => {
             },
           },
         },
-      },
-      select: {
-        id: true,
-        duration: true,
-        blueScore: true,
-        orangeScore: true,
-        winner: true,
-        mapName: true,
-        playerMatches: true,
       },
     });
     if (!match) return res.status(404).json({ error: "Match not found" });

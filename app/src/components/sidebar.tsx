@@ -129,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <div
                   className={`sub-menu ${openSubMenu === key ? "open" : ""}`}
                 >
-                  {items.map(({ label, value, icon }, idx) => (
+                  {items.map(({ label, value }, idx) => (
                     <div
                       key={idx}
                       className="fundamentals-item"

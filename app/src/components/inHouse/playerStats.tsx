@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./css/playerStats.module.css";
 import { Player, TeammateRecord, OpponentRecord } from "../../util/types";
+import { API_BASE_URL } from "../../vite-env.d";
 
 type PlayerStatKey =
   | "goals"
@@ -37,7 +38,7 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
 
   const fetchPlayerData = async (id: number) => {
     setLoading(true);
-    const response = await fetch(`/api/player/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/player/${id}`);
     const data = await response.json();
     setPlayer(data);
     setLoading(false);
