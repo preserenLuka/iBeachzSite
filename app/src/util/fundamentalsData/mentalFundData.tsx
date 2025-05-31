@@ -10,20 +10,34 @@ const mentalFundData: contentObject = {
     title: "Mental Strength",
     content: [
       {
-        text: "Tilting is an emotion, and it's okay to tilt — you will 100% tilt if you are a competitive person.",
-      },
-      { text: "Try to notice the enemy’s mistakes, not your teammates’." },
-      {
-        text: "If you focus on the enemy's mistakes, you're looking for how to win.",
-      },
-      {
-        text: "If you focus on your teammates' mistakes, you'll only see how you're losing.",
-      },
-      {
-        text: "If you’ve had a bad day, don’t jump into ranked games — don’t do that to yourself.",
-      },
-      {
-        text: "If you really want to play, go casual first, then decide what you want.",
+        title: "",
+        bulletPoints: [
+          {
+            point:
+              "Tilting is an emotion, and it's okay to tilt — you will 100% tilt if you are a competitive person.",
+          },
+          {
+            point: "Try to notice the enemy’s mistakes, not your teammates’.",
+          },
+          {
+            point:
+              "If you focus on the enemy's mistakes, you're looking for how to win.",
+          },
+          {
+            point:
+              "If you focus on your teammates' mistakes, you'll only see how you're losing.",
+          },
+          {
+            point:
+              "If you’ve had a bad day, don’t jump into ranked games — don’t do that to yourself.",
+          },
+          {
+            point:
+              "If you really want to play, go casual first, then decide what you want.",
+          },
+        ],
+        extraText:
+          "If your teammate is intentionally throwing, you can throw the game twice as hard to reset mentally. It’s a mental refresh.",
       },
       {
         title: "Daily Mental Strategy",

@@ -38,7 +38,7 @@ const singleContentComponent: React.FC<ContentProps> = ({ content }) => {
           <h1 className="site-title">{content.title}</h1>
           <p className="site-description">{content.description}</p>
           {isSingleTopic(content.topics) && content.topics.description && (
-            <p className="site-sub-description">{content.topics.description}</p>
+            <p className="sub-description">{content.topics.description}</p>
           )}
           {topicsContent.map((item, index) => {
             if ("text" in item) {

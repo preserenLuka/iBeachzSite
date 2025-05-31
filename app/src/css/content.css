@@ -1,3 +1,7 @@
 .wrapper-content {
   width: 100%;
 }
+@media (max-width: 768px) {
+  .wrapper-content {
+  }
+}

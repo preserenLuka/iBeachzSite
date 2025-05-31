@@ -85,3 +85,56 @@
 .navigate-button:hover {
   background-color: #1c87d6;
 }
+
+@media (max-width: 768px) {
+  .welcome-container {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+  .content-section {
+    padding: 6vw 3vw;
+    border-radius: 0;
+    font-size: 0.98rem;
+    box-shadow: none;
+  }
+  .content-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .content-section p {
+    font-size: 0.98rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .role-header {
+    font-size: 1.05rem;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .role-list {
+    padding-left: 16px;
+    font-size: 0.95rem;
+  }
+  .role-list li {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+  .social-links {
+    gap: 10px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .social-icon {
+    font-size: 2rem;
+  }
+  .navigate-button {
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 12px 0;
+    margin-top: 18px;
+  }
+}
