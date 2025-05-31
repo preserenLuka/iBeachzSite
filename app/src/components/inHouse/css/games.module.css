@@ -214,3 +214,62 @@
   justify-content: center;
   margin: 32px 0 24px 0;
 }
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .container {
+    width: 98%;
+    padding: 8px;
+    margin: 8px auto;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+  .card {
+    min-height: unset;
+    padding: 12px 6px;
+  }
+
+  .cardMiddle {
+    align-items: center;
+    margin: 0;
+  }
+
+  .cardLeft {
+    align-items: left;
+    margin: 0;
+  }
+  .cardRight {
+    align-items: right;
+    margin: 0;
+  }
+  .playerName {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  .score {
+    font-size: 1.1rem;
+  }
+  .vs {
+    font-size: 1rem;
+  }
+  .pagination {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cardLeft .playerName {
+    margin-left: 0;
+    margin-right: 32px; /* Shift left team names further left */
+    text-align: left;
+  }
+  .cardRight .playerName {
+    margin-left: 32px; /* Shift right team names further right */
+    margin-right: 0;
+    text-align: right;
+  }
+  .cardMiddle {
+    align-items: center;
+  }
+}

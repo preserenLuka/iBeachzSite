@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import Leaderboards from "./leaderboards";
 import Games from "./games";
 // import Games from "./games"; // Uncomment and create this if you have a Games component
+import styles from "./css/inHouse.module.css";
 
 const InHouse: React.FC = () => {
   const { contentName } = useParams();
@@ -17,7 +18,7 @@ const InHouse: React.FC = () => {
   const isGames = contentName?.toLowerCase().includes("game");
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       {isLeaderboards ? (
         <Leaderboards />
       ) : isGames ? (

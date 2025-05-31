@@ -94,10 +94,7 @@ const menuItems: MenuItem[] = [
     title: "Notes",
     key: "notes",
     icon: <BiNotepad size={30} />,
-    items: [
-      { label: "Notes", value: "Notes" },
-      { label: "test", value: "test" },
-    ],
+    items: [{ label: "Notes", value: "Notes" }],
   },
   {
     title: "In House",

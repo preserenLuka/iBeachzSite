@@ -48,18 +48,6 @@
   text-decoration: underline;
 }
 
-.backButton {
-  margin: 1.5rem auto;
-  display: block;
-  padding: 0.5rem 1.5rem;
-  border-radius: 6px;
-  border: none;
-  background: var(--background-light);
-  color: #fff;
-  cursor: pointer;
-  font-weight: 600;
-}
-
 .sortArrow {
   display: inline-block;
   margin-left: 4px;
@@ -114,4 +102,78 @@
 .modeSelect:focus,
 .limitSelect:focus {
   border: 1.5px solid var(--secondary);
+}
+
+.pageButton {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.backButtonWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0 24px 0;
+}
+/* Add at the end of playerStats.module.css */
+
+@media (max-width: 768px) {
+  .container {
+    width: 98%;
+    padding: 10px;
+    margin: 10px auto;
+    min-height: 100vh; /* Ensures background fills viewport */
+    box-sizing: border-box;
+    overflow-y: auto; /* Allows scrolling if content overflows */
+    background: var(--background-light); /* Or your gradient here */
+  }
+  html,
+  body {
+    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  .mainContent {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+  }
+  .statRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .statSquare {
+    margin: 4px 0;
+    padding: 8px;
+    font-size: 1rem;
+  }
+  .section {
+    max-height: 250px;
+  }
+  .table {
+    width: 180vw;
+    min-width: 600px;
+    display: table;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .table th,
+  .table td {
+    padding: 10px 5px;
+    font-size: 1.15rem;
+  }
+  .title {
+    font-size: 1.4rem;
+  }
 }

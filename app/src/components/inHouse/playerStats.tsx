@@ -109,19 +109,19 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
         <div className={styles.rightColumn}>
           <div className={`${styles.coloredSquare} ${styles.square1}`}>
             <div>
-              <div>Win %</div>
+              <div className={`${styles.rigthColumnTItle}`}>Win %</div>
               <div style={{ fontSize: 28 }}>{(winRate * 100).toFixed(1)}%</div>
             </div>
           </div>
           <div className={`${styles.coloredSquare} ${styles.square2}`}>
             <div>
-              <div>Player Score</div>
+              <div className={`${styles.rigthColumnTItle}`}>Player Score</div>
               <div style={{ fontSize: 28 }}>{playerScore.toFixed(1)}</div>
             </div>
           </div>
           <div className={`${styles.coloredSquare} ${styles.square3}`}>
             <div>
-              <div>Shooting %</div>
+              <div className={`${styles.rigthColumnTItle}`}>Shooting %</div>
               <div style={{ fontSize: 28 }}>
                 {(shootingPercentage * 100).toFixed(1)}%
               </div>

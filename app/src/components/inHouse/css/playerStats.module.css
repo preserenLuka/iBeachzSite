@@ -164,6 +164,59 @@ option {
 .square1,
 .square2,
 .square3 {
-  background: var(--secondary);
-  color: #fff;
+  background: linear-gradient(90deg, #e0e7ef 0%, #3a8dde 100%);
+  color: #222;
+}
+.rigthColumnTItle {
+  color: #183a5c;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 3px;
+}
+
+/* Add at the end of playerStats.module.css */
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .container {
+    width: 98%;
+    padding: 10px;
+    margin: 10px auto;
+  }
+  .mainContent {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .leftColumn,
+  .rightColumn {
+    width: 100%;
+  }
+  .statRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .statSquare {
+    margin: 4px 0;
+    padding: 8px;
+    font-size: 1rem;
+  }
+  .section {
+    max-height: 250px;
+  }
+  .table {
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+  .table th,
+  .table td {
+    padding: 4px;
+    font-size: 0.95rem;
+  }
+  .rigthColumnTItle {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+    color: var(--background-light);
+  }
 }

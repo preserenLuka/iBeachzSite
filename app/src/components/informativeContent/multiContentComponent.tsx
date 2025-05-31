@@ -3,7 +3,7 @@ import VideoGallery from "../ytEmbed/videoGallery";
 // Types
 import { contentObject, MultiTopic } from "../../util/types";
 // CSS
-import "../../css/multiContent.css";
+import "./css/multiContent.css";
 
 interface ContentProps {
   isContentOpen: boolean;

@@ -1,0 +1,139 @@
+@import "../../../css/theme.css";
+
+.multi-wrapper {
+  color: var(--text-color);
+  padding: 2.5%; /* Retain 2.5% padding */
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  height: 100vh; /* Full viewport height */
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.multi-topics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.multi-topic-section {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 40px);
+  gap: 2%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  margin-bottom: 20px;
+}
+
+.multi-topic-content {
+  padding: 1%;
+  margin-top: 2.5%;
+  background-color: var(--background-light);
+  flex: 0 0 45%;
+  border-radius: 3%;
+}
+
+.multi-topic-title {
+  font-size: 28px;
+  color: var(--secondary);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.multi-topic-description {
+  font-size: 18px;
+  width: 100%;
+  font-weight: bold;
+  padding: 1%;
+}
+
+.multi-video-wrapper {
+  flex: 0 0 55%; /* Take 55% of the width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5%;
+}
+.multi-content-section {
+}
+
+.content-list-title {
+  font-size: 24px;
+  color: var(--primary);
+  width: 100%;
+  font-weight: bold;
+}
+.content-title {
+  font-size: 24px;
+  color: var(--primary);
+  width: 100%;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .multi-wrapper {
+    flex-direction: column;
+    height: 100vh;
+    min-height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    overflow-y: visible;
+  }
+
+  .multi-topic-section {
+    flex-direction: column;
+    height: 100vh;
+    gap: 1%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    margin-bottom: 0;
+  }
+  .multi-topic-content {
+    flex: 1 1 auto;
+    width: 100%;
+    margin: 0;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .multi-video-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0 0.2rem 0.2rem 0.2rem;
+    flex: 1 0 auto;
+    min-height: 0;
+    max-height: 40vh; /* or adjust as needed */
+  }
+
+  .multi-topic-content {
+    min-height: 40vh;
+    max-height: 60vh;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .multi-video-wrapper {
+    min-height: 40vh;
+    max-height: 60vh;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .multi-topic-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .multi-topic-description {
+    font-size: 1rem;
+    text-align: center;
+    padding: 2% 0;
+  }
+}

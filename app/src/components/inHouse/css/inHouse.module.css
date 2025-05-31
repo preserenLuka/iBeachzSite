@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+  .wrapper {
+    min-height: 100vh;
+    width: 100vw;
+    background: var(--background-light); /* Or your gradient */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /* Enable scrolling if content overflows */
+    overflow-y: auto;
+  }
+}

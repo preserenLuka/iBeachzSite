@@ -9,11 +9,13 @@ const leaderboardData = require("./routes/leaderboard");
 const newGameData = require("./routes/newGameData");
 const playerData = require("./routes/player");
 const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 
 //const topicsRoutes = require("./routes/topics");
 //const contentsRoutes = require("./routes/contents");
 
 const app = express();
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 

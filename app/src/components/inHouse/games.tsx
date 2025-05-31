@@ -13,7 +13,6 @@ const Games: React.FC = () => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
   const [playerName, setPlayerName] = useState("");
-  const [order, setOrder] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
@@ -23,9 +22,8 @@ const Games: React.FC = () => {
     const params = new URLSearchParams();
     params.append("page", page.toString());
     if (playerName) params.append("playerName", playerName);
-    params.append("order", order);
 
-    fetch(`${API_BASE_URL}api/matches?${params.toString()}`)
+    fetch(`${API_BASE_URL}/api/matches?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data.matches)) {
@@ -37,7 +35,7 @@ const Games: React.FC = () => {
         }
         setLoading(false);
       });
-  }, [playerName, order, page]);
+  }, [playerName, page]);
 
   const handlePrev = () => setPage((p) => Math.max(1, p - 1));
   const handleNext = () => setPage((p) => p + 1);
@@ -74,17 +72,6 @@ const Games: React.FC = () => {
             setPage(1);
           }}
         />
-        <select
-          className={styles.select}
-          value={order}
-          onChange={(e) => {
-            setOrder(e.target.value as "asc" | "desc");
-            setPage(1);
-          }}
-        >
-          <option value="desc">Duration Desc</option>
-          <option value="asc">Duration Asc</option>
-        </select>
       </div>
       <div className={styles.gamesList}>
         {loading ? (

@@ -46,6 +46,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 3px solid var(--background);
 }
 
 .playerName {
@@ -69,4 +70,41 @@
   color: #888;
   font-size: 1.2rem;
   margin-top: 40px;
+}
+
+/* Add at the end of gameDetails.module.css */
+
+@media (max-width: 768px) {
+  .outerContainer {
+    flex-direction: column;
+    gap: 16px;
+    margin: 16px auto;
+    min-height: unset;
+  }
+  .playersColumn {
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: flex-start !important;
+  }
+  .playerCard {
+    min-width: 100px;
+    padding: 16px 8px;
+    font-size: 1rem;
+    border: 2px solid var(--background);
+  }
+  .playerName {
+    font-size: 1.1rem;
+  }
+  .matchSquare {
+    width: 90vw;
+    height: auto;
+    min-width: 0;
+    min-height: 0;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+  .matchTitle {
+    font-size: 1.3rem;
+  }
 }

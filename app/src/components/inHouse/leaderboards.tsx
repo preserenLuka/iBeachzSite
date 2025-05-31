@@ -55,12 +55,14 @@ const Leaderboards: React.FC = () => {
   if (selectedPlayer) {
     return (
       <div>
-        <button
-          className={styles.backButton}
-          onClick={() => setSelectedPlayer(null)}
-        >
-          ← Back to Leaderboard
-        </button>
+        <div className={styles.backButtonWrapper}>
+          <button
+            className={styles.pageButton}
+            onClick={() => setSelectedPlayer(null)}
+          >
+            Back to Games
+          </button>
+        </div>
         <PlayerStats playerId={selectedPlayer.id} />
       </div>
     );
@@ -87,50 +89,56 @@ const Leaderboards: React.FC = () => {
         {loading ? (
           <div style={{ textAlign: "center", padding: "2rem" }}>Loading...</div>
         ) : (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>#</th>
-                {columns.map((col) => (
-                  <th
-                    key={col.key}
-                    className={col.key !== "playerName" ? styles.sortable : ""}
-                    onClick={
-                      col.key !== "playerName"
-                        ? () => handleSort(col.key)
-                        : undefined
-                    }
-                    style={{
-                      textAlign: col.key === "playerName" ? "left" : "center",
-                    }}
-                  >
-                    {col.label}
-                    {orderBy === col.key && (
-                      <span className={styles.sortArrow}>
-                        {order === "asc" ? (
-                          <FaArrowUpWideShort className={styles.arrowIcon} />
-                        ) : (
-                          <FaArrowDownShortWide className={styles.arrowIcon} />
-                        )}
-                      </span>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {players.map((player, idx) => (
-                <tr key={player.id} onClick={() => setSelectedPlayer(player)}>
-                  <td>{idx + 1}</td>
-                  <td className={styles.playerName}>{player.playerName}</td>
-                  <td>{player.goals}</td>
-                  <td>{player.saves}</td>
-                  <td>{player.assists}</td>
-                  <td>{player.shots}</td>
+          <div style={{ overflowX: "auto" }}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  {columns.map((col) => (
+                    <th
+                      key={col.key}
+                      className={
+                        col.key !== "playerName" ? styles.sortable : ""
+                      }
+                      onClick={
+                        col.key !== "playerName"
+                          ? () => handleSort(col.key)
+                          : undefined
+                      }
+                      style={{
+                        textAlign: col.key === "playerName" ? "left" : "center",
+                      }}
+                    >
+                      {col.label}
+                      {orderBy === col.key && (
+                        <span className={styles.sortArrow}>
+                          {order === "asc" ? (
+                            <FaArrowUpWideShort className={styles.arrowIcon} />
+                          ) : (
+                            <FaArrowDownShortWide
+                              className={styles.arrowIcon}
+                            />
+                          )}
+                        </span>
+                      )}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {players.map((player, idx) => (
+                  <tr key={player.id} onClick={() => setSelectedPlayer(player)}>
+                    <td>{idx + 1}</td>
+                    <td className={styles.playerName}>{player.playerName}</td>
+                    <td>{player.goals}</td>
+                    <td>{player.saves}</td>
+                    <td>{player.assists}</td>
+                    <td>{player.shots}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
       <div className={styles.bottomBar}>
