@@ -13,10 +13,15 @@ const prisma = require("../util/prisma");
  *         schema:
  *           type: integer
  *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         description: Filter by partial player name (case-insensitive, if DB collation allows)
+ *       - in: query
  *         name: orderBy
  *         schema:
  *           type: string
- *           enum: [goals, saves, assists, shots]
+ *           enum: [goals, saves, assists, shots, wins, losses, matchesPlayed, streak, longestStreak, demosInflicted, demosTaken, boostUsed]
  *         description: Field to order by
  *       - in: query
  *         name: order
@@ -28,30 +33,56 @@ const prisma = require("../util/prisma");
  *         name: limit
  *         schema:
  *           type: integer
- *           enum: [10, 25, 50, 75]
+ *           enum: [10, ,15, 25]
  *         description: Number of players to return
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number
  *     responses:
  *       200:
- *         description: List of players with stats
+ *         description: List of players with stats and total entries
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                   playerName:
- *                     type: string
- *                   goals:
- *                     type: integer
- *                   saves:
- *                     type: integer
- *                   assists:
- *                     type: integer
- *                   shots:
- *                     type: integer
+ *               type: object
+ *               properties:
+ *                 players:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       playerName:
+ *                         type: string
+ *                       goals:
+ *                         type: integer
+ *                       saves:
+ *                         type: integer
+ *                       assists:
+ *                         type: integer
+ *                       shots:
+ *                         type: integer
+ *                       wins:
+ *                         type: integer
+ *                       losses:
+ *                         type: integer
+ *                       matchesPlayed:
+ *                         type: integer
+ *                       streak:
+ *                         type: integer
+ *                       longestStreak:
+ *                         type: integer
+ *                       demosInflicted:
+ *                         type: integer
+ *                       demosTaken:
+ *                         type: integer
+ *                       boostUsed:
+ *                         type: integer
+ *                 totalEntries:
+ *                   type: integer
  *       400:
  *         description: Invalid parameters
  *       500:
@@ -62,10 +93,32 @@ const prisma = require("../util/prisma");
 const getLeaderboardPlayers = async (req, res) => {
   try {
     const { id } = req.params;
-    const { orderBy = "goals", order = "desc", limit = 10 } = req.query;
-    const validFields = ["goals", "saves", "assists", "shots"];
-    const validLimits = [10, 25, 50, 75];
+    const {
+      search = "",
+      orderBy = "goals",
+      order = "desc",
+      limit = 10,
+      page = 1,
+    } = req.query;
+
+    const validFields = [
+      "goals",
+      "saves",
+      "assists",
+      "shots",
+      "wins",
+      "losses",
+      "matchesPlayed",
+      "streak",
+      "longestStreak",
+      "demosInflicted",
+      "demosTaken",
+      "boostUsed",
+    ];
+    const validLimits = [10, 15, 25];
+
     const parsedLimit = parseInt(limit, 10);
+    const parsedPage = parseInt(page, 10);
 
     if (!validFields.includes(orderBy)) {
       return res.status(400).json({ error: "Invalid orderBy field" });
@@ -73,9 +126,27 @@ const getLeaderboardPlayers = async (req, res) => {
     if (!validLimits.includes(parsedLimit)) {
       return res.status(400).json({ error: "Invalid limit" });
     }
+    if (isNaN(parsedPage) || parsedPage < 1) {
+      return res.status(400).json({ error: "Invalid page number" });
+    }
 
+    // Build the 'where' clause
+    const whereClause = { leaderboardId: Number(id) };
+    if (search) {
+      // Remove mode: 'insensitive' to avoid errors on older Prisma / MySQL
+      whereClause.playerName = {
+        contains: search,
+      };
+    }
+
+    // Get the total number of entries
+    const totalEntries = await prisma.playerStats.count({
+      where: whereClause,
+    });
+
+    // Fetch players for the current page
     const players = await prisma.playerStats.findMany({
-      where: { leaderboardId: Number(id) },
+      where: whereClause,
       select: {
         id: true,
         playerName: true,
@@ -83,46 +154,32 @@ const getLeaderboardPlayers = async (req, res) => {
         saves: true,
         assists: true,
         shots: true,
+        wins: true,
+        losses: true,
+        matchesPlayed: true,
+        streak: true,
+        longestStreak: true,
+        demosInflicted: true,
+        demosTaken: true,
+        boostUsed: true,
       },
       orderBy: {
         [orderBy]: order === "asc" ? "asc" : "desc",
       },
+      skip: (parsedPage - 1) * parsedLimit,
       take: parsedLimit,
     });
-    res.json(players);
+
+    res.json({
+      players,
+      totalEntries,
+    });
   } catch (error) {
     console.error("Error fetching leaderboard players:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
-const clearAllData = async (req, res) => {
-  try {
-    const adminPassword = req.headers["x-admin-password"];
-    const CORRECT_PASSWORD = process.env.DELETE_PASSWORD;
-
-    if (!adminPassword || adminPassword !== CORRECT_PASSWORD) {
-      return res.status(401).json({ error: "Unauthorized: Invalid password" });
-    }
-
-    // Delete in order to avoid foreign key constraint errors
-    await prisma.playerMatch.deleteMany({});
-    await prisma.match.deleteMany({});
-    await prisma.teammateRecord.deleteMany({});
-    await prisma.opponentRecord.deleteMany({});
-    await prisma.playerStats.deleteMany({});
-    await prisma.leaderboard.deleteMany({});
-    await prisma.note.deleteMany({});
-    await prisma.user.deleteMany({});
-
-    res.json({ message: "All data deleted from all tables." });
-  } catch (error) {
-    console.error("Error clearing all data:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
-
 module.exports = {
   getLeaderboardPlayers,
-  clearAllData,
 };

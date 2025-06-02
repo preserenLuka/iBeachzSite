@@ -3,6 +3,8 @@ import styles from "./css/games.module.css";
 import GameDetails from "./gameDetails";
 import { Match } from "../../util/types";
 import { API_BASE_URL } from "../../vite-env.d";
+// Import your chosen icon
+import { FaSearch } from "react-icons/fa";
 
 const TEAM_COLORS: Record<string, string> = {
   BLUE: "#308bc7",
@@ -12,7 +14,10 @@ const TEAM_COLORS: Record<string, string> = {
 const Games: React.FC = () => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
+  // The value we send in the query
   const [playerName, setPlayerName] = useState("");
+  // Temporary local state to hold user input
+  const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
@@ -40,6 +45,19 @@ const Games: React.FC = () => {
   const handlePrev = () => setPage((p) => Math.max(1, p - 1));
   const handleNext = () => setPage((p) => p + 1);
 
+  // Called when user presses Enter or clicks search button
+  const handleSearch = () => {
+    setPlayerName(searchTerm);
+    setPage(1);
+  };
+
+  // If user presses ENTER in the search box
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   if (selectedMatchId) {
     return (
       <>
@@ -66,13 +84,16 @@ const Games: React.FC = () => {
           className={styles.input}
           type="text"
           placeholder="Filter by player name"
-          value={playerName}
-          onChange={(e) => {
-            setPlayerName(e.target.value);
-            setPage(1);
-          }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
+        {/* Button to trigger search */}
+        <button className={styles.pageButton} onClick={handleSearch}>
+          <FaSearch />
+        </button>
       </div>
+
       <div className={styles.gamesList}>
         {loading ? (
           <div className={styles.loading}>Loading...</div>

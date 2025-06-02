@@ -8,6 +8,7 @@ const matchData = require("./routes/match");
 const leaderboardData = require("./routes/leaderboard");
 const newGameData = require("./routes/newGameData");
 const playerData = require("./routes/player");
+const clearData = require("./routes/clearData");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 
@@ -25,6 +26,7 @@ app.use(leaderboardData);
 app.use(matchData);
 app.use(newGameData);
 app.use(playerData);
+app.use(clearData);
 
 // Apply rate limiting to all routes except /api/newgamedata
 const generalLimiter = rateLimit({

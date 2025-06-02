@@ -76,7 +76,10 @@ const defenseMechData: contentObject = {
     {
       title: "Shadow Defense",
       key: "shadowDefense",
-      videoId: ["PmCBkHsKGVs?si=6ONlbRQnaS-0dhRN"],
+      videoId: [
+        "bq2EEKlgrzg?si=fNPu0t3FCdsm_AKZ",
+        "PmCBkHsKGVs?si=6ONlbRQnaS-0dhRN",
+      ],
       description:
         "What: Defending by staying between the ball and your net while facing backward, mirroring your opponent’s movement.",
       content: [

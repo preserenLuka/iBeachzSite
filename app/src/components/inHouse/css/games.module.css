@@ -160,7 +160,12 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.4s;
+  transition: padding 0.1s;
+}
+.pageButton:active {
+  font-size: 0.9rem;
+  padding: 0.2rem 1.1rem;
 }
 
 .pageButton:disabled {

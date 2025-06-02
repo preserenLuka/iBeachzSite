@@ -106,6 +106,14 @@ const menuItems: MenuItem[] = [
         label: "Games",
         value: "InHouseGames",
       },
+      {
+        label: "Chose players",
+        value: "InHouseChosePlayers",
+      },
+      {
+        label: "Match Predictions",
+        value: "InHousePredictions",
+      },
     ],
   },
 ];

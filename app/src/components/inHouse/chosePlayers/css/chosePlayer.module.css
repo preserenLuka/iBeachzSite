@@ -1,0 +1,89 @@
+.container {
+  /* Takes 80% width of the page, centered */
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  background: var(--background-light);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  color: var(--text-color-light);
+  min-height: 400px;
+  margin-top: 3%;
+}
+
+.gameArea {
+  flex: 0 0 80%;
+  border-right: 1px solid var(--primary);
+  padding-right: 24px;
+}
+
+.sidePanel {
+  /* Right 20% for user info */
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+
+.userNamesBox {
+  background: var(--background);
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 1rem;
+}
+
+.nameItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.deleteButton {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.inputBox {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.playerTextArea {
+  background: var(--background);
+  color: var(--text-color-light);
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+  height: 100px;
+  resize: none;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.playerTextArea:focus {
+  border: 1.5px solid var(--secondary);
+}
+
+.addButton {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--table-border);
+  background: var(--background-light);
+  color: var(--primary);
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 6px;
+}

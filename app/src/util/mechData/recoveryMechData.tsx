@@ -74,7 +74,10 @@ const recoveryMechData: contentObject = {
     {
       title: "Speed Flip",
       key: "speedFlip",
-      videoId: ["WL4m8HhzI9U?si=AI8_2oe3rHAKsCzo&amp;start=3176"],
+      videoId: [
+        "WL4m8HhzI9U?si=AI8_2oe3rHAKsCzo&amp;start=3176",
+        "W0494Cf6WCU?si=O7jWXQLbsotR3hET",
+      ],
       description: "Key use: Kickoffs and quick rotations.",
       content: [
         {

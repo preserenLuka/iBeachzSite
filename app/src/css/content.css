@@ -1,7 +1,31 @@
 .wrapper-content {
   width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 @media (max-width: 768px) {
   .wrapper-content {
   }
+}
+/* Global scrollbar styling for WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--background-light, #f5f5f5);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary, #ccc);
+  border-radius: 4px;
+  border: 1px solid var(--secondary, #999);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-hover, #aaa);
+}
+
+/* Firefox (and others) scrollbar coloring */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary, #ccc) var(--background-light, #f5f5f5);
 }
