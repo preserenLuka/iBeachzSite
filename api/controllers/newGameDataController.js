@@ -66,6 +66,8 @@ const SECRET = process.env.API_SECRET;
 
 const newGameData = async (req, res) => {
   const clientSecret = req.headers["x-api-secret"];
+  console.log("Expected SECRET:", SECRET);
+  console.log("Received x-api-secret:", clientSecret);
   if (clientSecret !== SECRET) {
     return res.status(401).json({ error: "Unauthorized" });
   }
