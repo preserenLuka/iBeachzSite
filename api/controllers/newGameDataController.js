@@ -7,6 +7,13 @@ const prisma = require("../util/prisma");
  *     summary: Receive and process new game data
  *     tags:
  *       - GameData
+ *     parameters:
+ *       - in: header
+ *         name: x-api-secret
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: API secret for authentication
  *     requestBody:
  *       required: true
  *       content:

@@ -33,7 +33,7 @@ const prisma = require("../util/prisma");
  *         name: limit
  *         schema:
  *           type: integer
- *           enum: [10, ,15, 25]
+ *           enum: [10, 15, 25]
  *         description: Number of players to return
  *       - in: query
  *         name: page
