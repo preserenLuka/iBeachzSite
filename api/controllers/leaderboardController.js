@@ -1,4 +1,5 @@
 const prisma = require("../util/prisma");
+const retryAsync = require("../util/retry");
 /**
  * @swagger
  * /api/leaderboards/{id}/players:
@@ -145,30 +146,35 @@ const getLeaderboardPlayers = async (req, res) => {
     });
 
     // Fetch players for the current page
-    const players = await prisma.playerStats.findMany({
-      where: whereClause,
-      select: {
-        id: true,
-        playerName: true,
-        goals: true,
-        saves: true,
-        assists: true,
-        shots: true,
-        wins: true,
-        losses: true,
-        matchesPlayed: true,
-        streak: true,
-        longestStreak: true,
-        demosInflicted: true,
-        demosTaken: true,
-        boostUsed: true,
-      },
-      orderBy: {
-        [orderBy]: order === "asc" ? "asc" : "desc",
-      },
-      skip: (parsedPage - 1) * parsedLimit,
-      take: parsedLimit,
-    });
+    const players = await retryAsync(
+      () =>
+        prisma.playerStats.findMany({
+          where: whereClause,
+          select: {
+            id: true,
+            playerName: true,
+            goals: true,
+            saves: true,
+            assists: true,
+            shots: true,
+            wins: true,
+            losses: true,
+            matchesPlayed: true,
+            streak: true,
+            longestStreak: true,
+            demosInflicted: true,
+            demosTaken: true,
+            boostUsed: true,
+          },
+          orderBy: {
+            [orderBy]: order === "asc" ? "asc" : "desc",
+          },
+          skip: (parsedPage - 1) * parsedLimit,
+          take: parsedLimit,
+        }),
+      3, // number of retries
+      2000 // delay in ms
+    );
 
     res.json({
       players,

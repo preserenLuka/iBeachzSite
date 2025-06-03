@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import styles from "./css/miniGame.module.css";
 import SlotReels, { SlotReelsHandle } from "./SlotReels";
 import TeamSidebar from "./teamSidebar";
-import Lever from "./Lever";
+import Lever from "./lever";
 
 interface MiniGameProps {
   names: string[];
@@ -22,16 +22,13 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
   const [winner, setWinner] = useState<string | null>(null);
   const [spinning, setSpinning] = useState(false);
   const [pendingSpin, setPendingSpin] = useState(false);
-  const [leverPhase, setLeverPhase] = useState<
-    | "idle"
-    | "shaftUpCollapse"
-    | "shaftDownExtend"
-    | "shaftDownCollapse"
-    | "shaftUpExtend"
-  >("idle");
   const [mode, setMode] = useState<Mode>("2v2");
   const [picked, setPicked] = useState<string[]>([]);
   const [spinQueue, setSpinQueue] = useState<string[]>([]); // Track the spin queue
+  const [notEnoughPopup, setNotEnoughPopup] = useState(false);
+  const [currentSpinPlayer, setCurrentSpinPlayer] = useState<string | null>(
+    null
+  );
 
   const reelsRef = useRef<SlotReelsHandle>(null);
 
@@ -46,20 +43,28 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
 
   // Lever animation and spin trigger
   const handleLever = () => {
-    if (spinning || names.length < requiredPlayers) return;
-    setLeverPhase("shaftUpCollapse");
-    setTimeout(() => setLeverPhase("shaftDownExtend"), 200);
-    setTimeout(() => setLeverPhase("shaftDownCollapse"), 400);
-    setTimeout(() => setLeverPhase("shaftUpExtend"), 600);
-    setTimeout(() => setLeverPhase("idle"), 800);
-    // Start spinning after lever animation
-    setTimeout(() => {
-      setPicked([]);
-      setSpinning(true);
-      // If you want a random spin, pick a random name and use spinTo
-      const randomName = names[Math.floor(Math.random() * names.length)];
-      reelsRef.current?.spinTo(randomName);
-    }, 800);
+    if (spinning) return;
+    if (names.length < requiredPlayers) {
+      setNotEnoughPopup(true);
+      setTimeout(() => setNotEnoughPopup(false), 1500);
+      return;
+    }
+    setPicked([]);
+    setSpinning(true);
+
+    // Pick unique random names for this round
+    const available = [...names];
+    const queue: string[] = [];
+    for (let i = 0; i < requiredPlayers; i++) {
+      const idx = Math.floor(Math.random() * available.length);
+      queue.push(available[idx]);
+      available.splice(idx, 1);
+    }
+    setSpinQueue(queue);
+
+    // Start the first spin
+    setCurrentSpinPlayer(queue[0]);
+    reelsRef.current?.spinTo(queue[0]);
   };
 
   // Handle each spin end
@@ -75,14 +80,17 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
     if (!spinning) return;
     if (picked.length < requiredPlayers && pendingSpin) {
       setPendingSpin(false);
-      // Get the next winner from your spinQueue
       const nextWinner = spinQueue[picked.length];
       setTimeout(() => {
-        if (nextWinner) reelsRef.current?.spinTo(nextWinner);
+        if (nextWinner) {
+          setCurrentSpinPlayer(nextWinner);
+          reelsRef.current?.spinTo(nextWinner);
+        }
       }, 500);
     } else if (picked.length >= requiredPlayers) {
       setSpinning(false);
       setPendingSpin(false);
+      setCurrentSpinPlayer(null);
     }
   }, [names, picked, spinning, pendingSpin, spinQueue, requiredPlayers]);
 
@@ -123,13 +131,15 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
         <div className={styles.rlJackpotSign}>JACKPOT</div>
         <div className={styles.SlotBodyWrapper}>
           <div className={styles.SlotBody}>
-            <SlotReels ref={reelsRef} names={names} onSpinEnd={handleSpinEnd} />
+            <SlotReels
+              ref={reelsRef}
+              names={names}
+              onSpinEnd={handleSpinEnd}
+              selectedName={currentSpinPlayer ?? undefined}
+            />
 
             {/* Lever inside SlotBody but positioned outside */}
-            <Lever
-              disabled={spinning || names.length < MODE_PLAYERS[mode]}
-              onPulled={handleLever}
-            />
+            <Lever disabled={spinning} onPulled={handleLever} />
           </div>
         </div>
 
@@ -140,6 +150,31 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
             ))}
           </div>
         </div>
+
+        {/* Not enough players popup */}
+        {notEnoughPopup && (
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: 80,
+              margin: "0 auto",
+              zIndex: 10,
+              background: "#ff4444",
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: "1.3rem",
+              padding: "18px 32px",
+              borderRadius: 12,
+              boxShadow: "0 2px 16px #0006",
+              textAlign: "center",
+              width: 320,
+            }}
+          >
+            Not enough players!
+          </div>
+        )}
       </div>
     </div>
   );

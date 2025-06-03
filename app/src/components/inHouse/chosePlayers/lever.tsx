@@ -18,6 +18,7 @@ const Lever: React.FC<LeverProps> = ({ disabled, onPulled }) => {
   const [leverPhase, setLeverPhase] = useState<LeverPhase>("idle");
 
   const handleClick = () => {
+    console.log("Lever clicked");
     if (disabled) return;
     setLeverPhase("shaftUpCollapse");
     setTimeout(() => setLeverPhase("shaftDownExtend"), 200);

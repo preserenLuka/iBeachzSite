@@ -45,6 +45,7 @@ const Leaderboards: React.FC = () => {
   const [players, setPlayers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on outside click
@@ -111,11 +112,23 @@ const Leaderboards: React.FC = () => {
     fetch(`${baseUrl}?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
-        setPlayers(data.players || []);
-        setTotalEntries(data.totalEntries || 0);
+        if (Array.isArray(data.players)) {
+          setPlayers(data.players);
+          setTotalEntries(data.totalEntries || 0);
+          setError(null);
+        } else {
+          setPlayers([]);
+          setTotalEntries(0);
+          setError("API is waking up, please try again in a few seconds.");
+        }
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setPlayers([]);
+        setTotalEntries(0);
+        setError("API is waking up, please try again in a few seconds.");
+        setLoading(false);
+      });
   }, [leaderboardId, orderBy, order, limit, page, search]);
 
   const totalPages = Math.ceil(totalEntries / limit);
@@ -280,6 +293,12 @@ const Leaderboards: React.FC = () => {
           </div>
         )}
       </div>
+
+      {error && (
+        <div style={{ color: "#ff4444", textAlign: "center", margin: "1rem" }}>
+          {error}
+        </div>
+      )}
 
       <div className={styles.bottomBar}>
         {/* Pagination buttons in the center */}
