@@ -96,7 +96,7 @@ const newGameData = async (req, res) => {
         .json({ error: "duration and players are required" });
     }
 
-    // 1. Determine leaderboard mode based on number of players
+    // 1. Determine leaderboard mode based on number of players 2
     let mode = null;
     switch (players.length) {
       case 2:
