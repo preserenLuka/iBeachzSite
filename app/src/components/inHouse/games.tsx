@@ -3,7 +3,6 @@ import styles from "./css/games.module.css";
 import GameDetails from "./gameDetails";
 import { Match } from "../../util/types";
 import { API_BASE_URL } from "../../vite-env.d";
-// Import your chosen icon
 import { FaSearch } from "react-icons/fa";
 
 const TEAM_COLORS: Record<string, string> = {
@@ -14,49 +13,84 @@ const TEAM_COLORS: Record<string, string> = {
 const Games: React.FC = () => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
-  // The value we send in the query
   const [playerName, setPlayerName] = useState("");
-  // Temporary local state to hold user input
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [selectedMatchId, setSelectedMatchId] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    const params = new URLSearchParams();
-    params.append("page", page.toString());
-    if (playerName) params.append("playerName", playerName);
+    let retryCount = 0;
+    const maxRetries = 3;
+    const retryDelay = 2500; // 2.5 seconds
 
-    fetch(`${API_BASE_URL}/api/matches?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data.matches)) {
-          setMatches(data.matches);
-          setHasMore(data.hasMore);
-        } else {
-          setMatches([]);
-          setHasMore(false);
-        }
-        setLoading(false);
-      });
+    const fetchData = () => {
+      setLoading(true);
+      setError(null);
+      const params = new URLSearchParams();
+      params.append("page", page.toString());
+      if (playerName) params.append("playerName", playerName);
+
+      fetch(`${API_BASE_URL}/api/matches?${params.toString()}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data.matches)) {
+            setMatches(data.matches);
+            setHasMore(data.hasMore);
+            setError(null);
+            setLoading(false);
+          } else {
+            if (retryCount < maxRetries) {
+              retryCount++;
+              setError("API is sleeping, waking up... please wait.");
+              setTimeout(fetchData, retryDelay);
+            } else {
+              setMatches([]);
+              setHasMore(false);
+              setError("API is waking up, please try again in a few seconds.");
+              setLoading(false);
+            }
+          }
+        })
+        .catch(() => {
+          if (retryCount < maxRetries) {
+            retryCount++;
+            setError("API is sleeping, waking up... please wait.");
+            setTimeout(fetchData, retryDelay);
+          } else {
+            setMatches([]);
+            setHasMore(false);
+            setError("API is waking up, please try again in a few seconds.");
+            setLoading(false);
+          }
+        });
+    };
+
+    fetchData();
   }, [playerName, page]);
 
   const handlePrev = () => setPage((p) => Math.max(1, p - 1));
   const handleNext = () => setPage((p) => p + 1);
 
-  // Called when user presses Enter or clicks search button
   const handleSearch = () => {
     setPlayerName(searchTerm);
     setPage(1);
   };
 
-  // If user presses ENTER in the search box
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearch();
     }
   };
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setPage(1);
+      setPlayerName(searchTerm); // <-- This triggers the API call
+    }, 750);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
 
   if (selectedMatchId) {
     return (
@@ -88,14 +122,15 @@ const Games: React.FC = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
         />
-        {/* Button to trigger search */}
         <button className={styles.pageButton} onClick={handleSearch}>
           <FaSearch />
         </button>
       </div>
 
       <div className={styles.gamesList}>
-        {loading ? (
+        {error ? (
+          <div className={styles.loading}>{error}</div>
+        ) : loading ? (
           <div className={styles.loading}>Loading...</div>
         ) : matches.length === 0 ? (
           <div className={styles.noMatches}>No matches found.</div>

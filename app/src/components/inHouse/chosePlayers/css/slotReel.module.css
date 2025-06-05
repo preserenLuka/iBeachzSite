@@ -1,0 +1,71 @@
+.slotReelContainer {
+  width: 320px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  background: #111;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slotReelArrows {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 18px;
+  font-size: 2.2rem;
+  color: #0ff;
+  font-weight: bold;
+  text-shadow: 0 0 8px #0ff8;
+  opacity: 0.85;
+}
+
+.slotReelMotion {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slotReelName {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
+  width: 100%;
+  pointer-events: none;
+  backface-visibility: hidden;
+  font-family: Orbitron, "Press Start 2P", monospace, sans-serif;
+  font-weight: 700;
+  text-shadow: 0 2px 8px #0ff8ff88, 0 0 8px #ff993388;
+  letter-spacing: 1px;
+  user-select: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slotReelWinner {
+  border: 3px solid #0ff;
+  background: rgba(0, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 0 16px #0ff8;
+}

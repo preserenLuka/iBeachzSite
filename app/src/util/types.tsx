@@ -94,6 +94,7 @@ export type Player = {
   matchesPlayed: number;
   wins: number;
   losses: number;
+  playerScore: number;
   teammateRecords: TeammateRecord[];
   opponentRecords: OpponentRecord[];
 };

@@ -1,4 +1,5 @@
 const prisma = require("../util/prisma");
+const retryAsync = require("../util/retry");
 /**
  * @swagger
  * /api/matches:
@@ -66,7 +67,7 @@ const getMatches = async (req, res) => {
         },
       },
       orderBy: {
-        duration: "desc", // Only descending order
+        id: "desc", // Newest matches first
       },
       take,
       skip,

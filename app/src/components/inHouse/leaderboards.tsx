@@ -8,9 +8,9 @@ import { API_BASE_URL } from "../../vite-env.d";
 import PlayerStats from "./playerStats";
 
 const leaderboardOptions = [
-  { label: "1 v 1", id: 0 },
-  { label: "2 v 2", id: 1 },
-  { label: "3 v 3", id: 2 },
+  { label: "1 v 1", id: 1 },
+  { label: "2 v 2", id: 2 },
+  { label: "3 v 3", id: 3 },
 ];
 
 const statOptions = [
@@ -24,7 +24,7 @@ const statOptions = [
 ];
 
 const Leaderboards: React.FC = () => {
-  const [leaderboardId, setLeaderboardId] = useState(1);
+  const [leaderboardId, setLeaderboardId] = useState(2);
   const [selectedStats, setSelectedStats] = useState<string[]>([
     "wins",
     "losses",
@@ -97,39 +97,67 @@ const Leaderboards: React.FC = () => {
 
   // Fetching data
   useEffect(() => {
-    setLoading(true);
-    const baseUrl = `${API_BASE_URL}/api/leaderboards/${leaderboardId}/players`;
-    const params = new URLSearchParams({
-      orderBy,
-      order,
-      limit: limit.toString(),
-      page: page.toString(),
-    });
-    if (search) {
-      params.append("search", search);
-    }
-
-    fetch(`${baseUrl}?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data.players)) {
-          setPlayers(data.players);
-          setTotalEntries(data.totalEntries || 0);
-          setError(null);
-        } else {
-          setPlayers([]);
-          setTotalEntries(0);
-          setError("API is waking up, please try again in a few seconds.");
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        setPlayers([]);
-        setTotalEntries(0);
-        setError("API is waking up, please try again in a few seconds.");
-        setLoading(false);
+    let retryCount = 0;
+    const maxRetries = 3;
+    const retryDelay = 2000;
+    const fetchData = () => {
+      setLoading(true);
+      const baseUrl = `${API_BASE_URL}/api/leaderboards/${leaderboardId}/players`;
+      const params = new URLSearchParams({
+        orderBy,
+        order,
+        limit: limit.toString(),
+        page: page.toString(),
       });
+      if (search) {
+        params.append("search", search);
+      }
+
+      fetch(`${baseUrl}?${params.toString()}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data.players)) {
+            setPlayers(data.players);
+            setTotalEntries(data.totalEntries || 0);
+            setError(null);
+            setLoading(false);
+          } else {
+            if (retryCount < maxRetries) {
+              retryCount++;
+              setTimeout(fetchData, retryDelay);
+            } else {
+              setPlayers([]);
+              setTotalEntries(0);
+              setError("API is waking up, please try again in a few seconds.");
+              setLoading(false);
+            }
+          }
+        })
+        .catch(() => {
+          if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(fetchData, retryDelay);
+          } else {
+            setPlayers([]);
+            setTotalEntries(0);
+            setError("API is waking up, please try again in a few seconds.");
+            setLoading(false);
+          }
+        });
+    };
+
+    fetchData();
   }, [leaderboardId, orderBy, order, limit, page, search]);
+
+  // Debounced search effect
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setPage(1);
+      setSearch(searchTerm);
+    }, 750);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
 
   const totalPages = Math.ceil(totalEntries / limit);
 
@@ -152,78 +180,83 @@ const Leaderboards: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.topBar}>
-        {/* Multi-select dropdown */}
-        <div className={styles.dropdownContainer} ref={dropdownRef}>
-          <button
-            className={styles.dropdownButton}
-            onClick={() => setDropdownOpen((open) => !open)}
-            type="button"
+        <div className={styles.title}>Leaderboard</div>
+        <div className={styles.topControlsRow}>
+          {/* Multi-select dropdown */}
+          <div className={styles.dropdownContainer} ref={dropdownRef}>
+            <button
+              className={styles.dropdownButton}
+              onClick={() => setDropdownOpen((open) => !open)}
+              type="button"
+            >
+              Select Stats
+            </button>
+            {dropdownOpen && (
+              <div className={styles.dropdownMenu}>
+                {statOptions.map((option) => {
+                  const checked = selectedStats.includes(option.key);
+                  return (
+                    <label key={option.key} className={styles.dropdownItem}>
+                      <span
+                        onClick={() => handleStatToggle(option.key)}
+                        style={{
+                          cursor: "pointer",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          marginRight: 10,
+                        }}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === " " || e.key === "Enter")
+                            handleStatToggle(option.key);
+                        }}
+                        aria-checked={checked}
+                        role="checkbox"
+                      >
+                        {checked ? (
+                          <IoCheckboxOutline size={22} color="var(--primary)" />
+                        ) : (
+                          <RiCheckboxBlankLine
+                            size={22}
+                            color="var(--primary)"
+                          />
+                        )}
+                      </span>
+                      {option.label}
+                      {/* The hidden checkbox for accessibility */}
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => handleStatToggle(option.key)}
+                        style={{ display: "none" }}
+                        tabIndex={-1}
+                      />
+                    </label>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Mode select */}
+          <select
+            className={styles.modeSelect}
+            value={leaderboardId}
+            onChange={(e) => {
+              setLeaderboardId(Number(e.target.value));
+              setPage(1);
+            }}
           >
-            Select Stats
-          </button>
-          {dropdownOpen && (
-            <div className={styles.dropdownMenu}>
-              {statOptions.map((option) => {
-                const checked = selectedStats.includes(option.key);
-                return (
-                  <label key={option.key} className={styles.dropdownItem}>
-                    <span
-                      onClick={() => handleStatToggle(option.key)}
-                      style={{
-                        cursor: "pointer",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        marginRight: 10,
-                      }}
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === " " || e.key === "Enter")
-                          handleStatToggle(option.key);
-                      }}
-                      aria-checked={checked}
-                      role="checkbox"
-                    >
-                      {checked ? (
-                        <IoCheckboxOutline size={22} color="var(--primary)" />
-                      ) : (
-                        <RiCheckboxBlankLine size={22} color="var(--primary)" />
-                      )}
-                    </span>
-                    {option.label}
-                    {/* The hidden checkbox for accessibility */}
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => handleStatToggle(option.key)}
-                      style={{ display: "none" }}
-                      tabIndex={-1}
-                    />
-                  </label>
-                );
-              })}
-            </div>
-          )}
+            {leaderboardOptions.map((opt) => (
+              <option key={opt.id} value={opt.id}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Mode select */}
-        <select
-          className={styles.modeSelect}
-          value={leaderboardId}
-          onChange={(e) => {
-            setLeaderboardId(Number(e.target.value));
-            setPage(1);
-          }}
-        >
-          {leaderboardOptions.map((opt) => (
-            <option key={opt.id} value={opt.id}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-        <h2 className={styles.title}>Leaderboard</h2>
-
         {/* Search bar, similar to the one in games */}
-        <div className={styles.SearchControls} style={{ marginLeft: "auto" }}>
+        <div className={styles.SearchControls}>
           <input
             className={styles.input}
             type="text"

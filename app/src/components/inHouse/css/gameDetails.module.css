@@ -83,12 +83,18 @@
   }
   .playersColumn {
     flex-direction: row;
+    flex-wrap: wrap; /* Allow wrapping */
     gap: 8px;
     justify-content: center;
     align-items: flex-start !important;
+    width: 100%;
+    max-width: 100vw;
   }
   .playerCard {
     min-width: 100px;
+    max-width: 48vw; /* Prevents cards from being too wide */
+    flex: 1 1 45%; /* Responsive: 2 per row, then wrap */
+    box-sizing: border-box;
     padding: 16px 8px;
     font-size: 1rem;
     border: 2px solid var(--background);

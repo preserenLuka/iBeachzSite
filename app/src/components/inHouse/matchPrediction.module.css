@@ -1,0 +1,32 @@
+.container {
+  max-width: 420px;
+  margin: 60px auto 0 auto;
+  padding: 32px 24px;
+  background: linear-gradient(135deg, #308bc7 70%, #246a9c 100%);
+  border-radius: 18px;
+  box-shadow: 0 6px 32px #0003;
+  text-align: center;
+  color: #fff;
+  font-family: "Orbitron", "Segoe UI", Arial, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 12px #0ff8, 0 1px 0 #222;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.note {
+  font-size: 1rem;
+  color: #fff8;
+  margin-top: 18px;
+  font-style: italic;
+}

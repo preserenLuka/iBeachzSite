@@ -12,25 +12,46 @@
 }
 
 .rlJackpotSign {
-  width: 60%;
-  height: 100px;
-  background: #308bc7;
-  border-radius: 120px 120px 0 0;
-  border: 5px solid #fff;
+  width: 61%;
+  height: 110px;
+  background: linear-gradient(180deg, #308bc7 80%, #246a9c 100%);
+  border-radius: 120px 120px 22px 22px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   font-family: "Orbitron", "Press Start 2P", monospace, sans-serif;
-  font-size: 2.3rem;
+  font-size: 2.6rem;
   font-weight: 900;
   color: #fff;
-  letter-spacing: 0.2em;
-  margin-bottom: -5px;
+  letter-spacing: 0.22em;
   position: relative;
   z-index: 2;
   overflow: visible;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 6px 24px #0004, 0 2px 0 #fff8 inset;
+  border-bottom: 4px solid #222;
+  border-left: 2px solid #222;
+  border-right: 2px solid #222;
+  padding: 10px;
+}
+
+.rlJackpotSign::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 0;
+  border-bottom: 2px solid #000;
+  z-index: 2;
+  width: auto;
+  pointer-events: none;
+}
+
+.rlJackpotSign span,
+.rlJackpotSign {
+  text-shadow: 0 2px 12px #0ff8, 0 1px 0 #222, 0 0px 8px #fff8;
 }
 
 .SlotBodyWrapper {
@@ -44,31 +65,84 @@
 
 .SlotBody {
   width: 100%;
-  background: #3a9bdc;
-  border: 6px solid #fff;
-  box-shadow: 0 8px 0 #308bc7, 0 16px 24px #308bc733;
-  padding: 56px 36px 32px 36px;
-  min-height: 220px;
-  border-radius: 0 0 24px 24px;
+  background: #308bc7;
+  border-radius: 14px 14px 0 0;
   z-index: 3;
+}
+
+.SlotBodyButtons {
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
+  background: #308bc7;
+  border: 2px solid #222;
+  border-radius: 0 0 18px 18px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: center;
+  transform: perspective(30px) rotateX(4deg);
+}
+
+.buttonRow {
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 18px 0 0 0;
+  height: 100%;
   position: relative;
 }
 
+.button3d {
+  transform: perspective(30Dpx) rotateX(-5deg);
+  width: 36px;
+  height: 18px;
+  border-radius: 50% / 40%;
+  box-shadow: 0 4px 0 #222, 0 2px 8px #0004;
+  margin-right: 18px;
+  border: 2px solid #222;
+  position: relative;
+  transition: box-shadow 0.1s;
+}
+
+.button3d:last-child {
+  margin-right: 0;
+}
+.leverBox {
+  position: absolute;
+  top: 0%;
+  right: 37px; /* adjust so it sits just outside the machine */
+  width: 15px;
+  height: 54px;
+  background: linear-gradient(180deg, #e0e0e0 70%, #b0b0b0 100%);
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 4;
+}
+.leverBoxShaft {
+  position: absolute;
+  top: 46%;
+  right: 18px; /* adjust so it sits just outside the machine */
+  width: 22px;
+  height: 4px;
+  background: gray;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 0;
+}
 .pixelLeverBase {
   position: absolute;
   top: 50%;
-  right: -62px; /* stick to right edge, adjust as needed */
+  right: -52px; /* stick to right edge, adjust as needed */
   transform: translateY(-50%);
   z-index: 4;
   width: 54px;
   height: 54px;
-  background: linear-gradient(135deg, #b0b0b0 60%, #888 100%);
-  border: 4px solid #222;
-  border-radius: 12px;
-  box-shadow: 2px 2px 0 #222;
 }
 
 .pixelSlotWindow {
@@ -160,33 +234,85 @@
   backface-visibility: hidden;
 }
 
+.pixelSlotBase2 {
+  width: 60%;
+  height: 200px;
+  background: #308bc7; /* Use a blue similar to the image */
+  border-radius: 0px 0px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: auto;
+}
+
+.internalBase {
+  width: 94%;
+  height: 85%;
+  background: inherit;
+  border: 2px solid #222; /* Inner thin black border */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", "Press Start 2P", monospace, sans-serif;
+  font-size: 2.7rem;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+.cardSlot {
+  position: absolute;
+  top: 13%;
+  right: 5%;
+  width: 8%;
+  height: 23%;
+  border: 2px solid #222;
+  border-radius: 7px;
+  background: transparent;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.cardSlot::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 32%;
+  height: 0;
+  border-top: 2px solid #222;
+}
 .pixelSlotBase {
-  width: 40%;
-  min-width: 340px;
-  max-width: 420px;
-  height: 54px;
-  background: linear-gradient(180deg, #308bc7 60%, #ff9933 100%);
-  border: 6px solid #fff;
-  border-radius: 0 0 18px 18px;
-  margin-top: -8px;
-  box-shadow: 0 8px 0 #308bc7, 0 16px 24px #308bc733;
+  width: 60%;
+  height: 30px;
+  background: #308bc7;
+  border-radius: 18px 18px 8px 8px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   position: relative;
-  z-index: 1;
+  z-index: 5;
   margin-left: auto;
   margin-right: auto;
+  /* Remove border-top here */
 }
 
-.pixelLightsRow {
-  display: flex;
-  gap: 16px;
+.pixelSlotBase::before {
+  content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 10px;
+  top: 0;
+  left: 10px; /* Match border-radius */
+  right: 10px; /* Match border-radius */
+  height: 0;
+  border-top: 2px solid #000;
+  border-radius: 0;
+  z-index: 2;
+  width: auto;
 }
+
 .pixelLight {
   width: 18px;
   height: 18px;
@@ -289,4 +415,53 @@
 
 .keepBtn:hover {
   background: #246a9c;
+}
+
+.slotReelContainer {
+  width: 94%;
+  max-width: 600px;
+  min-height: 200px;
+  margin: 0 auto;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+
+.screen {
+  width: 90%;
+  box-shadow: 0 2px 12px #0008;
+  padding: 32px;
+  margin-top: 10px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  position: relative;
+  z-index: 3;
+  border: 2px solid #222;
+  box-sizing: border-box;
+}
+
+.slotReelArrows {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 18px;
+  font-size: 2.2rem;
+  color: #0ff;
+  font-weight: bold;
+  text-shadow: 0 0 8px #0ff8;
+  opacity: 0.85;
 }

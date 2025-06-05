@@ -185,7 +185,63 @@ const getLeaderboardPlayers = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+/**
+ * @swagger
+ * /api/leaderboards/fix:
+ *   get:
+ *     summary: Ensures the three main leaderboards (1v1, 2v2, 3v3) exist in correct order
+ *     tags:
+ *       - Leaderboards
+ *     responses:
+ *       200:
+ *         description: Leaderboards created or already exist
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 leaderboards:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       mode:
+ *                         type: string
+ *                       title:
+ *                         type: string
+ *       500:
+ *         description: Server error
+ */
+const fixLeaderboards = async (req, res) => {
+  const modes = [
+    { mode: "ONE_VS_ONE", title: "1v1" },
+    { mode: "TWO_VS_TWO", title: "2v2" },
+    { mode: "THREE_VS_THREE", title: "3v3" },
+  ];
+
+  try {
+    const created = [];
+    for (const { mode, title } of modes) {
+      let lb = await prisma.leaderboard.findFirst({ where: { mode } });
+      if (!lb) {
+        lb = await prisma.leaderboard.create({ data: { mode, title } });
+      }
+      created.push(lb);
+    }
+    res.json({
+      message: "Leaderboards ensured in order: 1v1, 2v2, 3v3.",
+      leaderboards: created,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = {
   getLeaderboardPlayers,
+  fixLeaderboards,
 };

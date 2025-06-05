@@ -52,6 +52,9 @@
   color: var(--primary);
   text-decoration: underline;
 }
+.playerName:hover {
+  color: var(--third-color);
+}
 
 .sortArrow {
   display: inline-block;
@@ -74,6 +77,9 @@
 .sortable {
   cursor: pointer;
   user-select: none;
+}
+.sortable:hover {
+  color: var(--secondary);
 }
 
 .topBar {
@@ -148,6 +154,10 @@
   margin-right: 14px;
 }
 
+.modeSelect option {
+  background-color: var(--background-light);
+}
+
 .modeSelect:focus,
 .limitSelect:focus {
   border: 1.5px solid var(--secondary);
@@ -165,9 +175,8 @@
   transition: background 0.4s;
   transition: padding 0.1s;
 }
-.pageButton:active {
-  font-size: 0.9rem;
-  padding: 0.2rem 1.1rem;
+.pageButton:hover {
+  background-color: var(--third-color);
 }
 
 .pageButton:disabled {
@@ -245,6 +254,71 @@
   }
   .limitSelect {
     margin-right: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .modeSelect {
+    margin-right: 0;
+    margin-bottom: 0.7rem;
+    width: 50%;
+    min-width: 0;
+  }
+
+  .SearchControls {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 0.7rem;
+  }
+
+  .dropdownContainer {
+    margin-right: 0;
+    margin-bottom: 0.7rem;
+    width: 50%;
+  }
+
+  .dropdownMenu {
+    left: 0;
+    min-width: 100%;
+  }
+}
+
+/* Add this new class for the row of controls */
+.topControlsRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.7rem;
+}
+
+/* On mobile, make sure they are side by side and full width */
+@media (max-width: 768px) {
+  .topControlsRow {
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+  }
+  .dropdownContainer,
+  .modeSelect {
+    width: 50%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+  .title {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin-bottom: 0.7rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -331,4 +405,9 @@
   font-size: 1rem;
   outline: none;
   transition: border 0.2s;
+}
+
+.input:focus,
+.select:focus {
+  border: 2px solid var(--primary);
 }

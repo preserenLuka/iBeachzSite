@@ -12,7 +12,7 @@
   text-align: center;
   margin-bottom: 24px;
   color: var(--primary);
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -27,7 +27,7 @@
 .select {
   background: var(--background);
   color: var(--text-color-light);
-  border: 1px solid var(--primary);
+  border: 1px solid var(--secondary);
   border-radius: 6px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -37,7 +37,7 @@
 
 .input:focus,
 .select:focus {
-  border: 1.5px solid var(--secondary);
+  border: 2px solid var(--primary);
 }
 
 .table {
@@ -163,9 +163,8 @@
   transition: background 0.4s;
   transition: padding 0.1s;
 }
-.pageButton:active {
-  font-size: 0.9rem;
-  padding: 0.2rem 1.1rem;
+.pageButton:hover {
+  background-color: var(--third-color);
 }
 
 .pageButton:disabled {

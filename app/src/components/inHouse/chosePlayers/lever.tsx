@@ -30,6 +30,8 @@ const Lever: React.FC<LeverProps> = ({ disabled, onPulled }) => {
 
   return (
     <div className={styles.pixelLeverBase}>
+      <div className={styles.leverBox} />
+      <div className={styles.leverBoxShaft} />
       <motion.div
         className={styles.pixelLever}
         onClick={handleClick}
@@ -42,6 +44,7 @@ const Lever: React.FC<LeverProps> = ({ disabled, onPulled }) => {
           height: "160px",
           width: "20px",
           top: -125,
+          right: -10,
         }}
       >
         {/* Upward shaft */}
@@ -78,7 +81,7 @@ const Lever: React.FC<LeverProps> = ({ disabled, onPulled }) => {
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           style={{
             rotate: "180deg",
-            bottom: 10,
+            bottom: 9,
             right: -6,
             position: "absolute",
             width: "6px",

@@ -65,20 +65,8 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
 
   // Calculate Player Rating
   const matchesPlayed = player.matchesPlayed || 0;
-  const goalsPerGame = matchesPlayed ? player.goals / matchesPlayed : 0;
-  const assistsPerGame = matchesPlayed ? player.assists / matchesPlayed : 0;
-  const savesPerGame = matchesPlayed ? player.saves / matchesPlayed : 0;
-  const pointsPerGame = matchesPlayed ? player.points / matchesPlayed : 0;
   const shootingPercentage = player.shots > 0 ? player.goals / player.shots : 0;
   const winRate = matchesPlayed > 0 ? player.wins / matchesPlayed : 0;
-
-  const playerScore =
-    savesPerGame * 10 +
-    pointsPerGame * 0.05 +
-    shootingPercentage * 100 +
-    goalsPerGame * 15 +
-    assistsPerGame * 10 +
-    winRate * 50;
 
   return (
     <div className={styles.container}>
@@ -116,7 +104,11 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
           <div className={`${styles.coloredSquare} ${styles.square2}`}>
             <div>
               <div className={`${styles.rigthColumnTItle}`}>Player Score</div>
-              <div style={{ fontSize: 28 }}>{playerScore.toFixed(1)}</div>
+              <div style={{ fontSize: 28 }}>
+                {player.playerScore !== undefined
+                  ? player.playerScore.toFixed(1)
+                  : "N/A"}
+              </div>
             </div>
           </div>
           <div className={`${styles.coloredSquare} ${styles.square3}`}>
@@ -148,11 +140,6 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
                   <td>
                     <span
                       className={styles.playerLink}
-                      style={{
-                        cursor: "pointer",
-                        color: "var(--primary)",
-                        textDecoration: "underline",
-                      }}
                       onClick={() => setCurrentPlayerId(rec.teammateId)}
                     >
                       {rec.teammateName || rec.teammateId}
@@ -184,11 +171,6 @@ const PlayerStats: React.FC<{ playerId: string }> = ({ playerId }) => {
                   <td>
                     <span
                       className={styles.playerLink}
-                      style={{
-                        cursor: "pointer",
-                        color: "var(--primary)",
-                        textDecoration: "underline",
-                      }}
                       onClick={() => setCurrentPlayerId(rec.opponentId)}
                     >
                       {rec.opponentName || rec.opponentId}

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import styles from "./css/miniGame.module.css";
 import SlotReels, { SlotReelsHandle } from "./SlotReels";
 import TeamSidebar from "./teamSidebar";
@@ -40,6 +39,9 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
   };
 
   const requiredPlayers = MODE_PLAYERS[mode];
+  const blueCount = requiredPlayers / 2;
+  const teamBlue = picked.slice(0, blueCount);
+  const teamOrange = picked.slice(blueCount);
 
   // Lever animation and spin trigger
   const handleLever = () => {
@@ -102,79 +104,123 @@ const MiniGame: React.FC<MiniGameProps> = ({ names, onRemove }) => {
     }
   }, [winner]);
 
-  // Determine team compositions
-  const blueCount = MODE_PLAYERS[mode] / 2;
-  const teamBlue = picked.slice(0, blueCount);
-  const teamOrange = picked.slice(blueCount);
-
   return (
     <div
       className={styles.pixelSlotOuter}
       style={{ display: "flex", flexDirection: "row" }}
     >
-      {/* Teams sidebar */}
-      <TeamSidebar blue={teamBlue} orange={teamOrange} />
+      {/* Move mode select and pass props */}
+      <TeamSidebar
+        blue={teamBlue}
+        orange={teamOrange}
+        mode={mode}
+        onModeChange={handleModeChange}
+        requiredPlayers={requiredPlayers}
+      />
 
       {/* Main slot machine */}
-      <div style={{ flex: 1 }}>
-        {/* Dropdown for mode */}
-        <div style={{ marginBottom: 16, textAlign: "center" }}>
-          <label>
-            Mode:{" "}
-            <select value={mode} onChange={handleModeChange}>
-              <option value="1v1">1v1</option>
-              <option value="2v2">2v2</option>
-              <option value="3v3">3v3</option>
-            </select>
-          </label>
-        </div>
-        <div className={styles.rlJackpotSign}>JACKPOT</div>
-        <div className={styles.SlotBodyWrapper}>
-          <div className={styles.SlotBody}>
-            <SlotReels
-              ref={reelsRef}
-              names={names}
-              onSpinEnd={handleSpinEnd}
-              selectedName={currentSpinPlayer ?? undefined}
-            />
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 600,
+            position: "relative",
+            marginTop: 20,
+          }}
+        >
+          <div className={styles.rlJackpotSign}>JACKPOT</div>
+          <div className={styles.SlotBodyWrapper}>
+            <div className={styles.SlotBody}>
+              <div className={styles.slotReelContainer}>
+                <div className={styles.screen}>
+                  <div className={styles.slotReelArrows}>
+                    <span>▶</span>
+                    <span>◀</span>
+                  </div>
 
-            {/* Lever inside SlotBody but positioned outside */}
-            <Lever disabled={spinning} onPulled={handleLever} />
-          </div>
-        </div>
+                  {/* Slot content here */}
+                  <SlotReels
+                    ref={reelsRef}
+                    names={names}
+                    onSpinEnd={handleSpinEnd}
+                    selectedName={currentSpinPlayer ?? undefined}
+                  />
+                </div>
+              </div>
 
-        <div className={styles.pixelSlotBase}>
-          <div className={styles.pixelLightsRow}>
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className={styles.pixelLight} />
-            ))}
+              {/* button row */}
+              <div className={styles.SlotBodyButtons}>
+                <div className={styles.buttonRow}>
+                  <div
+                    className={styles.button3d}
+                    style={{
+                      background:
+                        "linear-gradient(180deg,#ff5a8a 60%,#c8004c 100%)",
+                    }}
+                  />
+                  <div
+                    className={styles.button3d}
+                    style={{
+                      background:
+                        "linear-gradient(180deg,#ffe066 60%,#bfa600 100%)",
+                    }}
+                  />
+                  <div
+                    className={styles.button3d}
+                    style={{
+                      background:
+                        "linear-gradient(180deg,#7be87b 60%,#1f7a1f 100%)",
+                      marginLeft: "auto",
+                    }}
+                  />
+                </div>
+              </div>
+              {/* Lever inside SlotBody but positioned outside */}
+              <Lever disabled={spinning} onPulled={handleLever} />
+            </div>
           </div>
-        </div>
 
-        {/* Not enough players popup */}
-        {notEnoughPopup && (
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              top: 80,
-              margin: "0 auto",
-              zIndex: 10,
-              background: "#ff4444",
-              color: "#fff",
-              fontWeight: "bold",
-              fontSize: "1.3rem",
-              padding: "18px 32px",
-              borderRadius: 12,
-              boxShadow: "0 2px 16px #0006",
-              textAlign: "center",
-              width: 320,
-            }}
-          >
-            Not enough players!
+          <div className={styles.pixelSlotBase2}>
+            <div className={styles.cardSlot} />
+            <div className={styles.internalBase}>
+              <span style={{ fontSize: "3rem", fontWeight: 700 }}>Custom</span>
+              <span style={{ fontSize: "3rem", fontWeight: 700 }}>Teams</span>
+            </div>
           </div>
-        )}
+          <div className={styles.pixelSlotBase} />
+
+          {/* Not enough players popup */}
+          {notEnoughPopup && (
+            <div
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 80,
+                margin: "0 auto",
+                zIndex: 10,
+                background: "#ff4444",
+                color: "#fff",
+                fontWeight: "bold",
+                fontSize: "1.3rem",
+                padding: "18px 32px",
+                borderRadius: 12,
+                boxShadow: "0 2px 16px #0006",
+                textAlign: "center",
+                width: 320,
+              }}
+            >
+              Not enough players!
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
