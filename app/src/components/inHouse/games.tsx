@@ -139,12 +139,16 @@ const Games: React.FC = () => {
             <div className={styles.grid}>
               {Array.isArray(matches) &&
                 matches.map((match) => {
-                  const bluePlayers = match.playerMatches
-                    .filter((pm) => pm.team === "BLUE")
-                    .map((pm) => pm.player);
-                  const orangePlayers = match.playerMatches
-                    .filter((pm) => pm.team === "ORANGE")
-                    .map((pm) => pm.player);
+                  const bluePlayers = Array.isArray(match.playerMatches)
+                    ? match.playerMatches
+                        .filter((pm) => pm.team === "BLUE")
+                        .map((pm) => pm.player)
+                    : [];
+                  const orangePlayers = Array.isArray(match.playerMatches)
+                    ? match.playerMatches
+                        .filter((pm) => pm.team === "ORANGE")
+                        .map((pm) => pm.player)
+                    : [];
 
                   const winningTeam = match.winner;
                   const losingTeam = winningTeam === "BLUE" ? "ORANGE" : "BLUE";

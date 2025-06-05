@@ -61,12 +61,11 @@ const GameDetails: React.FC<GameDetailsProps> = ({ matchId }) => {
 
   const winningTeam = match.winner;
   const losingTeam = winningTeam === "BLUE" ? "ORANGE" : "BLUE";
-  const winningPlayers = match.playerMatches.filter(
-    (pm) => pm.team === winningTeam
-  );
-  const losingPlayers = match.playerMatches.filter(
-    (pm) => pm.team === losingTeam
-  );
+  const playerMatches = Array.isArray(match.playerMatches)
+    ? match.playerMatches
+    : [];
+  const winningPlayers = playerMatches.filter((pm) => pm.team === winningTeam);
+  const losingPlayers = playerMatches.filter((pm) => pm.team === losingTeam);
 
   const min = Math.floor(match.duration / 60);
   const sec = match.duration % 60;

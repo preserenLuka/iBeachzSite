@@ -26,6 +26,6 @@
 
 /* Firefox (and others) scrollbar coloring */
 * {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: var(--primary, #ccc) var(--background-light, #f5f5f5);
 }

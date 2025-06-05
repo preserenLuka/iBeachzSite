@@ -113,22 +113,21 @@ const getMatchById = async (req, res) => {
   }
 
   try {
-    const match = await retryAsync(() =>
-      prisma.match.findUnique({
-        where: { id: matchId },
-        include: {
-          playerMatches: {
-            include: {
-              player: {
-                select: {
-                  playerName: true,
-                },
+    const match = await prisma.match.findUnique({
+      where: { id: matchId },
+      include: {
+        playerMatches: {
+          include: {
+            player: {
+              select: {
+                playerName: true,
               },
             },
           },
         },
-      })
-    );
+      },
+    });
+
     if (!match) return res.status(404).json({ error: "Match not found" });
     res.json(match);
   } catch (error) {
