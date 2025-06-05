@@ -53,25 +53,27 @@ const getMatches = async (req, res) => {
       };
     }
 
-    const matches = await prisma.match.findMany({
-      where,
-      include: {
-        playerMatches: {
-          include: {
-            player: {
-              select: {
-                playerName: true,
+    const matches = await retryAsync(() =>
+      prisma.match.findMany({
+        where,
+        include: {
+          playerMatches: {
+            include: {
+              player: {
+                select: {
+                  playerName: true,
+                },
               },
             },
           },
         },
-      },
-      orderBy: {
-        id: "desc", // Newest matches first
-      },
-      take,
-      skip,
-    });
+        orderBy: {
+          id: "desc", // Newest matches first
+        },
+        take,
+        skip,
+      })
+    );
 
     // For frontend pagination: check if there are more matches
     const totalCount = await prisma.match.count({ where });
@@ -127,7 +129,6 @@ const getMatchById = async (req, res) => {
         },
       },
     });
-
     if (!match) return res.status(404).json({ error: "Match not found" });
     res.json(match);
   } catch (error) {
