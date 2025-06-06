@@ -132,7 +132,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                   {items.map(({ label, value }, idx) => (
                     <div
                       key={idx}
-                      className="fundamentals-item"
+                      className={`fundamentals-item${
+                        currentLabel === label ? " active" : ""
+                      }`}
                       onClick={() => handleContentChange(value, label)}
                     >
                       {label}

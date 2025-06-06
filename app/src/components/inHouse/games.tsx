@@ -186,7 +186,9 @@ const Games: React.FC = () => {
                       <div className={styles.cardMiddle}>
                         <div className={styles.vs}>VS</div>
                         <div className={styles.score}>
-                          {match.blueScore} - {match.orangeScore}
+                          {winningTeam === "BLUE"
+                            ? `${match.blueScore} - ${match.orangeScore}`
+                            : `${match.orangeScore} - ${match.blueScore}`}
                         </div>
                         <div className={styles.duration}>{durationStr}</div>
                       </div>

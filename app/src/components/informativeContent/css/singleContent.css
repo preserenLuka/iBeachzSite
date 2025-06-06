@@ -16,6 +16,8 @@
   font-size: 1.13rem;
   line-height: 1.7;
   padding: 1.5% 2%;
+  overflow-y: auto;
+  max-height: 85vh; /* or adjust as needed for your layout */
 }
 
 .site-title {

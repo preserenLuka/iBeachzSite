@@ -257,3 +257,8 @@
 .sidebar.closed .menu-title {
   justify-content: center;
 }
+
+.fundamentals-item.active {
+  background: var(--accent, #174d71);
+  color: #fff;
+}

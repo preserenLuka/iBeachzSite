@@ -102,7 +102,9 @@ const GameDetails: React.FC<GameDetailsProps> = ({ matchId }) => {
         </div>
         <div className={styles.matchTitle}>
           <b>
-            {match.blueScore} - {match.orangeScore}
+            {winningTeam === "BLUE"
+              ? `${match.blueScore} - ${match.orangeScore}`
+              : `${match.orangeScore} - ${match.blueScore}`}
           </b>
         </div>
         <div className={styles.matchDuration}>{durationStr}</div>
