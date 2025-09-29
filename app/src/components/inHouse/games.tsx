@@ -23,7 +23,7 @@ const Games: React.FC = () => {
   useEffect(() => {
     let retryCount = 0;
     const maxRetries = 3;
-    const retryDelay = 2500; // 2.5 seconds
+    const retryDelay = 2500;
 
     const fetchData = () => {
       setLoading(true);
@@ -86,7 +86,7 @@ const Games: React.FC = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setPage(1);
-      setPlayerName(searchTerm); // <-- This triggers the API call
+      setPlayerName(searchTerm); // <-- To sproži API call
     }, 750);
 
     return () => clearTimeout(handler);

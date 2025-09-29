@@ -36,7 +36,7 @@ const Leaderboards: React.FC = () => {
   const [order, setOrder] = useState("desc");
   const [limit] = useState(15);
   const [searchTerm, setSearchTerm] = useState("");
-  const [search, setSearch] = useState(""); // Actual search filter used in API calls
+  const [search, setSearch] = useState("");
 
   // Pagination
   const [page, setPage] = useState(1);
@@ -223,7 +223,6 @@ const Leaderboards: React.FC = () => {
                         )}
                       </span>
                       {option.label}
-                      {/* The hidden checkbox for accessibility */}
                       <input
                         type="checkbox"
                         checked={checked}
@@ -275,7 +274,9 @@ const Leaderboards: React.FC = () => {
 
       <div style={{ minHeight: 300 }}>
         {loading ? (
-          <div style={{ textAlign: "center", padding: "2rem" }}>Loading...</div>
+          <div style={{ textAlign: "center", padding: "2rem", width: "100%" }}>
+            Loading...
+          </div>
         ) : (
           <div style={{ overflowX: "auto" }}>
             <table className={styles.table}>

@@ -29,34 +29,25 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const router = useNavigate();
 
-  const toggleSubMenu = (menu: string) => {
-    if (openSubMenu === menu) {
-      setOpenSubMenu(null);
-    } else {
-      setOpenSubMenu(menu);
-      {
-        !isOpen && toggleSidebar();
-      }
-      console.log("Submenu toggled", menu);
-    }
+  const handleContentChange = (content: string, label?: string) => {
+    router(`${content}`);
+    setIsOpen(false);
+    setisContentOpen(true);
+    setOpenSubMenu(null);
+    if (label) setCurrentLabel(label);
   };
 
   const toggleSidebar = () => {
     setIsOpen((prev) => {
       const newState = !prev;
-
-      // If we are closing the sidebar, also close the open submenu
       if (!newState) {
         setOpenSubMenu(null);
       }
-
       if (isMobile && !newState) {
         setisContentOpen(false);
       }
-
       return newState;
     });
-
     console.log("Sidebar toggled");
   };
 
@@ -68,17 +59,21 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const isMobile = width <= 768;
 
-  const handleContentChange = (content: string, label?: string) => {
-    router(`${content}`);
-    setIsOpen(false);
-    setisContentOpen(true);
-    setOpenSubMenu(null);
-    if (label) setCurrentLabel(label);
-  };
-
   useEffect(() => {
     console.log("closing", isContentOpen);
   }, [isContentOpen]);
+
+  const toggleSubMenu = (menu: string) => {
+    if (openSubMenu === menu) {
+      setOpenSubMenu(null);
+    } else {
+      setOpenSubMenu(menu);
+      {
+        !isOpen && toggleSidebar();
+      }
+      console.log("Submenu toggled", menu);
+    }
+  };
 
   return (
     <>

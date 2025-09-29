@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import VideoGallery from "../ytEmbed/videoGallery";
-// Types
 import { contentObject, MultiTopic } from "../../util/types";
-// CSS
 import "./css/multiContent.css";
 
 interface ContentProps {
@@ -10,34 +8,77 @@ interface ContentProps {
   content: contentObject;
 }
 
-// Type guard to check if topics is MultiTopic
-const isMultiTopic = (topics: any): topics is MultiTopic => {
-  return Array.isArray(topics); // MultiTopic is an array of Topics
-};
+const isMultiTopic = (topics: any): topics is MultiTopic =>
+  Array.isArray(topics);
 
 const MultiContentComponent: React.FC<ContentProps> = ({ content }) => {
+  console.log("MULTICONTENT: Render", content);
+
+  const [currentSection, setCurrentSection] = useState(0);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isScrolling = useRef(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
   if (!content) {
+    console.log("MULTICONTENT: No content");
     return <div className="multi-wrapper">Content not found.</div>;
   }
-
-  // Check if topics is MultiTopic
   if (!isMultiTopic(content.topics)) {
+    console.log("MULTICONTENT: Invalid topics format", content.topics);
     return <div className="multi-wrapper">Invalid topics format.</div>;
   }
+  const topics = content.topics;
+  console.log("MULTICONTENT: topics", topics);
+
+  // Wheel handler for section-by-section scroll
+  useEffect(() => {
+    const handleWheel = (e: Event) => {
+      const event = e as WheelEvent;
+      event.preventDefault();
+      if (isScrolling.current) return;
+      if (event.deltaY > 0 && currentSection < topics.length - 1) {
+        isScrolling.current = true;
+        setCurrentSection((prev) => {
+          const next = Math.min(topics.length - 1, prev + 1);
+          sectionRefs.current[next]?.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => (isScrolling.current = false), 700);
+          return next;
+        });
+      } else if (event.deltaY < 0 && currentSection > 0) {
+        isScrolling.current = true;
+        setCurrentSection((prev) => {
+          const next = Math.max(0, prev - 1);
+          sectionRefs.current[next]?.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => (isScrolling.current = false), 650);
+          return next;
+        });
+      }
+    };
+
+    const wrapper = wrapperRef.current;
+    wrapper?.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      wrapper?.removeEventListener("wheel", handleWheel);
+    };
+  }, [currentSection, topics.length]);
 
   return (
-    <div className="multi-wrapper">
+    <div className="multi-wrapper" ref={wrapperRef}>
       <div className="multi-topics-container">
-        {content.topics.map((topic, index) => (
-          <div key={index} className="multi-topic-section">
+        {topics.map((topic, index) => (
+          <div
+            key={index}
+            className="multi-topic-section"
+            ref={(el) => {
+              sectionRefs.current[index] = el;
+            }}
+          >
             <div className="multi-topic-content">
               <h2 className="multi-topic-title">{topic.title}</h2>
-
               {topic.description && (
                 <p className="multi-topic-description">{topic.description}</p>
               )}
-
-              {/* Map through the content of the topic */}
               {topic.content.map((item, idx) => {
                 if ("text" in item) {
                   return (
@@ -46,7 +87,6 @@ const MultiContentComponent: React.FC<ContentProps> = ({ content }) => {
                     </p>
                   );
                 }
-
                 if ("title" in item && "bulletPoints" in item) {
                   return (
                     <div key={idx} className="multi-content-section">
@@ -67,7 +107,7 @@ const MultiContentComponent: React.FC<ContentProps> = ({ content }) => {
                                 </h4>
                               );
                             }
-                            return null; // Fallback for unexpected cases
+                            return null;
                           })}
                       </ul>
                       {item.extraText && (
@@ -76,12 +116,9 @@ const MultiContentComponent: React.FC<ContentProps> = ({ content }) => {
                     </div>
                   );
                 }
-
-                return null; // Fallback
+                return null;
               })}
             </div>
-
-            {/* Render video gallery */}
             <div className="multi-video-wrapper">
               {topic.videoId && topic.videoId.length > 0 ? (
                 <VideoGallery videoIds={topic.videoId} />

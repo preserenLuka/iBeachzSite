@@ -77,7 +77,20 @@ model PlayerStats {
   demosInflicted  Int             @default(0)
   demosTaken      Int             @default(0)
   boostUsed       Int             @default(0)
-  playerScore     Float           @default(0.0) // <-- Added
+  playerScore     Float           @default(0.0)
+}
+
+model Match {
+  id            Int           @id @default(autoincrement())
+  mapName       String?        @default("Unknown")
+  matchTime     DateTime      @default(now())
+  duration      Int           @default(0)
+  leaderboard   Leaderboard   @relation(fields: [leaderboardId], references: [id])
+  leaderboardId Int
+  blueScore     Int
+  orangeScore   Int
+  winner        TeamColor?
+  playerMatches PlayerMatch[]
 }
 
 model TeammateRecord {
@@ -95,25 +108,13 @@ model OpponentRecord {
   id           Int         @id @default(autoincrement())
   playerId     Int
   opponentId   Int
-  opponentName String      // <--- add this
+  opponentName String
   wins         Int         @default(0)
   losses       Int         @default(0)
   player       PlayerStats @relation("Opponents", fields: [playerId], references: [id])
   opponent     PlayerStats @relation("OpponentPlayer", fields: [opponentId], references: [id])
 }
 
-model Match {
-  id            Int           @id @default(autoincrement())
-  mapName       String?        @default("Unknown")
-  matchTime     DateTime      @default(now())
-  duration      Int           @default(0)
-  leaderboard   Leaderboard   @relation(fields: [leaderboardId], references: [id])
-  leaderboardId Int
-  blueScore     Int
-  orangeScore   Int
-  winner        TeamColor?
-  playerMatches PlayerMatch[]
-}
 
 model PlayerMatch {
   id             Int         @id @default(autoincrement())
@@ -122,13 +123,11 @@ model PlayerMatch {
   player         PlayerStats @relation(fields: [playerStatsId], references: [id])
   playerStatsId  Int
   team           TeamColor
-
-  // Per-match stats:
   goals          Int         @default(0)
   assists        Int         @default(0)
   saves          Int         @default(0)
   shots          Int         @default(0)
   points         Int         @default(0)
-  demosInflicted Int      @default(0) // <-- add this
-  demosTaken     Int      @default(0) // <-- add this
+  demosInflicted Int         @default(0)
+  demosTaken     Int         @default(0)
 }

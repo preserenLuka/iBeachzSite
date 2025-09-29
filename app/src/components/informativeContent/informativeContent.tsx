@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router";
 
 // Components
@@ -27,7 +27,11 @@ import soloQFundData from "../../util/fundamentalsData/soloQFundData";
 import speedFundData from "../../util/fundamentalsData/speedFundData";
 
 // Types
-import { contentObject } from "../../util/types";
+import { contentObject, MultiTopic } from "../../util/types";
+
+// Type guard for MultiTopic
+const isMultiTopic = (topics: any): topics is MultiTopic =>
+  Array.isArray(topics);
 
 interface ContentProps {
   isContentOpen: boolean;
@@ -35,7 +39,6 @@ interface ContentProps {
 
 const InformativeContent: React.FC<ContentProps> = ({ isContentOpen }) => {
   const { contentName } = useParams();
-  const [isMultiTopic, setIsMultiTopic] = useState(false);
 
   const contentData: Record<string, contentObject> = {
     // Mechanics
@@ -62,46 +65,28 @@ const InformativeContent: React.FC<ContentProps> = ({ isContentOpen }) => {
 
   const currentContent = contentName ? contentData[contentName] : undefined;
 
-  useEffect(() => {
-    if (currentContent) {
-      console.log("currentContent:", currentContent);
-      const isMulti =
-        Array.isArray(currentContent.topics) &&
-        currentContent.topics.length > 1;
-      setIsMultiTopic(isMulti);
-    }
-  }, [currentContent]);
-
-  useEffect(() => {
-    console.log(
-      "Content name:",
-      contentName,
-      "currentContent:",
-      currentContent,
-      "isMultiTopic:",
-      isMultiTopic
-    );
-  }, [contentName, isMultiTopic]);
-
   if (!currentContent) {
     return <div>Content not found.</div>;
   }
 
-  return (
-    <>
-      {!isMultiTopic ? (
-        <SingleContentComponent
-          isContentOpen={isContentOpen}
-          content={currentContent}
-        />
-      ) : (
-        <MultiContentComponent
-          isContentOpen={isContentOpen}
-          content={currentContent}
-        />
-      )}
-    </>
-  );
+  // Use type guard to decide which component to render
+  if (isMultiTopic(currentContent.topics)) {
+    return (
+      <MultiContentComponent
+        key="multi"
+        isContentOpen={isContentOpen}
+        content={currentContent}
+      />
+    );
+  } else {
+    return (
+      <SingleContentComponent
+        key="single"
+        isContentOpen={isContentOpen}
+        content={currentContent}
+      />
+    );
+  }
 };
 
 export default InformativeContent;

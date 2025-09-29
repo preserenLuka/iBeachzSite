@@ -2,8 +2,6 @@
 require("dotenv-flow").config();
 const express = require("express");
 const cors = require("cors");
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
 const matchData = require("./routes/match");
 const leaderboardData = require("./routes/leaderboard");
 const newGameData = require("./routes/newGameData");

@@ -16,6 +16,8 @@ const isSingleTopic = (topic: any): topic is SingleTopic => {
 };
 
 const singleContentComponent: React.FC<ContentProps> = ({ content }) => {
+  console.log("SINGLECONTENT: Render", content);
+
   const [topicsContent, setTopicsContent] = useState<Array<RandomText | List>>(
     []
   );
@@ -24,10 +26,11 @@ const singleContentComponent: React.FC<ContentProps> = ({ content }) => {
     if (content?.topics && "content" in content.topics) {
       setTopicsContent(content.topics.content);
     }
-    console.log("content-------------:", content.topics);
+    console.log("SINGLECONTENT: topics", content.topics);
   }, [content]);
 
   if (!content) {
+    console.log("SINGLECONTENT: No content");
     return <div className="wrapper">Content not found.</div>;
   }
 
