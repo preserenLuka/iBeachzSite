@@ -2,10 +2,10 @@ interface ProfileProps {
   isOpen: boolean;
 }
 
-export default function Profile({ isOpen }: ProfileProps) {
+export default function Profile({}: ProfileProps) {
   return (
     <div className="profile-section">
-      <img
+      {/*       <img
         src="https://via.placeholder.com/40"
         alt="Pfp"
         className="profile-pic"
@@ -15,7 +15,7 @@ export default function Profile({ isOpen }: ProfileProps) {
           <p className="profile-name">ProfileName</p>
           <p className="profile-title"></p>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

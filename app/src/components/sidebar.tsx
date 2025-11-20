@@ -79,7 +79,20 @@ const Sidebar: React.FC<SidebarProps> = ({
     <>
       <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
         <div className={"sidebar-header"}>
-          {isOpen && <span className="sidebar-title">Game Fundamentals</span>}
+          {isOpen && (
+            <span
+              className="sidebar-title"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                router("/");
+                setIsOpen(false);
+                setisContentOpen(false);
+                setCurrentLabel(""); // Optionally reset the highlighted label
+              }}
+            >
+              Rocket League
+            </span>
+          )}
 
           <button className="toggle-btn" onClick={toggleSidebar}>
             {!isOpen && isMobile && (
