@@ -1,0 +1,8 @@
+# Allow all search engines
+User-agent: *
+
+# Disallow nothing (allow crawling all pages)
+Disallow:
+
+# Sitemap location
+Sitemap: https://rlmastery.com/sitemap.xml
