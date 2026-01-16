@@ -49,20 +49,50 @@ const Leaderboards: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setDropdownOpen(false);
+ useEffect(() => {
+  let isMounted = true;
+  const retryDelay = 2000; // 2s between retries
+
+  const fetchData = async () => {
+    if (!isMounted) return;
+    setLoading(true);
+    setError(null);
+
+    try {
+      const baseUrl = `${API_BASE_URL}/api/leaderboards/${leaderboardId}/players`;
+      const params = new URLSearchParams({
+        orderBy,
+        order,
+        limit: limit.toString(),
+        page: page.toString(),
+      });
+      if (search) params.append("search", search);
+
+      const res = await fetch(`${baseUrl}?${params.toString()}`);
+      const data = await res.json();
+
+      if (Array.isArray(data.players)) {
+        setPlayers(data.players);
+        setTotalEntries(data.totalEntries || 0);
+        setLoading(false);
+      } else {
+        throw new Error("Invalid data format");
+      }
+    } catch (err) {
+      console.warn("Fetch failed, retrying...", err);
+      if (isMounted) {
+        setError("API is waking up, retrying...");
+        setTimeout(fetchData, retryDelay); // retry again
       }
     }
-    if (dropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownOpen]);
+  };
+
+  fetchData();
+
+  return () => {
+    isMounted = false;
+  };
+}, [leaderboardId, orderBy, order, limit, page, search]);
 
   const handleSort = (key: string) => {
     if (orderBy === key) {
