@@ -4,7 +4,7 @@ import path from "path";
 import { menuItemsData } from "./src/util/menuItemsData.js"; // note .js for Node ESM
 
 // --- Config ---
-const BASE_URL = "https://yourwebsite.com"; // Replace with your actual domain
+const BASE_URL = "https://rlmastery.com"; // Replace with your actual domain
 const SITEMAP_FILE = path.join(process.cwd(), "public", "sitemap.xml");
 
 // --- Type definitions ---

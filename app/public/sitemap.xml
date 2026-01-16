@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yourwebsite.com/</loc>
+    <loc>https://rlmastery.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/defenseFundamental</loc>
+    <loc>https://rlmastery.com/defenseFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/counterAttackFundamental</loc>
+    <loc>https://rlmastery.com/counterAttackFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/attackFundamental</loc>
+    <loc>https://rlmastery.com/attackFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/rotationFundamental</loc>
+    <loc>https://rlmastery.com/rotationFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/speedFundamental</loc>
+    <loc>https://rlmastery.com/speedFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/challengeFundamental</loc>
+    <loc>https://rlmastery.com/challengeFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/soloQFundamental</loc>
+    <loc>https://rlmastery.com/soloQFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/mentalFundamental</loc>
+    <loc>https://rlmastery.com/mentalFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/advancedTipsFundamental</loc>
+    <loc>https://rlmastery.com/advancedTipsFundamental</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/shootingMechanics</loc>
+    <loc>https://rlmastery.com/shootingMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/cuttingControlMechanics</loc>
+    <loc>https://rlmastery.com/cuttingControlMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/flickingMechanics</loc>
+    <loc>https://rlmastery.com/flickingMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/aerialMechanics</loc>
+    <loc>https://rlmastery.com/aerialMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/resetMechanics</loc>
+    <loc>https://rlmastery.com/resetMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/wallCeilingMechanics</loc>
+    <loc>https://rlmastery.com/wallCeilingMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/recoveryMechanics</loc>
+    <loc>https://rlmastery.com/recoveryMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/defenseMechanics</loc>
+    <loc>https://rlmastery.com/defenseMechanics</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/CoachingRequest</loc>
+    <loc>https://rlmastery.com/CoachingRequest</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/CoachingReviews</loc>
+    <loc>https://rlmastery.com/CoachingReviews</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/Notes</loc>
+    <loc>https://rlmastery.com/Notes</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/InHouseLeaderboards</loc>
+    <loc>https://rlmastery.com/InHouseLeaderboards</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/InHouseGames</loc>
+    <loc>https://rlmastery.com/InHouseGames</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/InHouseChosePlayers</loc>
+    <loc>https://rlmastery.com/InHouseChosePlayers</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourwebsite.com/InHousePredictions</loc>
+    <loc>https://rlmastery.com/InHousePredictions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
