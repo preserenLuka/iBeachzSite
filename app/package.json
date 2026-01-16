@@ -4,10 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "generate-sitemap": "tsc --project tsconfig.scripts.json && node scripts-dist/generate-sitemap.js"
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
@@ -32,9 +29,10 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "ts-node": "^1.7.1",
+    "ts-node": "^1.7.3",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
+    "undici-types": "^7.18.2",
     "vite": "^6.2.0"
   }
 }
