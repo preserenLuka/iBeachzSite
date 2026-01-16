@@ -1,13 +1,11 @@
 require("dotenv-flow").config();
-
 const { PrismaClient } = require("@prisma/client");
-const { PrismaMariaDb } = require("@prisma/adapter-mariadb");
 
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is missing at runtime");
 }
 
-// Log what host/user it’s REALLY using (safe-ish masking)
+// Log host/user for debugging
 try {
   const u = new URL(process.env.DATABASE_URL);
   console.log("[prisma] connecting to:", {
@@ -19,5 +17,13 @@ try {
   console.log("[prisma] DATABASE_URL not parseable");
 }
 
-const adapter = new PrismaMariaDb({ url: process.env.DATABASE_URL });
-module.exports = new PrismaClient({ adapter, log: ["error", "warn"] });
+// Use a single global PrismaClient
+let prisma;
+if (!global.prisma) {
+  global.prisma = new PrismaClient({
+    log: ["error", "warn"], // optional: keep logs
+  });
+}
+prisma = global.prisma;
+
+module.exports = prisma;
