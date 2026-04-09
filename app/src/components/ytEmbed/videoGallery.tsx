@@ -18,7 +18,7 @@ const VideoGallery: React.FC<VideoGalleryProps> = ({ videoIds }) => {
 
   return (
     <div className="vidGallery-wrapper">
-      <YouTubeEmbed videoId={videoIds[currentIndex]} />
+      <YouTubeEmbed key={currentIndex} videoId={videoIds[currentIndex]} />
       {videoIds.length > 1 && ( // Conditionally render buttons if more than 1 video ID
         <div className="button-container">
           <button className="gallerybutton" onClick={handlePrev}>

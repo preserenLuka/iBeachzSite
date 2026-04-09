@@ -1,0 +1,21 @@
+.yt-embed-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.yt-lite {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.yt-lite > iframe {
+  border-radius: 30px;
+}
+
+.yt-lite {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

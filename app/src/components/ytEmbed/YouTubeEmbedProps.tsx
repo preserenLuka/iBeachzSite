@@ -1,45 +1,92 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+// @ts-ignore
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
+// @ts-ignore
+import "./ytEmbed.css";
 
 interface YouTubeEmbedProps {
   videoId: string;
   startTime?: string;
 }
 
-const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId }) => {
-  return (
-    <>
-      <style>{`
-        .responsive-iframe-container {
-          position: relative;
-          width: 100%;
-          padding-bottom: 56.25%; /* 16:9 aspect ratio */
-          height: 0;
-          overflow: hidden;
-        }
+const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId, startTime }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const params = startTime ? `autoplay=0&start=${startTime}` : "autoplay=0";
 
-        .responsive-iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border: none;
-          border-radius: 30px;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "childList") {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeName === "IFRAME") {
+              const iframe = node as HTMLIFrameElement;
+              if (iframe.src && iframe.src.includes("autoplay=1")) {
+                iframe.src = iframe.src.replace(/autoplay=1/g, "autoplay=0");
+              }
+            }
+          });
         }
-      `}</style>
-      <div className="responsive-iframe-container">
-        <iframe
-          className="responsive-iframe"
-          width="1000"
-          height="540"
-          src={`https://www.youtube.com/embed/${videoId}`}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
-      </div>
-    </>
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "src"
+        ) {
+          const target = mutation.target as HTMLIFrameElement;
+          if (target.src && target.src.includes("autoplay=1")) {
+            target.src = target.src.replace(/autoplay=1/g, "autoplay=0");
+          }
+        }
+      });
+    });
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["src"],
+    });
+
+    // IntersectionObserver to stop video when not visible
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            const iframe = container.querySelector(
+              "iframe",
+            ) as HTMLIFrameElement;
+            if (iframe) {
+              iframe.contentWindow?.postMessage(
+                '{"event":"command","func":"stopVideo","args":""}',
+                "*",
+              );
+            }
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    intersectionObserver.observe(container);
+
+    return () => {
+      observer.disconnect();
+      intersectionObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className="yt-embed-wrapper">
+      <LiteYouTubeEmbed
+        id={videoId}
+        title="YouTube video player"
+        autoplay={false}
+        alwaysLoadIframe={false}
+        params={params}
+      />
+    </div>
   );
 };
 

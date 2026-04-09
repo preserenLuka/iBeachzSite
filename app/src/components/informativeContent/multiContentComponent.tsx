@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import VideoGallery from "../ytEmbed/videoGallery";
 import { contentObject, MultiTopic } from "../../util/types";
+// @ts-ignore
 import "./css/multiContent.css";
 
 interface ContentProps {

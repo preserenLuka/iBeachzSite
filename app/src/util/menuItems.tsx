@@ -1,4 +1,4 @@
-import { MenuItem } from "./types";
+import { MenuItem } from "../types/types";
 // Icons for each element in menu
 
 // Icons for menu
